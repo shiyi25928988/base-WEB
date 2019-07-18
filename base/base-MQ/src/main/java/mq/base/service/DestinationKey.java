@@ -2,13 +2,13 @@ package mq.base.service;
 
 import java.util.Objects;
 
-public class DestinationTick {
+public class DestinationKey {
 
 	private String destinationName;
 	private Boolean isMultiCast;
 	private int hash;
 	
-	public DestinationTick(String destinationName, Boolean isMultiCast) {
+	public DestinationKey(String destinationName, Boolean isMultiCast) {
 		this.destinationName = destinationName;
 		this.isMultiCast = isMultiCast;
 		hash = 31;
@@ -40,13 +40,13 @@ public class DestinationTick {
         if (this == that) {
             return true;
         }
-        if (that instanceof DestinationTick) {
-            return equals((DestinationTick) that);
+        if (that instanceof DestinationKey) {
+            return equals((DestinationKey) that);
         }
         return false;
     }
 
-    public boolean equals(DestinationTick that) {
+    public boolean equals(DestinationKey that) {
         return isEqual(this.destinationName, that.destinationName) && isEqual(this.isMultiCast, that.isMultiCast);
     }
 	

@@ -12,8 +12,20 @@ import javax.jms.Topic;
 
 import mq.base.handler.IMessageHandler;
 
+/**
+ * IMessageQueueService handles ...
+ * 
+ * @author (original): <a href="mailto:yshi@infor.com">yshi</a>
+ * @author (most recent): $LastChangedBy$
+ * @version: $LastChangedRevision$
+ * @created: Jun 6, 2019
+ * @modified: $LastChangedDate$
+ */
 public interface IMessageQueueService {
 
+	/**
+	 * @return
+	 */
 	Connection getConnection();
 	
 	Session getSession();

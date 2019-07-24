@@ -11,6 +11,8 @@ import javax.jms.Session;
 import javax.jms.Topic;
 
 import mq.base.handler.IMessageHandler;
+import mq.base.module.AckMode;
+import mq.base.module.DestinationType;
 
 /**
  * IMessageQueueService handles ...
@@ -22,34 +24,11 @@ import mq.base.handler.IMessageHandler;
  * @modified: $LastChangedDate$
  */
 public interface IMessageQueueService {
-
-	/**
-	 * @return
-	 */
-	Connection getConnection();
 	
-	Session getSession();
+	void sendMsg(DestinationType destinationType, String destinationName, String msg);
 	
-	Queue getQueue(String queueName);
-	Topic getTopic(String topicName);
-	
-	Map<String, Queue> getQueues();
-	Map<String, Topic> getTopics();
-	
-	void deleteQueue(String queueName) throws JMSException;
-	void deleteTopic(String topicName) throws JMSException;
-	
-	MessageProducer getQueueMsgProducer(Queue queue);
-	MessageProducer getTopicMsgPublisher(Topic topic);
-	
-	void sendQueueMsg(String queueName, Object msg);
-	void sendTopicMsg(String topicName, Object msg);
-	
-	MessageConsumer getQueueMsgConsumer(Queue queue);
-	MessageConsumer getTopicMsgSubscriber(Topic topic);
+	void addMessageHandler(DestinationType destinationType, String destinationName, IMessageHandler messageHandler);
 	
 	void close() throws JMSException;
-	
-	IMessageHandler addMessageHandler(IMessageHandler messageHandler);
 	
 }

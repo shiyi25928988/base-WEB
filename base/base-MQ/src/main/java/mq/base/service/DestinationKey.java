@@ -2,23 +2,33 @@ package mq.base.service;
 
 import java.util.Objects;
 
+import mq.base.module.DestinationType;
+
 public class DestinationKey {
 
 	private String destinationName;
-	private Boolean isMultiCast;
+	private DestinationType destinationType;
 	private int hash;
 	
-	public DestinationKey(String destinationName, Boolean isMultiCast) {
+	public DestinationKey(String destinationName, DestinationType destinationType) {
 		this.destinationName = destinationName;
-		this.isMultiCast = isMultiCast;
+		this.destinationType = destinationType;
+		
 		hash = 31;
 		
 		if(!destinationName.isEmpty()) {
 			hash += destinationName.hashCode();
 		}
 		hash *= 31;
-		if(Objects.nonNull(isMultiCast)) {
-			hash += isMultiCast.hashCode();
+		if(Objects.nonNull(destinationType)) {
+			switch(destinationType) {
+			case Queue:
+				hash += 1;
+				break;
+			case Topic:
+				hash += 2;
+				break;
+			}
 		}
 	}
 	
@@ -26,8 +36,8 @@ public class DestinationKey {
 		return destinationName;
 	}
 
-	public Boolean getIsMultiCast() {
-		return isMultiCast;
+	public DestinationType getType() {
+		return destinationType;
 	}
 
 	@Override
@@ -37,7 +47,7 @@ public class DestinationKey {
 	
     @Override
     public boolean equals(Object that) {
-        if (this == that) {
+        if (this.hashCode() == that.hashCode()) {
             return true;
         }
         if (that instanceof DestinationKey) {
@@ -47,7 +57,7 @@ public class DestinationKey {
     }
 
     public boolean equals(DestinationKey that) {
-        return isEqual(this.destinationName, that.destinationName) && isEqual(this.isMultiCast, that.isMultiCast);
+        return isEqual(this.destinationName, that.destinationName) && isEqual(this.getType(), that.getType());
     }
 	
 	

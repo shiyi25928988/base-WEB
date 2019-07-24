@@ -29,7 +29,6 @@ import com.google.inject.Singleton;
 
 import lombok.extern.java.Log;
 import mq.base.service.IMessageQueueService;
-import mq.base.service.MessageQueueServiceImpl;
 
 /**
  * @author yshi
@@ -66,8 +65,6 @@ public class MessageQueueModule extends AbstractModule {
 		bind(PooledConnectionFactory.class).toProvider(PooledConnectionFactoryProvider.class).in(Singleton.class);
 		/*-----------------*/
 		bind(Connection.class).toProvider(ConnectionProvider.class);
-		bind(Session.class).toProvider(SessionProvider.class);
-		bind(IMessageQueueService.class).toProvider(MessageQueueServiceProider.class);
 	}
 
 	public static class ContextProvider implements Provider<Context> {
@@ -128,35 +125,5 @@ public class MessageQueueModule extends AbstractModule {
 			return null;
 		}
 	}
-
-	public static class SessionProvider implements Provider<Session> {
-		@Inject
-		@Nonnull
-		Connection connection;
-
-		@Override
-		public Session get() {
-			try {
-				return connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			} catch (JMSException e) {
-				log.severe(e.toString());
-				throw new NullPointerException();
-			}
-		}
-	}
-
-	public static class MessageQueueServiceProider implements Provider<IMessageQueueService> {
-		@Inject
-		@Nonnull
-		Connection connection;
-
-		@Inject
-		@Nonnull
-		Session session;
-
-		@Override
-		public IMessageQueueService get() {
-			return new MessageQueueServiceImpl(connection, session);
-		}
-	}
+	
 }

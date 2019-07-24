@@ -31,6 +31,10 @@ import lombok.extern.java.Log;
 import mq.base.service.IMessageQueueService;
 import mq.base.service.MessageQueueServiceImpl;
 
+/**
+ * @author yshi
+ *
+ */
 @Log
 public class MessageQueueModule extends AbstractModule {
 
@@ -45,6 +49,11 @@ public class MessageQueueModule extends AbstractModule {
 	public MessageQueueModule() {}
 	
 	public MessageQueueModule(Properties properties) {
+		
+		if(Objects.isNull(properties)) {
+			return;
+		}
+		
 		BROKER_URL = properties.getProperty("BROKER_url"); // amqps://b-6cfc4ea2-8ff6-4a62-8197-4b36395b0169-1.mq.ap-northeast-1.amazonaws.com:5671
 		BROKER_UESRNAME = properties.getProperty("BROKER_username"); // username = sunsystems123
 		BROKER_PASSWORD = properties.getProperty("BROKER_password"); // password = sunsystems123

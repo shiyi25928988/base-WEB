@@ -107,11 +107,8 @@ public class HtmlLogin {
 						)
 					).withClass("checkbox mb-3"),
 				
-				new Button().setClass("btn btn-lg btn-primary btn-block").setText("Sign in").setType("submit"),
-//				button()
-//					.withClass("btn btn-lg btn-primary btn-block")
-//					.withType("submit")
-//					.withText("Sign in"),
+				new Button().setClass("btn btn-lg btn-primary btn-block").setText("Sign in").setType(Button.ButtonType.submit),
+
 				p()
 					.withClass("mt-5 mb-3 text-muted")
 					.withText("© 2017-2019")

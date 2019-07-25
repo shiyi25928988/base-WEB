@@ -107,7 +107,7 @@ public class HtmlLogin {
 						)
 					).withClass("checkbox mb-3"),
 				
-				new Button().setClass("btn btn-lg btn-primary btn-block").setText("Sign in").setType(Button.ButtonType.submit),
+				new Button().setClass("btn btn-lg btn-primary btn-block").setText("Sign in").setType(Button.ButtonType.submit).setTitle("log in.."),
 
 				p()
 					.withClass("mt-5 mb-3 text-muted")

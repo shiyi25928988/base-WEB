@@ -1,5 +1,6 @@
 package html.base.element;
 
+import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 
 public class Button extends ContainerTag{
@@ -44,6 +45,11 @@ public class Button extends ContainerTag{
 	
 	public Button setTitle(String title) {
 		this.withTitle(title);
+		return this;
+	}
+	
+	public Button addAttribute(String name, String value) {
+		this.attr(new Attribute(name, value));
 		return this;
 	}
 

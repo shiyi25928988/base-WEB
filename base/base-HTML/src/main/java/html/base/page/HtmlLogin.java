@@ -2,6 +2,7 @@ package html.base.page;
 
 import static j2html.TagCreator.*;
 
+import html.base.element.Button;
 import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
@@ -105,10 +106,12 @@ public class HtmlLogin {
 							)
 						)
 					).withClass("checkbox mb-3"),
-				button()
-					.withClass("btn btn-lg btn-primary btn-block")
-					.withType("submit")
-					.withText("Sign in"),
+				
+				new Button().setClass("btn btn-lg btn-primary btn-block").setText("Sign in").setType("submit"),
+//				button()
+//					.withClass("btn btn-lg btn-primary btn-block")
+//					.withType("submit")
+//					.withText("Sign in"),
 				p()
 					.withClass("mt-5 mb-3 text-muted")
 					.withText("© 2017-2019")

@@ -2,7 +2,7 @@ package html.base.element;
 
 import j2html.tags.ContainerTag;
 
-public class Button extends ContainerTag implements Element{
+public class Button extends ContainerTag{
 
 	private Button(String tagName) {
 		super(tagName);
@@ -12,34 +12,29 @@ public class Button extends ContainerTag implements Element{
 		this("button");
 	}
 	
-	@Override
 	public Button setClass(String className) {
 		this.withClass(className);
 		return this;
 	}
 
-	@Override
 	public Button setName(String name) {
 		this.withName(name);
 		return this;
 	}
 
-	@Override
-	public Element setId(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Button setId(String id) {
+		this.withId(id);
+		return this;
 	}
 
-	@Override
-	public Element setText(String text) {
-		// TODO Auto-generated method stub
-		return null;
+	public Button setText(String text) {
+		this.withText(text);
+		return this;
 	}
 
-	@Override
-	public Element setType(String type) {
-		// TODO Auto-generated method stub
-		return null;
+	public Button setType(String type) {
+		this.withType(type);
+		return this;
 	}
 
 }

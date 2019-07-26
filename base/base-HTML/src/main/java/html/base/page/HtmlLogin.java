@@ -2,7 +2,7 @@ package html.base.page;
 
 import static j2html.TagCreator.*;
 
-import html.base.element.Button;
+import html.base.element.button.Button;
 import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;

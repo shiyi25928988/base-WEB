@@ -14,5 +14,5 @@ public interface HtmlElement<T extends HtmlElement<?>> {
 	
 	T addAttribute(String name, String value);
 	
-	T hide();
+	T hide(boolean condition);
 }

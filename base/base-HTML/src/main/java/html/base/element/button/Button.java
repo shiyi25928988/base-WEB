@@ -1,8 +1,13 @@
-package html.base.element;
+package html.base.element.button;
 
+import html.base.element.HtmlElement;
 import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 
+/**
+ * @author yshi
+ *
+ */
 public class Button extends ContainerTag implements HtmlElement<Button>{
 
 	private Button(String tagName) {
@@ -73,9 +78,11 @@ public class Button extends ContainerTag implements HtmlElement<Button>{
 	}
 
 	@Override
-	public Button hide() {
-		// TODO Auto-generated method stub
-		return null;
+	public Button hide(boolean condition) {
+		if(condition) {
+			this.isHidden();
+		}
+		return this;
 	}
 
 	

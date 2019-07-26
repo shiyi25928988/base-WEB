@@ -1,8 +1,13 @@
 package html.base.element.input;
 
 import html.base.element.HtmlElement;
+import j2html.attributes.Attribute;
 import j2html.tags.EmptyTag;
 
+/**
+ * @author yshi
+ *
+ */
 public class Input extends EmptyTag implements HtmlElement<Input>{
 
 	private Input(String tagName) {
@@ -26,26 +31,28 @@ public class Input extends EmptyTag implements HtmlElement<Input>{
 
 	@Override
 	public Input setName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		this.withName(name);
+		return this;
 	}
 
 	@Override
 	public Input setId(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		this.withId(id);
+		return this;
 	}
 
 	@Override
 	public Input addAttribute(String name, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		this.attr(new Attribute(name, value));
+		return this;
 	}
 
 	@Override
-	public Input hide() {
-		// TODO Auto-generated method stub
-		return null;
+	public Input hide(boolean condition) {
+		if(condition) {
+			this.isHidden();
+		}
+		return this;
 	}
 
 }

@@ -5,39 +5,7 @@ public class TextInput extends Input{
 	
 	public TextInput() {
 		super();
-		this.withType("text");
+		this.setInputType(InputType.Text);
 	}
-
-	@Override
-	public Input setClasses(String... classes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Input setName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Input setId(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Input addAttribute(String name, String value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Input hide() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 }

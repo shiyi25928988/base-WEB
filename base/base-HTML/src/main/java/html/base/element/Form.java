@@ -23,6 +23,7 @@ public class Form extends ContainerTag {
 	
 	
 	public Form setName(String formName) {
+		this.formName = formName;
 		this.withName(formName);
 		return this;
 	}
@@ -59,7 +60,7 @@ public class Form extends ContainerTag {
 		parent("_parent"),
 		top("_top");
 		
-		public String target;
+		public final String target;
 		
 		FormTarget(String target) {
 			this.target = target;

@@ -3,6 +3,8 @@ package html.base.page;
 import static j2html.TagCreator.*;
 
 import html.base.element.button.Button;
+import html.base.element.button.ButtonType;
+import html.base.element.input.PasswordInput;
 import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
@@ -89,6 +91,7 @@ public class HtmlLogin {
 					.withClass("sr-only")
 					.withText("Password")
 					.attr(new Attribute("for", "inputPassword")),
+				new PasswordInput().setClasses("form-control"),
 				input()
 					.withType("password")
 					.withName("PASS_WORD")
@@ -107,7 +110,7 @@ public class HtmlLogin {
 						)
 					).withClass("checkbox mb-3"),
 				
-				new Button().setClasses("btn btn-lg btn-primary btn-block").setText("Sign in").setType(Button.ButtonType.submit).setTitle("log in.."),
+				new html.base.element.input.Button().setButtonText("login").setType(ButtonType.submit).setClasses("btn btn-lg btn-primary btn-block"),
 
 				p()
 					.withClass("mt-5 mb-3 text-muted")

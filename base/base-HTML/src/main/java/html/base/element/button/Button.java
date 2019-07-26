@@ -71,11 +71,6 @@ public class Button extends ContainerTag implements HtmlElement<Button>{
 		return this;
 	}
 	
-	public enum ButtonType{
-		submit,
-		button,
-		reset
-	}
 
 	@Override
 	public Button hide(boolean condition) {

@@ -18,7 +18,7 @@ public class Input extends EmptyTag implements HtmlElement<Input>{
 		this("input");
 	}
 	
-	public Input setInputType(InputType type) {
+	Input setInputType(InputType type) {
 		this.withType(type.type);
 		return this;
 	}
@@ -52,6 +52,16 @@ public class Input extends EmptyTag implements HtmlElement<Input>{
 		if(condition) {
 			this.isHidden();
 		}
+		return this;
+	}
+	
+	public Input setPlaceHolder(String placeholder) {
+		this.withPlaceholder(placeholder);
+		return this;
+	}
+	
+	public Input setText(String text) {
+		this.withValue(text);
 		return this;
 	}
 

@@ -7,6 +7,7 @@ public class Label extends ContainerTag implements HtmlElement<Label>{
 
 	public Label(Input input) {
 		super("label");
+		this.addAttribute("for", input.getId());
 	}
 
 	@Override

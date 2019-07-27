@@ -11,6 +11,10 @@ import j2html.tags.EmptyTag;
 public class Input extends EmptyTag implements HtmlElement<Input>{
 	
 	private String id;//bind with label
+	
+	public String getId() {
+		return this.id;
+	}
 
 	private Input(String tagName) {
 		super(tagName);

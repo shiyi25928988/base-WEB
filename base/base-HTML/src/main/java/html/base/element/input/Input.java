@@ -9,6 +9,8 @@ import j2html.tags.EmptyTag;
  *
  */
 public class Input extends EmptyTag implements HtmlElement<Input>{
+	
+	private String id;//bind with label
 
 	private Input(String tagName) {
 		super(tagName);
@@ -37,6 +39,7 @@ public class Input extends EmptyTag implements HtmlElement<Input>{
 
 	@Override
 	public Input setId(String id) {
+		this.id = id;
 		this.withId(id);
 		return this;
 	}

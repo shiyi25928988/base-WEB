@@ -91,7 +91,11 @@ public class HtmlLogin {
 					.withClass("sr-only")
 					.withText("Password")
 					.attr(new Attribute("for", "inputPassword")),
-				new PasswordInput().setClasses("form-control"),
+				new PasswordInput()
+					.setClasses("form-control")
+					.setPlaceHolder("Password")
+					.setId("inputPassword")
+					.setName("PASS_WORD"),
 				input()
 					.withType("password")
 					.withName("PASS_WORD")

@@ -5,12 +5,9 @@ import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 
 public class Form extends ContainerTag {
-	private Form(String tagName) {
-		super(tagName);
-	}
 	
 	public Form() {
-		this("form");
+		super("form");
 		this.attr(new Attribute("enctype","text/plain"));
 	}
 

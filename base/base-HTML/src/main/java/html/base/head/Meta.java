@@ -1,16 +1,12 @@
-package html.base.element;
+package html.base.head;
 
 import j2html.attributes.Attribute;
 import j2html.tags.EmptyTag;
 
 public class Meta extends EmptyTag{
 
-	private Meta(String tagName) {
-		super(tagName);
-	}
-	
 	public Meta() {
-		this("meta");
+		super("meta");
 	}
 	
 	public void attr(String name, String value) {

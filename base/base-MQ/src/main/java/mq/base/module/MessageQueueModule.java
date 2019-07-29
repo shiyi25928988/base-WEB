@@ -3,20 +3,12 @@ package mq.base.module;
 import java.util.Hashtable;
 import java.util.Objects;
 import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.annotation.Nonnull;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageProducer;
-import javax.jms.Queue;
-import javax.jms.Session;
 import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.apache.activemq.jms.pool.PooledConnectionFactory;
@@ -28,7 +20,6 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 import lombok.extern.java.Log;
-import mq.base.service.IMessageQueueService;
 
 /**
  * @author yshi

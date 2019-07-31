@@ -16,6 +16,7 @@
 		<module>base-DB</module>
 		<module>base-CACHE</module>
 		<module>base-HTML</module>
+		<module>base-CRAWLER</module>
 	</modules>
 
 	<properties>

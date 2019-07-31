@@ -23,8 +23,6 @@ public class Crawler extends WebCrawler {
 	
 	 @Override
      public void visit(Page page) {
-		 
-         
 
          if (page.getParseData() instanceof HtmlParseData) {
         	 String url = page.getWebURL().getURL();

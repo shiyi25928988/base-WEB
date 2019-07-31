@@ -1,10 +1,12 @@
 package crawler.base;
 
 import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author yshi
+ *
+ */
 public class QueueHolder {
 
 	private static Queue<CrawlResults> queue = new ConcurrentLinkedQueue<CrawlResults>();

@@ -1,4 +1,4 @@
-package crawler.base;
+package crawler.base.exceptions;
 
 public class InvalidSeedException extends Exception{
 

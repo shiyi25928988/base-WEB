@@ -7,14 +7,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 
-import org.apache.commons.io.FileUtils;
+import lombok.extern.java.Log;
 
+@Log
 public class WriteFile {
 	
 	
 	public static void write(String url, String content){
 		try {
-			string2File(url+"\n\r"+content,"S:"+File.separator+"crawler_folder"+File.separator+System.currentTimeMillis()+".txt");
+			string2File(url+"\n\r"+content,CrawlerConstants.CURRENT_PATH + File.separator+System.currentTimeMillis() + ".txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -45,6 +46,10 @@ public class WriteFile {
         }  
         return flag;  
     }  
+	
+	public static void main(String...strings) {
+		log.info(CrawlerConstants.CURRENT_PATH);
+	}
 	
 	
 }

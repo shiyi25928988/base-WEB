@@ -15,12 +15,18 @@ import db.base.module.DataSourceModule;
 import lombok.extern.java.Log;
 import mq.base.module.MessageQueueModule;
 
+/**
+ * @author yshi
+ *
+ */
 @Log
 public class GuiceServletConfig extends GuiceServletContextListener {
-	private static Properties properties = new Properties();
+	private static Properties messageQueueProp = new Properties();
+	private static Properties jdbcProp = new Properties();
 	static {
 		try {
-			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("env.properties"));
+			messageQueueProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mq.properties"));
+			jdbcProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"));
 		} catch (IOException e) {
 			log.severe("env.properties load failed");
 			System.exit(1);
@@ -33,8 +39,8 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 	protected Injector getInjector() {
 		if (Objects.isNull(injector)) {
 			injector = Guice.createInjector(
-					new DataSourceModule(),
-					new MessageQueueModule(properties), 
+					new DataSourceModule(jdbcProp),
+					new MessageQueueModule(messageQueueProp), 
 					new RESTfulModule(),
 					new ServletModule(),
 					new CacheModule());

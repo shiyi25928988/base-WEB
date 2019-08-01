@@ -13,48 +13,24 @@ import db.base.service.UserService;
 import db.base.service.UserServiceImpl;
 
 /**
- * 
- * install this module to RootModule.java
- * 
- * 
- * */
-
+ * @author yshi
+ *
+ */
 public class DataSourceModule extends MyBatisModule {
-
-	/**
-	 * JDBC configuration
-	 * 
-	 * */
-	private final static Properties getConnectionProperties(String schema) {
-		Properties myBatisProperties = new Properties();
-	    myBatisProperties.setProperty("JDBC.driver", "com.mysql.cj.jdbc.Driver");
-	    myBatisProperties.setProperty("JDBC.url", "jdbc:mysql://localhost:3306/" + schema + "?serverTimezone=UTC&characterEncoding=utf-8");
-		myBatisProperties.setProperty("JDBC.schema", schema);
-		myBatisProperties.setProperty("JDBC.username", "root");
-		myBatisProperties.setProperty("JDBC.password", "root");
-		myBatisProperties.setProperty("JDBC.autoCommit", "false");
-		return myBatisProperties;
+	private  Properties myBatisProperties;
+	
+	public DataSourceModule(Properties properties) {
+		this.myBatisProperties = properties;
 	}
 
 	@Override
 	protected void initialize() {
-		
-		environmentId("development");
-		
-		Names.bindProperties(binder(), getConnectionProperties("base"));
-		
+		Names.bindProperties(binder(), this.myBatisProperties);
 		bindDataSourceProviderType(PooledDataSourceProvider.class);
-		
 		bindTransactionFactoryType(JdbcTransactionFactory.class);
 		
-		/**
-		 * 
-		 * 
-		 * */
 		bindService();
-		
 		addMapper();
-		
 	}
 	
 	private void bindService() {
@@ -65,5 +41,4 @@ public class DataSourceModule extends MyBatisModule {
 		addMapperClass(UserMapper.class);
 	}
 	
-
 }

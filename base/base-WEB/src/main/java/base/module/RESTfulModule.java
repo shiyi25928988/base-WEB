@@ -10,9 +10,9 @@ import base.IOC.ClassHelper;
 import base.annotation.Controller;
 import base.rest.RestService;
 import base.rest.RestServiceImpl;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
-@Log
+@Slf4j
 public class RESTfulModule extends AbstractModule {
 
 	private static Set<Class<?>> controllerClassSet;
@@ -20,7 +20,7 @@ public class RESTfulModule extends AbstractModule {
 		try {
 			controllerClassSet = getControllers("base");
 		} catch (ClassNotFoundException | IOException e) {
-			log.severe(e.getMessage());
+			log.error(e.getMessage());
 			System.exit(1);
 		}
 	}

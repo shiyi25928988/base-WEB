@@ -6,6 +6,10 @@ import org.apache.http.message.BasicHeader;
 
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 
+/**
+ * @author yshi
+ *
+ */
 public class CrawlerConfig extends CrawlConfig{
 	
 	static CrawlConfig config;
@@ -15,6 +19,7 @@ public class CrawlerConfig extends CrawlConfig{
 		initConfig(config);
 	}
 	
+	private CrawlerConfig() {}
 	
 	private static void initConfig(final CrawlConfig config){
 		config.setCrawlStorageFolder(CrawlerConstants.CURRENT_PATH);

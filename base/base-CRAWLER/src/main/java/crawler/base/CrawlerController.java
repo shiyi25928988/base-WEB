@@ -6,6 +6,11 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.parser.Parser;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
+/**
+ * CrawlController wrapper
+ * @author yshi
+ *
+ */
 public class CrawlerController extends CrawlController {
 
 	public CrawlerController(CrawlConfig config, PageFetcher pageFetcher, Parser parser,

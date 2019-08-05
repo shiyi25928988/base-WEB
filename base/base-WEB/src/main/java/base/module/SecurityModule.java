@@ -33,12 +33,13 @@ public class SecurityModule extends ShiroWebModule {
 	@Override
 	protected void configureShiroWeb() {
 		log.info("configureShiroWeb...");
+		
 		bindRealm().toInstance(getRealm());
 		
 		/***/
-		addFilterChain("/login", ANON);
-		addFilterChain("/logout", AUTHC);
-		addFilterChain("/user", AUTHC);
+		addFilterChain("/login", ShiroWebModule.ANON);
+		addFilterChain("/logout", ShiroWebModule.AUTHC);
+		addFilterChain("/user", ShiroWebModule.AUTHC);
 	}
 
 	/**

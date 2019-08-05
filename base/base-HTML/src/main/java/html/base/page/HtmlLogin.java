@@ -5,6 +5,10 @@ import static j2html.TagCreator.*;
 import html.base.element.button.Button;
 import html.base.element.button.ButtonType;
 import html.base.element.input.PasswordInput;
+import html.base.head.Head;
+import html.base.head.Link;
+import html.base.head.Meta;
+import html.base.head.Style;
 import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
@@ -26,17 +30,15 @@ public class HtmlLogin {
 	}
 	
 	public DomContent renderHead() {
-		return head(
-				meta().attr(new Attribute("charset", "UTF-8")),
-				meta().attr(new Attribute("http-equiv", "X-UA-Compatible"))
-					  .attr(new Attribute("content", "IE=edge")),
-				meta().attr(new Attribute("name", "viewport"))
-					  .attr(new Attribute("content", "width=device-width, initial-scale=1, shrink-to-fit=no")),
-				link().withRel("stylesheet")
+		Head head = new Head()
+				.addDomContent(new Meta().attr("charset", "UTF-8"))
+				.addDomContent(new Meta().attr("http-equiv", "X-UA-Compatible").attr("content", "IE=edge"))
+				.addDomContent(new Meta().attr("name", "viewport").attr("content", "width=device-width, initial-scale=1, shrink-to-fit=no"))
+				.addDomContent(new Link().withRel("stylesheet")
 					  .withHref("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
 					  .attr(new Attribute("integrity", "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"))
-					  .attr(new Attribute("crossorigin", "anonymous")),
-				style("\r\n" + 
+					  .attr(new Attribute("crossorigin", "anonymous")))
+				.addDomContent(new Style().addStyle(
 						"      .bd-placeholder-img {\r\n" + 
 						"        font-size: 1.125rem;\r\n" + 
 						"        text-anchor: middle;\r\n" + 
@@ -45,16 +47,13 @@ public class HtmlLogin {
 						"        -ms-user-select: none;\r\n" + 
 						"        user-select: none;\r\n" + 
 						"      }\r\n" + 
-						"\r\n" + 
 						"      @media (min-width: 768px) {\r\n" + 
 						"        .bd-placeholder-img-lg {\r\n" + 
 						"          font-size: 3.5rem;\r\n" + 
-						"        }\r\n" + 
-						"      }\r\n" + 
-						"    "),
-				link().withRel("stylesheet")
-					  .withHref("https://getbootstrap.com/docs/4.3/examples/sign-in/signin.css")
-			);
+						"        }}" ))
+				.addDomContent(new Link().withRel("stylesheet")
+					  .withHref("https://getbootstrap.com/docs/4.3/examples/sign-in/signin.css"));
+			return head;
 	}
 	
 	public DomContent renderBody() {

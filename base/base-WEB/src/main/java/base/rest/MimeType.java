@@ -1,5 +1,9 @@
 package base.rest;
 
+/**
+ * @author yshi
+ *
+ */
 public enum MimeType {
 	/**
 	 * 
@@ -25,11 +29,10 @@ public enum MimeType {
 	IMAGE_GIF("image/gif"),
 	
 	VIDEO_MP4("video/mp4"),
-	AUDIO_MP3("audio/mpeg")
-	;;;
-	
+	AUDIO_MP3("audio/mpeg");
 	
 	String type;
+	
 	private MimeType(String type) {
 		this.type = type;
 	}
@@ -37,5 +40,4 @@ public enum MimeType {
 	public String getType() {
 		return type;
 	}
-	
 }

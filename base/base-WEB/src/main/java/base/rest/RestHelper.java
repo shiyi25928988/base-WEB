@@ -8,14 +8,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import lombok.extern.slf4j.Slf4j;
 import mq.base.utils.JsonUtils;
 
+/**
+ * @author yshi
+ *
+ */
+@Slf4j
 public final class RestHelper {
 	
+	/**
+	 *  To prevent instantiated.
+	 */
 	private RestHelper() {
 		throw new RuntimeException();
 	}
 
+	/**
+	 * @param data
+	 * @param resp
+	 */
 	public static void sendResponseData(final Object data, final HttpServletResponse resp) {
 		if(Objects.isNull(data)) {
 			throw new NullPointerException();
@@ -29,11 +42,9 @@ public final class RestHelper {
 			writer.flush();
 			writer.close();
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 	}
 }

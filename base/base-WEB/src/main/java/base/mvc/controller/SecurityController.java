@@ -17,7 +17,13 @@ import base.rest.HtmlHelper;
 import base.servlet.ServletHelper;
 import db.base.service.UserService;
 import html.base.page.HtmlLogin;
+import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author yshi
+ *
+ */
+@Slf4j
 @Controller
 public class SecurityController {
 	
@@ -27,16 +33,14 @@ public class SecurityController {
 	@GET
 	@Path(value = "/login")
 	public void loginHtml() {
-		System.out.println("GET login");
-		System.out.println(ServletHelper.getRequest().getContextPath());
+		log.info("get login page..");
 		HtmlHelper.sendHtmlPage(new HtmlLogin(ServletHelper.getRequest().getContextPath()).render());
 	}
 	
 	@POST
 	@Path(value = "/login")
 	public void login_post_username_password() {
-		System.out.println("POST login");
-		System.out.println();
+		log.info("post login request..");
 		HttpServletRequest req = ServletHelper.getRequest();
 		HttpServletResponse resp = ServletHelper.getResponse();
 		
@@ -54,7 +58,6 @@ public class SecurityController {
 		    //this is all you have to do to support 'remember me' (no config - built in!):
 		    token.setRememberMe(true);
 		    currentUser.login(token);
-		   
 		}
 	}
 	

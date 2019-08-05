@@ -1,11 +1,32 @@
 package base.rest;
 
+/**
+ * @author yshi
+ *
+ */
 public interface RestService {
+	
+	/**
+	 * HTTP GET
+	 */
 	void doGet();
+	
+	/**
+	 * HTTP PUT
+	 */
 	void doPut();
+	
+	/**
+	 * HTTP POST
+	 */
 	void doPost();
-	void doHead();
+	
+	/**
+	 * HTTP DELETE
+	 */
 	void doDelete();
+	
+	void doHead();
 	void doOptions();
 	void doTrace();
 }

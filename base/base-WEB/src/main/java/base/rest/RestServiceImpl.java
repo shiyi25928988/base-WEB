@@ -26,11 +26,13 @@ import com.google.inject.Injector;
 import base.IOC.ReflectionUtils;
 import base.config.GuiceServletConfig;
 import base.servlet.ServletHelper;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  *
  */
+@Slf4j
 public class RestServiceImpl implements RestService {
 
 	private Set<Class<?>> classSet;
@@ -44,11 +46,15 @@ public class RestServiceImpl implements RestService {
 	private Map<String, Method> methodMap_OPTIONS = new ConcurrentHashMap<>();
 	private Map<String, Method> methodMap_HEAD    = new ConcurrentHashMap<>();
 	
+	/**
+	 * @param classSet
+	 */
 	public RestServiceImpl(final Set<Class<?>> classSet) {
 		this.classSet = classSet;
 		if (Objects.nonNull(this.classSet) && this.classSet.size() >= 1) {
 			classSet.stream().forEach(clazz -> {
 				Method[] methods = clazz.getDeclaredMethods();
+				
 				Stream.of(methods).forEach(m -> {
 
 					if (m.isAnnotationPresent(GET.class)) {
@@ -110,9 +116,9 @@ public class RestServiceImpl implements RestService {
 		}
 	}
 	
-	private void invoke(Map<String, Method> methodMap) {
+	private void invoke(final Map<String, Method> methodMap) {
 		HttpServletRequest req = ServletHelper.getRequest();
-		HttpServletResponse resp = ServletHelper.getResponse();
+		//HttpServletResponse resp = ServletHelper.getResponse();
 		String restPath = StringUtils.remove(req.getRequestURI(), req.getContextPath());
 		Method method = methodMap.get(restPath);
 		Class<?> clazz = classMap.get(restPath);
@@ -167,7 +173,7 @@ public class RestServiceImpl implements RestService {
 	
 	@Override
 	public void doTrace() {
-		// not support yet
+		log.error("Not support TRACE http method!!");
 	}
 
 }

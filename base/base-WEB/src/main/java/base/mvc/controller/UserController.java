@@ -18,6 +18,10 @@ import cache.base.service.CacheService;
 import db.base.entity.User;
 import db.base.service.UserService;
 
+/**
+ * @author yshi
+ *
+ */
 @Controller
 public class UserController {
 

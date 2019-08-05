@@ -15,7 +15,9 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class ClassHelper {
+public final class ClassHelper {
+	
+	private ClassHelper() {}
 	
 	/**
 	 * @param scanPackageNames

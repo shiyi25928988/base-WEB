@@ -3,18 +3,20 @@ package base.filter;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.shiro.web.servlet.ShiroFilter;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
-@Log
+/**
+ * @author yshi
+ *
+ */
+@Slf4j
 public class SecureFilter extends ShiroFilter{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	WebSecurityManager webSecurityManager;
 
+	/* (non-Javadoc)
+	 * @see org.apache.shiro.web.servlet.ShiroFilter#init()
+	 */
 	@Override
 	public void init() throws Exception {
 		super.init();

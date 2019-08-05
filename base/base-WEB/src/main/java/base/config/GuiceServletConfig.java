@@ -12,15 +12,18 @@ import base.module.IocModule;
 import base.module.ServletModule;
 import cache.base.module.CacheModule;
 import db.base.module.DataSourceModule;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import mq.base.module.MessageQueueModule;
 
 /**
  * @author yshi
  *
  */
-@Log
+@Slf4j
 public class GuiceServletConfig extends GuiceServletContextListener {
+	/*
+	 * The properties loading 
+	 * */
 	private static Properties messageQueueProp = new Properties();
 	private static Properties jdbcProp = new Properties();
 	static {
@@ -28,15 +31,22 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 			messageQueueProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mq.properties"));
 			jdbcProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"));
 		} catch (IOException e) {
-			log.severe("env.properties load failed");
+			log.error(e.getMessage());
 			System.exit(1);
 		}
 	}
 
-	private static volatile Injector injector;
+	
+	/**
+	 * Injector
+	 */
+	private static volatile Injector injector = null;
 
+	/* (non-Javadoc)
+	 * @see com.google.inject.servlet.GuiceServletContextListener#getInjector()
+	 */
 	@Override
-	protected Injector getInjector() {
+	protected synchronized Injector getInjector() {
 		if (Objects.isNull(injector)) {
 			injector = Guice.createInjector(
 					new DataSourceModule(jdbcProp),
@@ -48,6 +58,10 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 		return injector;
 	}
 
+	/**
+	 * @return
+	 * @throws NullPointerException
+	 */
 	public static Injector getInjectorInstance() throws NullPointerException {
 		if (Objects.isNull(injector))
 			throw new NullPointerException();

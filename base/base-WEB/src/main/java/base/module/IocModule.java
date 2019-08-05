@@ -1,15 +1,12 @@
 package base.module;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 
 import base.IOC.ClassHelper;
-import base.annotation.Controller;
 import base.rest.RestService;
 import base.rest.RestServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -32,11 +29,18 @@ public class IocModule extends AbstractModule {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.inject.AbstractModule#configure()
+	 */
 	@Override
 	protected void configure() {
 		bind(RestService.class).toProvider(RestServiceProvider.class);
 	}
 
+	/**
+	 * To provide a RestService implement class
+	 *
+	 */
 	public static class RestServiceProvider implements Provider<RestService> {
 		/* 
 		 * RestService is designed to process the classes which was annotated by the rest method

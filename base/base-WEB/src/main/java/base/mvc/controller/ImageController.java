@@ -18,6 +18,10 @@ import base.rest.HtmlHelper;
 import base.rest.MimeType;
 import base.servlet.ServletHelper;
 
+/**
+ * @author yshi
+ *
+ */
 @Controller
 public class ImageController {
 

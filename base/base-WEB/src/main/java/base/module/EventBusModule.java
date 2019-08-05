@@ -13,7 +13,7 @@ import com.google.inject.Singleton;
  * @author yshi
  *
  */
-public class RootModule extends AbstractModule{
+public class EventBusModule extends AbstractModule{
 
 	@Override
 	protected void configure() {

@@ -1,39 +1,38 @@
 package base.module;
 
-import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.apache.shiro.aop.AnnotationResolver;
-import org.apache.shiro.config.Ini;
 import org.apache.shiro.guice.web.ShiroWebModule;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
-import org.apache.shiro.realm.jdbc.JdbcRealm.SaltStyle;
-import org.apache.shiro.realm.text.IniRealm;
 
-import com.google.inject.Provides;
-
-import db.base.module.DataSourceModule;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  *
  */
-@Log
+@Slf4j
 public class SecurityModule extends ShiroWebModule {
 
 	private ServletContext context;
 
+	/**
+	 * @param context
+	 */
 	SecurityModule(ServletContext context) {
 		super(context);
 		this.context = context;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.shiro.guice.web.ShiroWebModule#configureShiroWeb()
+	 */
 	@Override
 	protected void configureShiroWeb() {
+		log.info("configureShiroWeb...");
 		bindRealm().toInstance(getRealm());
 		
 		/***/
@@ -42,6 +41,9 @@ public class SecurityModule extends ShiroWebModule {
 		addFilterChain("/user", AUTHC);
 	}
 
+	/**
+	 * @return BasicDataSource
+	 */
 	private BasicDataSource getDataSource() {
 		BasicDataSource ds = new BasicDataSource();
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
@@ -51,6 +53,9 @@ public class SecurityModule extends ShiroWebModule {
 		return ds;
 	}
 
+	/**
+	 * @return Realm
+	 */
 	private Realm getRealm() {
 		JdbcRealm realm = new JdbcRealm();
 		realm.setDataSource(getDataSource());

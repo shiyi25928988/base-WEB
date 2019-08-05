@@ -9,9 +9,13 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
-@Log
+/**
+ * @author yshi
+ *
+ */
+@Slf4j
 public final class DesEncryptUtils {
 	
 	/** Secure key. */
@@ -139,7 +143,7 @@ public final class DesEncryptUtils {
 			cipher.init(Cipher.ENCRYPT_MODE, securekey, iv);
 			return cipher.doFinal(data);
 		} catch (Exception e) {
-			log.warning(e.toString());
+			log.error(e.getMessage());
 		}
 		return null;
 	}

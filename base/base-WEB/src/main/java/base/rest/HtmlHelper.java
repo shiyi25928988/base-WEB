@@ -2,7 +2,6 @@ package base.rest;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -10,7 +9,13 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import base.servlet.ServletHelper;
+import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author yshi
+ *
+ */
+@Slf4j
 public final class HtmlHelper {
 
 	public static void sendHtmlPage(String html) {
@@ -24,8 +29,7 @@ public final class HtmlHelper {
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 	}
 
@@ -40,8 +44,7 @@ public final class HtmlHelper {
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 	}
 

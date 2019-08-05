@@ -36,7 +36,10 @@ public class SecurityModule extends ShiroWebModule {
 		
 		bindRealm().toInstance(getRealm());
 		
-		/***/
+		/*
+		 * add the URL template and authenticate type to the filterChain
+		 * 
+		 * */
 		addFilterChain("/login", ShiroWebModule.ANON);
 		addFilterChain("/logout", ShiroWebModule.AUTHC);
 		addFilterChain("/user", ShiroWebModule.AUTHC);

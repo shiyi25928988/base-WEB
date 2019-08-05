@@ -24,10 +24,13 @@ import com.google.common.base.Strings;
 import com.google.inject.Injector;
 
 import base.IOC.ReflectionUtils;
-import base.annotation.RequestParam;
 import base.config.GuiceServletConfig;
 import base.servlet.ServletHelper;
 
+/**
+ * @author yshi
+ *
+ */
 public class RestServiceImpl implements RestService {
 
 	private Set<Class<?>> classSet;

@@ -9,6 +9,10 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+/**
+ * @author yshi
+ *
+ */
 public class RootModule extends AbstractModule{
 
 	@Override

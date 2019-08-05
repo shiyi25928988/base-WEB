@@ -8,7 +8,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 
-import base.module.RESTfulModule;
+import base.module.IocModule;
 import base.module.ServletModule;
 import cache.base.module.CacheModule;
 import db.base.module.DataSourceModule;
@@ -41,7 +41,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 			injector = Guice.createInjector(
 					new DataSourceModule(jdbcProp),
 					new MessageQueueModule(messageQueueProp), 
-					new RESTfulModule(),
+					new IocModule(),
 					new ServletModule(),
 					new CacheModule());
 		}

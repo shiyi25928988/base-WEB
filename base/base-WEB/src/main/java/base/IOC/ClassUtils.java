@@ -14,15 +14,26 @@ import java.util.jar.JarFile;
 import java.util.stream.Stream;
 
 import lombok.NonNull;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
-@Log
+/**
+ * @author yshi
+ *
+ */
+@Slf4j
 public final class ClassUtils {
 	
 	public static Set<Class<?>> getClassSet() throws IOException, ClassNotFoundException {
 		return getClassSet(ClassUtils.class.getName().substring(0, ClassUtils.class.getName().indexOf(".")));
 	}
 
+	/**
+	 * Return a classes set by the given package name.
+	 * @param packageName
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static Set<Class<?>> getClassSet(final String packageName) throws IOException, ClassNotFoundException {
 
 		Set<Class<?>> classSet = new HashSet<>();
@@ -32,11 +43,14 @@ public final class ClassUtils {
 		while (URLs.hasMoreElements()) {
 			URL url = URLs.nextElement();
 			if (Objects.nonNull(url)) {
+				
 				switch (url.getProtocol()) {
+				
 					case "file":
 						String packagePath = escapeSpace(url.getPath());
 						addClass(classSet, packagePath, packageName);
 						break;
+						
 					case "jar":
 						JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
 						if (Objects.nonNull(jarURLConnection)) {
@@ -55,15 +69,22 @@ public final class ClassUtils {
 							}
 						}
 						break;
+						default:
+							log.error(url.getProtocol() + "file process not supported!!");
 				}
 			}
 		}
-
 		return classSet;
 	}
 
-	private static void addClass(final Set<Class<?>> classSet, @NonNull final String packagePath,
-	                @NonNull final String packageName) {
+	/**
+	 * @param classSet
+	 * @param packagePath
+	 * @param packageName
+	 */
+	private static void addClass(final Set<Class<?>> classSet, 
+								@NonNull final String packagePath,
+								@NonNull final String packageName) {
 
 		File[] files = new File(packagePath).listFiles(new FileFilter() {
 			@Override
@@ -88,7 +109,7 @@ public final class ClassUtils {
 				try {
 					doAddClass(classSet, className);
 				} catch (ClassNotFoundException e) {
-					log.severe(e.getMessage());
+					log.error(e.getMessage());
 					e.printStackTrace();
 				}
 			} else if (file.isDirectory()) {
@@ -99,19 +120,40 @@ public final class ClassUtils {
 		});
 	}
 	
+	/**
+	 * Get the current class loader.
+	 * @return ClassLoader
+	 */
 	private static ClassLoader getClassLoader() {
 		return Thread.currentThread().getContextClassLoader();
 	}
 
+	/**
+	 * @param className
+	 * @param initialize
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
 	private static Class<?> loadClass(final String className, final boolean initialize) throws ClassNotFoundException {
 		return Class.forName(className, initialize, getClassLoader());
 	}
 
+	/**
+	 * @param classSet
+	 * @param className
+	 * @throws ClassNotFoundException
+	 */
 	private static void doAddClass(final Set<Class<?>> classSet, final String className) throws ClassNotFoundException {
 		Class<?> clazz = loadClass(className, false);
 		classSet.add(clazz);
 	}
 
+	
+	/**
+	 * %20 is a space in URL
+	 * @param url string 
+	 * @return
+	 */
 	private static String escapeSpace(final String str) {
 		return str.replace("%20", " ");
 	}

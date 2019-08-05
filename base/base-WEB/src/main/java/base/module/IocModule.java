@@ -1,6 +1,8 @@
 package base.module;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.google.inject.AbstractModule;
@@ -12,13 +14,18 @@ import base.rest.RestService;
 import base.rest.RestServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author yshi
+ *
+ */
 @Slf4j
-public class RESTfulModule extends AbstractModule {
+public class IocModule extends AbstractModule {
 
 	private static Set<Class<?>> controllerClassSet;
+	
 	static {
 		try {
-			controllerClassSet = getControllers("base");
+			controllerClassSet = ClassHelper.getControllers("base");
 		} catch (ClassNotFoundException | IOException e) {
 			log.error(e.getMessage());
 			System.exit(1);
@@ -31,16 +38,15 @@ public class RESTfulModule extends AbstractModule {
 	}
 
 	public static class RestServiceProvider implements Provider<RestService> {
+		/* 
+		 * RestService is designed to process the classes which was annotated by the rest method
+		 */
 		@Override
 		public RestService get() {
 			return new RestServiceImpl(controllerClassSet);
 		}
 	}
-
-	private static Set<Class<?>> getControllers(String scanPackageName) throws ClassNotFoundException, IOException {
-		Set<Class<?>> set = ClassHelper.getAnnotationClass(ClassHelper.getClassSet(scanPackageName), Controller.class);
-		set.forEach(clazz -> log.info(clazz.getCanonicalName()));
-		return set;
-	}
+	
+	
 	
 }

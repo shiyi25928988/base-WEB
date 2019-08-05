@@ -17,11 +17,18 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * @author yshi
+ *
+ */
+@Slf4j
 public class WebSecurityManagerImpl implements WebSecurityManager{
 
 	@Override
 	public Subject login(Subject subject, AuthenticationToken authenticationToken) throws AuthenticationException {
-		// TODO Auto-generated method stub
+		log.info("WebSecurityManager login");
 		return null;
 	}
 

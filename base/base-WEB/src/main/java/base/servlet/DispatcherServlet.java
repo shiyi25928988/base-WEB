@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.inject.Inject;
 
 import base.rest.RestService;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
-@Log
+@Slf4j
 public class DispatcherServlet extends HttpServlet {
 
 	/**

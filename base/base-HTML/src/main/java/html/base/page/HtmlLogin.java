@@ -7,6 +7,7 @@ import html.base.element.HttpMethod;
 import html.base.element.Img;
 import html.base.element.button.Button;
 import html.base.element.button.ButtonType;
+import html.base.element.h.H1;
 import html.base.element.input.PasswordInput;
 import html.base.head.Head;
 import html.base.head.Link;
@@ -80,14 +81,12 @@ public class HtmlLogin {
 		Form form = new Form();
 		form.setAction(".." + contexPath + "/login").setHttpMethod(HttpMethod.POST).setClasses("form-signin");
 		form.addDomContent(new Img().setClasses("mb-4").setSrc(".."+ this.contexPath +"/image/pussy.png").addAttribute("width", "72").addAttribute("height", "72"));
-		
+		form.addDomContent(new H1().setClasses("h3 mb-3 font-weight-normal").setText("Please sign in"));
 		return form(
 				
 				
 
-				h1()
-					.withClass("h3 mb-3 font-weight-normal")
-					.withText("Please sign in"),
+
 				label()
 					.withClass("sr-only")
 					.withText("Email address")

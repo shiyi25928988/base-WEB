@@ -1,43 +1,68 @@
 package html.base.element.input;
 
 import html.base.element.HtmlElement;
+import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 
+/**
+ * @author yshi
+ *
+ */
 public class Label extends ContainerTag implements HtmlElement<Label>{
+	
+	private String id;
+	private String name;
 
-	public Label(Input input) {
+	/**
+	 * @param element
+	 */
+	public Label(HtmlElement<?> element) {
 		super("label");
-		this.addAttribute("for", input.getId());
+		this.addAttribute("for", element.getId());
 	}
 
 	@Override
 	public Label setClasses(String... classes) {
-		// TODO Auto-generated method stub
+		this.withClasses(classes);
 		return null;
 	}
 
 	@Override
 	public Label setName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		this.withName(name);
+		this.name = name;
+		return this;
 	}
 
 	@Override
 	public Label setId(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		this.withId(id);
+		this.id = id;
+		return this;
 	}
 
 	@Override
 	public Label addAttribute(String name, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		this.attr(new Attribute(name, value));
+		return this;
 	}
 
 	@Override
 	public Label hide(boolean condition) {
-		// TODO Auto-generated method stub
-		return null;
+		if(condition) {
+			this.isHidden();
+		}
+		return this;
+	}
+
+	@Override
+	public String getId() {
+		return this.id;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 	
 }

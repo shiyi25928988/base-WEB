@@ -12,6 +12,9 @@ import j2html.tags.DomContent;
  *
  */
 public class Form extends ContainerTag implements HtmlElement<Form>{
+	
+	private String id;
+	private String name;
 
 	public Form() {
 		super("form");
@@ -66,6 +69,7 @@ public class Form extends ContainerTag implements HtmlElement<Form>{
 	@Override
 	public Form setName(String formName) {
 		this.withName(formName);
+		this.name = formName;
 		return this;
 	}
 
@@ -78,6 +82,7 @@ public class Form extends ContainerTag implements HtmlElement<Form>{
 	@Override
 	public Form setId(String id) {
 		this.withId(id);
+		this.id = id;
 		return this;
 	}
 
@@ -91,6 +96,16 @@ public class Form extends ContainerTag implements HtmlElement<Form>{
 	public Form hide(boolean condition) {
 		this.isHidden();
 		return this;
+	}
+
+	@Override
+	public String getId() {
+		return this.id;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 
 }

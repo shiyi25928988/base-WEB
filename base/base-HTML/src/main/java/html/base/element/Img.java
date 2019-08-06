@@ -8,7 +8,13 @@ import j2html.tags.EmptyTag;
  *
  */
 public class Img extends EmptyTag implements HtmlElement<Img>{
+	
+	private String id;
+	private String name;
 
+	/**
+	 * 
+	 */
 	public Img() {
 		super("img");
 	}
@@ -18,6 +24,11 @@ public class Img extends EmptyTag implements HtmlElement<Img>{
 		return this;
 	}
 	
+	/**
+	 * The alt attribute provides alternative information for an image if a user for some reason cannot view it.
+	 * @param alt
+	 * @return
+	 */
 	public Img setAlt(String alt) {
 		this.withAlt(alt);
 		return this;
@@ -32,12 +43,14 @@ public class Img extends EmptyTag implements HtmlElement<Img>{
 	@Override
 	public Img setName(String name) {
 		this.withName(name);
+		this.name = name;
 		return this;
 	}
 
 	@Override
 	public Img setId(String id) {
 		this.withId(id);
+		this.id = id;
 		return this;
 	}
 
@@ -51,6 +64,16 @@ public class Img extends EmptyTag implements HtmlElement<Img>{
 	public Img hide(boolean condition) {
 		this.isHidden();
 		return this;
+	}
+
+	@Override
+	public String getId() {
+		return this.id;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 
 }

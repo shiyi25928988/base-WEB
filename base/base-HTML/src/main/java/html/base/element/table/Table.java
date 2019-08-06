@@ -48,5 +48,16 @@ public class Table extends ContainerTag implements HtmlElement<Table>{
 	private class Tr{}
 	private class Th{}
 	private class Td{}
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

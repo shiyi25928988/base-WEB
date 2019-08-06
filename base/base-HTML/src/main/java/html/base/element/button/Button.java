@@ -9,13 +9,12 @@ import j2html.tags.ContainerTag;
  *
  */
 public class Button extends ContainerTag implements HtmlElement<Button>{
-
-	private Button(String tagName) {
-		super(tagName);
-	}
 	
+	private String id;
+	private String name;
+
 	public Button() {
-		this("button");
+		super("button");
 	}
 	
 	@Override
@@ -78,6 +77,16 @@ public class Button extends ContainerTag implements HtmlElement<Button>{
 			this.isHidden();
 		}
 		return this;
+	}
+
+	@Override
+	public String getId() {
+		return this.id;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 
 	

@@ -10,18 +10,14 @@ import j2html.tags.EmptyTag;
  */
 public class Input extends EmptyTag implements HtmlElement<Input>{
 	
-	private String id;//bind with label
+	private String id;
+	private String name;
 	
-	public String getId() {
-		return this.id;
-	}
-
-	private Input(String tagName) {
-		super(tagName);
-	}
-	
+	/**
+	 * 
+	 */
 	public Input() {
-		this("input");
+		super("input");
 	}
 	
 	Input setInputType(InputType type) {
@@ -38,13 +34,14 @@ public class Input extends EmptyTag implements HtmlElement<Input>{
 	@Override
 	public Input setName(String name) {
 		this.withName(name);
+		this.name = name;
 		return this;
 	}
 
 	@Override
 	public Input setId(String id) {
-		this.id = id;
 		this.withId(id);
+		this.id = id;
 		return this;
 	}
 
@@ -70,6 +67,16 @@ public class Input extends EmptyTag implements HtmlElement<Input>{
 	public Input setText(String text) {
 		this.withValue(text);
 		return this;
+	}
+
+	@Override
+	public String getId() {
+		return this.id;
+	}
+	
+	@Override
+	public String getName() {
+		return this.name;
 	}
 
 }

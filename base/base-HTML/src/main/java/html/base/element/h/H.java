@@ -10,8 +10,16 @@ import j2html.tags.ContainerTag;
  */
 public abstract class H extends ContainerTag implements HtmlElement<H>{
 
+	/**
+	 * @param tagName
+	 */
 	public H(String tagName) {
 		super(tagName);
+	}
+	
+	public H setText(String text) {
+		this.withText(text);
+		return this;
 	}
 	
 	public H setDir(Direction dir) {
@@ -30,18 +38,6 @@ public abstract class H extends ContainerTag implements HtmlElement<H>{
 	@Override
 	public H setClasses(String... classes) {
 		this.withClasses(classes);
-		return this;
-	}
-
-	@Override
-	public H setName(String name) {
-		this.withName(name);
-		return this;
-	}
-
-	@Override
-	public H setId(String id) {
-		this.withId(id);
 		return this;
 	}
 

@@ -1,5 +1,9 @@
 package html.base.element.input;
 
+/**
+ * @author yshi
+ *
+ */
 public enum InputType {
 	Button("button"),
 	CheckBox("checkbox"),

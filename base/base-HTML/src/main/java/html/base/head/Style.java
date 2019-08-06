@@ -18,7 +18,7 @@ public class Style extends ContainerTag{
 	 * @return
 	 */
 	public Style addStyle(String text) {
-		this.withText(text);
+		this.withText(text + "\r\n");
 		return this;
 	}
 

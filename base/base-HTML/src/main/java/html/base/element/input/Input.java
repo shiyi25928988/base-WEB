@@ -68,6 +68,26 @@ public class Input extends EmptyTag implements HtmlElement<Input>{
 		this.withValue(text);
 		return this;
 	}
+	
+	public Input required() {
+		this.isRequired();
+		return this;
+	}
+	
+	public Input hide() {
+		this.isHidden();
+		return this;
+	}
+	
+	public Input autoFocus() {
+		this.isAutoFocus();
+		return this;
+	}
+	
+	public Input autoComplete() {
+		this.isAutoComplete();
+		return this;
+	}
 
 	@Override
 	public String getId() {

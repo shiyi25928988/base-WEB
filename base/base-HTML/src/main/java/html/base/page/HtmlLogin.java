@@ -2,14 +2,16 @@ package html.base.page;
 
 import static j2html.TagCreator.*;
 
+import html.base.element.Div;
 import html.base.element.Form;
 import html.base.element.HttpMethod;
 import html.base.element.Img;
 import html.base.element.Label;
-import html.base.element.button.Button;
+import html.base.element.P;
+import html.base.element.Text;
 import html.base.element.button.ButtonType;
 import html.base.element.h.H1;
-import html.base.element.input.Input;
+import html.base.element.input.CheckBox;
 import html.base.element.input.PasswordInput;
 import html.base.element.input.TextInput;
 import html.base.head.Head;
@@ -87,37 +89,25 @@ public class HtmlLogin {
 		form.addDomContent(new H1().setClasses("h3 mb-3 font-weight-normal").setText("Please sign in"));
 		form.addDomContent(
 				new Label(
-						new TextInput().setName("USER_NAME").setId("inputUserName").setClasses("form-control").setPlaceHolder("User Name").required().autoFocus())
-				.setText("Email address").setClasses("sr-only"));
+						new TextInput()
+						.setName("USER_NAME")
+						.setId("inputUserName")
+						.setClasses("form-control")
+						.setPlaceHolder("User Name")
+						.required()
+						.autoFocus()).setText("Email address").setClasses("sr-only"));
 		form.addDomContent(
 				new Label(new PasswordInput()
 						.setClasses("form-control")
 						.setPlaceHolder("Password")
 						.setId("inputPassword")
 						.setName("PASS_WORD")).setText("Password").setClasses("sr-only"));
-		
-		
-		return form(
-				
-
-
-				div(
-					label(
-						input()
-							.withType("checkbox")
-							.withValue("remember-me"),
-						text(
-								" Remember me"
-							)
-						)
-					).withClass("checkbox mb-3"),
-				
-				new html.base.element.input.Button().setButtonText("login").setType(ButtonType.submit).setClasses("btn btn-lg btn-primary btn-block"),
-
-				p()
-					.withClass("mt-5 mb-3 text-muted")
-					.withText("© 2017-2019")
-				).withClass("form-signin").withAction(".." + contexPath + "/login").withMethod("post");
+		form.addDomContent(
+				new Div(new Label(new CheckBox("remember-me")),
+						new Text(" Remember me")).setClasses("checkbox mb-3"));
+		form.addDomContent(new html.base.element.input.Button().setButtonText("login").setType(ButtonType.submit).setClasses("btn btn-lg btn-primary btn-block"));
+		form.addDomContent(new P().withClass("mt-5 mb-3 text-muted").withText("© 2017-2019"));
+		return form;
 	}
 	
 	public ContainerTag javaScript() {

@@ -11,19 +11,17 @@ public class Div extends ContainerTag implements HtmlElement<Div> {
 		super("div");
 	}
 	
-	public Div(HtmlElement<?>...elements) {
+	public Div(DomContent...dom) {
 		super("div");
-		Arrays.stream(elements).forEach(e->{
-			if (e instanceof DomContent) {
+		Arrays.stream(dom).forEach(e->{
 				this.with((DomContent)e);
-			}
 		});
 	}
 	
-	public Div addContent(HtmlElement<?> element) {
-		if (element instanceof DomContent) {
-			this.with((DomContent)element);
-		}
+	public Div addContent(DomContent...dom) {
+		Arrays.stream(dom).forEach(e->{
+			this.with((DomContent)e);
+		});
 		return this;
 	}
 

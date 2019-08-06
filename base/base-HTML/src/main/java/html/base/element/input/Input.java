@@ -8,7 +8,7 @@ import j2html.tags.EmptyTag;
  * @author yshi
  *
  */
-public class Input extends EmptyTag implements HtmlElement<Input>{
+public abstract class Input extends EmptyTag implements HtmlElement<Input>{
 	
 	private String id;
 	private String name;

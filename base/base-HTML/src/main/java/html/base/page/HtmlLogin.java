@@ -6,22 +6,22 @@ import j2html.attributes.Attribute;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
 
-public class HtmlLogin {
+/**
+ * @author yshi
+ *
+ */
+public class HtmlLogin extends Html{
 	
 	private final String contexPath;
 	
+	/**
+	 * @param contexPath
+	 */
 	public HtmlLogin(String contexPath) {
 		this.contexPath = contexPath;
 	}
 
-	public String render() {
-	
-		return html(
-				renderHead(),
-				renderBody()
-				).render();
-	}
-	
+	@Override
 	public DomContent renderHead() {
 		return head(
 				meta().attr(new Attribute("charset", "UTF-8")),
@@ -54,6 +54,7 @@ public class HtmlLogin {
 			);
 	}
 	
+	@Override
 	public DomContent renderBody() {
 		return body(
 				renderForm()

@@ -10,14 +10,14 @@ import j2html.tags.DomContent;
  * @author yshi
  *
  */
-public class HtmlLogin extends Html{
+public class LoginHtml extends Html{
 	
 	private final String contexPath;
 	
 	/**
 	 * @param contexPath
 	 */
-	public HtmlLogin(String contexPath) {
+	public LoginHtml(String contexPath) {
 		this.contexPath = contexPath;
 	}
 

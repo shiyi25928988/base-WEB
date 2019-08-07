@@ -17,7 +17,7 @@ import base.annotation.Controller;
 import base.rest.HtmlHelper;
 import base.servlet.ServletHelper;
 import db.base.service.UserService;
-import html.base.page.HtmlLogin;
+import html.base.page.LoginHtml;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -35,7 +35,7 @@ public class SecurityController {
 	@Path(value = "/login")
 	public void loginHtml() {
 		log.info("get login page..");
-		HtmlHelper.sendHtmlPage(new HtmlLogin(ServletHelper.getRequest().getContextPath()).render());
+		HtmlHelper.sendHtmlPage(new LoginHtml(ServletHelper.getRequest().getContextPath()).render());
 	}
 	
 	@POST

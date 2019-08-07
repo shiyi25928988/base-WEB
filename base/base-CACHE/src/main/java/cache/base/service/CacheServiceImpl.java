@@ -7,11 +7,14 @@ import java.util.concurrent.TimeUnit;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
+/**
+ * @author yshi
+ *
+ */
 public class CacheServiceImpl implements CacheService<String, Object> {
 
 	private Cache<String, Object> cache;
 
-	private static boolean initFlag = false;
 
 	private final static CacheService<String, Object> cacheInstance;
 
@@ -19,25 +22,31 @@ public class CacheServiceImpl implements CacheService<String, Object> {
 		cacheInstance = new CacheServiceImpl();
 	}
 
+	/**
+	 * @return
+	 */
 	public static CacheService<String, Object> getCacheInstance() {
 		return cacheInstance;
 	}
 
+	/**
+	 * 
+	 */
 	private CacheServiceImpl() {
-		if (initFlag)
-			throw new RuntimeException("CacheService instance already constructed");
-		else {
-			cache = Caffeine.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES).maximumSize(10_000).build();
-			initFlag = true;
-		}
+		cache = Caffeine.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES).maximumSize(10_000).build();
 	}
 
+	/* (non-Javadoc)
+	 * @see cache.base.service.CacheService#put(java.lang.Object, java.lang.Object)
+	 */
 	@Override
 	public void put(String key, Object value) {
 		cache.put(key, value);
-
 	}
 
+	/* (non-Javadoc)
+	 * @see cache.base.service.CacheService#get(java.lang.Object)
+	 */
 	@Override
 	public Optional<Object> get(String key) {
 		Object value = cache.getIfPresent(key);
@@ -46,9 +55,11 @@ public class CacheServiceImpl implements CacheService<String, Object> {
 		} else {
 			return Optional.empty();
 		}
-
 	}
 
+	/* (non-Javadoc)
+	 * @see cache.base.service.CacheService#evcit(java.lang.Object)
+	 */
 	@Override
 	public void evcit(String key) {
 		cache.invalidate(key);

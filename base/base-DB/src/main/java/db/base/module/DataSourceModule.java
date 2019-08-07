@@ -11,11 +11,13 @@ import com.google.inject.name.Names;
 import db.base.mapper.UserMapper;
 import db.base.service.UserService;
 import db.base.service.UserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  *
  */
+@Slf4j
 public class DataSourceModule extends MyBatisModule {
 	private  Properties myBatisProperties;
 	
@@ -23,8 +25,15 @@ public class DataSourceModule extends MyBatisModule {
 		this.myBatisProperties = properties;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mybatis.guice.AbstractMyBatisModule#initialize()
+	 */
 	@Override
 	protected void initialize() {
+		log.info("DataSourceModule initializing...");
+		/*
+		 * myBatisProperties is a property include JDBC 
+		 * */
 		Names.bindProperties(binder(), this.myBatisProperties);
 		bindDataSourceProviderType(PooledDataSourceProvider.class);
 		bindTransactionFactoryType(JdbcTransactionFactory.class);
@@ -33,10 +42,16 @@ public class DataSourceModule extends MyBatisModule {
 		addMapper();
 	}
 	
+	/**
+	 * bind service
+	 */
 	private void bindService() {
 		bind(UserService.class).to(UserServiceImpl.class);
 	}
 	
+	/**
+	 * add mapper
+	 */
 	private void addMapper() {
 		addMapperClass(UserMapper.class);
 	}

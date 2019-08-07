@@ -98,9 +98,7 @@ public class LoginHtml extends Html{
 					.isRequired().withValue(""),
 				div(
 					label(
-						input()
-							.withType("checkbox")
-							.withValue("remember-me"),
+						input().withType("checkbox").withValue("remember-me"),
 						text(" Remember me")
 						)
 					).withClass("checkbox mb-3"),

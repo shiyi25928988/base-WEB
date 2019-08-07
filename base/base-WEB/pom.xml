@@ -6,7 +6,7 @@
 	<packaging>war</packaging>
 	<name>base Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<parent>
 		<groupId>org.yshi</groupId>
 		<artifactId>base.parent</artifactId>
@@ -61,7 +61,7 @@
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-servlet</artifactId>
@@ -129,7 +129,15 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>base</finalName>

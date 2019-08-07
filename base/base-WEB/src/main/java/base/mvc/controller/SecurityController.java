@@ -7,6 +7,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 
@@ -55,9 +56,16 @@ public class SecurityController {
 		    //We'll use the username/password example here since it is the most common.
 		    //(do you know what movie this is from? ;)
 		    UsernamePasswordToken token = new UsernamePasswordToken(userName, passWord);
-		    //this is all you have to do to support 'remember me' (no config - built in!):
+		    
+		    /*
+		     * this is all you have to do to support 'remember me' (no config - built in!):
+		     **********************************/
 		    token.setRememberMe(true);
-		    currentUser.login(token);
+		    try {
+		    	currentUser.login(token);
+		    }catch(AuthenticationException e) {
+		    	log.error(e.getLocalizedMessage());
+		    }
 		}
 	}
 	

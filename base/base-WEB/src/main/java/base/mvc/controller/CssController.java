@@ -18,8 +18,19 @@ public class CssController {
 	@GET
 	@Path(value = "/css/bootstrap.css")
 	public void getBootStrapCss() throws IOException {
-		
 		HtmlHelper.sendCss("bootstrap.css");
+	}
+	
+	@GET
+	@Path(value = "/css/bootstrap.min.css")
+	public void getBootStrapMinCss() throws IOException {
+		HtmlHelper.sendCss("bootstrap.min.css");
+	}
+	
+	@GET
+	@Path(value = "/css/signin.css")
+	public void getSigninCss() throws IOException {
+		HtmlHelper.sendCss("signin.css");
 	}
 
 }

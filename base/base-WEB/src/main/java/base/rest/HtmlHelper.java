@@ -19,6 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class HtmlHelper {
 
+	/**
+	 * @param html
+	 */
 	public static void sendHtmlPage(String html) {
 		try {
 			HttpServletResponse resp = ServletHelper.getResponse();
@@ -34,12 +37,12 @@ public final class HtmlHelper {
 		}
 	}
 
+	/**
+	 * @param cssFileName
+	 */
 	public static void sendCss(String cssFileName) {
-		
 		String filePath = ServletHelper.getRealPath() + "WEB-INF" + File.separator +"css" + File.separator + cssFileName;
-		
 		File file = new File(filePath);
-		
 		if (file.exists()) {
 			try {
 				FileReader fis = new FileReader(file);
@@ -56,18 +59,17 @@ public final class HtmlHelper {
 				writer.write(temp);
 				writer.flush();
 				writer.close();
-			
 			}catch (IOException e) {
 				log.error(e.getMessage());
 			}
-			
-			
-			
 		}
-		
-		
 	}
 
+	/**
+	 * @param filePath
+	 * @param imageType
+	 * @throws IOException
+	 */
 	public static void sendImage(String filePath, MimeType imageType) throws IOException {
 		HttpServletResponse response = ServletHelper.getResponse();
 		File file = new File(filePath);

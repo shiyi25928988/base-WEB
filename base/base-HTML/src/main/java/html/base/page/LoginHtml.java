@@ -12,54 +12,16 @@ import j2html.tags.DomContent;
  */
 public class LoginHtml extends Html{
 	
-	private final String contexPath;
-	
 	/**
 	 * @param contexPath
 	 */
 	public LoginHtml(String contexPath) {
-		this.contexPath = contexPath;
+		Html.contexPath = contexPath;
 	}
 
 	@Override
-	public DomContent renderHead() {
-		return head(
-				meta().attr(new Attribute("charset", "UTF-8")),
-				meta().attr(new Attribute("http-equiv", "X-UA-Compatible"))
-					  .attr(new Attribute("content", "IE=edge")),
-				meta().attr(new Attribute("name", "viewport"))
-					  .attr(new Attribute("content", "width=device-width, initial-scale=1, shrink-to-fit=no")),
-				link().withRel("stylesheet")
-					  .withHref("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
-					  .attr(new Attribute("integrity", "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"))
-					  .attr(new Attribute("crossorigin", "anonymous")),
-				style("\r\n" + 
-						"      .bd-placeholder-img {\r\n" + 
-						"        font-size: 1.125rem;\r\n" + 
-						"        text-anchor: middle;\r\n" + 
-						"        -webkit-user-select: none;\r\n" + 
-						"        -moz-user-select: none;\r\n" + 
-						"        -ms-user-select: none;\r\n" + 
-						"        user-select: none;\r\n" + 
-						"      }\r\n" + 
-						"\r\n" + 
-						"      @media (min-width: 768px) {\r\n" + 
-						"        .bd-placeholder-img-lg {\r\n" + 
-						"          font-size: 3.5rem;\r\n" + 
-						"        }\r\n" + 
-						"      }\r\n" + 
-						"    "),
-				link().withRel("stylesheet")
-					  .withHref("https://getbootstrap.com/docs/4.3/examples/sign-in/signin.css")
-			);
-	}
-	
-	@Override
 	public DomContent renderBody() {
-		return body(
-				renderForm()
-				).withClass("text-center");
-		
+		return body(renderForm()).withClass("text-center");
 	}
 	
 	public DomContent renderForm() {

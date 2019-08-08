@@ -1,5 +1,7 @@
 package org.yshi.client;
 
+import org.yshi.shared.AbstractAction;
+import org.yshi.shared.AbstractResult;
 import org.yshi.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -118,6 +120,26 @@ public class baseGWT implements EntryPoint {
         sendButton.setEnabled(false);
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
+        
+        AsyncDispatcher.dispatcher.execute(new AbstractAction() {
+        	
+        }, new AsyncCallback<AbstractResult>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(AbstractResult result) {
+				GWT.log("onSuccess");
+				
+			}
+        	
+        });
+        
+        
         greetingService.greetServer(textToServer, new AsyncCallback<String>() {
           public void onFailure(Throwable caught) {
             // Show the RPC error message to the user

@@ -18,6 +18,8 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Other module inherits                                      -->
+    <!--  GWT dispatch -->
+  <inherits name='net.customware.gwt.dispatch.Dispatch' />
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='org.yshi.client.baseGWT'/>

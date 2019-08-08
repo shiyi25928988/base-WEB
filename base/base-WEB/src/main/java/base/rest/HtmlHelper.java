@@ -2,6 +2,7 @@ package base.rest;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -33,19 +34,38 @@ public final class HtmlHelper {
 		}
 	}
 
-	public static void sendCss(String css) {
-		try {
-			HttpServletResponse resp = ServletHelper.getResponse();
-			resp.setContentType(MimeType.TEXT_CSS.getType());
-			resp.setCharacterEncoding("UTF-8");
-			PrintWriter writer;
-			writer = resp.getWriter();
-			writer.write(css);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			log.error(e.getMessage());
+	public static void sendCss(String cssFileName) {
+		
+		String filePath = ServletHelper.getRealPath() + "WEB-INF" + File.separator +"css" + File.separator + cssFileName;
+		
+		File file = new File(filePath);
+		
+		if (file.exists()) {
+			try {
+				FileReader fis = new FileReader(file);
+				long size = file.length();
+				char[] temp = new char[(int) size];
+				fis.read(temp, 0, (int) size);
+				fis.close();
+				
+				HttpServletResponse resp = ServletHelper.getResponse();
+				resp.setContentType(MimeType.TEXT_CSS.getType());
+				resp.setCharacterEncoding("UTF-8");
+				PrintWriter writer;
+				writer = resp.getWriter();
+				writer.write(temp);
+				writer.flush();
+				writer.close();
+			
+			}catch (IOException e) {
+				log.error(e.getMessage());
+			}
+			
+			
+			
 		}
+		
+		
 	}
 
 	public static void sendImage(String filePath, MimeType imageType) throws IOException {

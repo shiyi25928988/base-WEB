@@ -1,8 +1,9 @@
 package org.yshi.client;
 
-import org.yshi.shared.AbstractAction;
-import org.yshi.shared.AbstractResult;
 import org.yshi.shared.FieldVerifier;
+import org.yshi.shared.action.DefaultAction;
+import org.yshi.shared.result.DefaultResult;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -92,7 +93,7 @@ public class baseGWT implements EntryPoint {
        * Fired when the user clicks on the sendButton.
        */
       public void onClick(ClickEvent event) {
-        sendNameToServer();
+    	  sendNameToServer2();
       }
 
       /**
@@ -100,8 +101,31 @@ public class baseGWT implements EntryPoint {
        */
       public void onKeyUp(KeyUpEvent event) {
         if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-          sendNameToServer();
+        	sendNameToServer2();
         }
+      }
+      
+      private void sendNameToServer2() {
+    	  GWT.debugger();
+    	  
+    	  DefaultAction action = new DefaultAction();
+          action.setMessage("aaaaa");
+          
+          AsyncDispatcher.dispatcher.execute(action, new AsyncCallback<DefaultResult>() {
+
+  			@Override
+  			public void onFailure(Throwable caught) {
+  				// TODO Auto-generated method stub
+  				
+  			}
+
+  			@Override
+  			public void onSuccess(DefaultResult result) {
+  				GWT.log(result.getResult());
+  				
+  			}
+          	
+          });
       }
 
       /**
@@ -121,23 +145,7 @@ public class baseGWT implements EntryPoint {
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
         
-        AsyncDispatcher.dispatcher.execute(new AbstractAction() {
-        	
-        }, new AsyncCallback<AbstractResult>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(AbstractResult result) {
-				GWT.log("onSuccess");
-				
-			}
-        	
-        });
+        
         
         
         greetingService.greetServer(textToServer, new AsyncCallback<String>() {

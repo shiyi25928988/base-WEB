@@ -8,7 +8,7 @@ import net.customware.gwt.dispatch.client.standard.StandardDispatchAsync;
  * @author yshi
  *
  */
-public class AsyncDispatcher {
+public abstract class AsyncDispatcher {
 
 	/**
 	 * 

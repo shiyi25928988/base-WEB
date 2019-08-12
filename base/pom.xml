@@ -17,7 +17,6 @@
 		<module>base-CACHE</module>
 		<module>base-HTML</module>
 		<module>base-CRAWLER</module>
-		<module>base-GWT</module>
 	</modules>
 
 	<properties>

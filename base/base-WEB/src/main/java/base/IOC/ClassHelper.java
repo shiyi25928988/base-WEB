@@ -17,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class ClassHelper {
 	
+	/**
+	 * 
+	 */
 	private ClassHelper() {}
 	
 	/**
@@ -26,15 +29,15 @@ public final class ClassHelper {
 	 * @throws IOException
 	 */
 	public static Set<Class<?>> getControllers(String...scanPackageNames) throws ClassNotFoundException, IOException {
-		Set<Class<?>> set = new HashSet<>();
+		Set<Class<?>> classSet = new HashSet<>();
 		Arrays.asList(scanPackageNames).stream().forEach(name->{
 			try {
-				set.addAll(getControllers(name));
+				classSet.addAll(getControllers(name));
 			} catch (ClassNotFoundException | IOException e) {
 				log.error(e.getMessage());
 			}
 		});
-		return set;
+		return classSet;
 	}
 
 	/**
@@ -44,9 +47,9 @@ public final class ClassHelper {
 	 * @throws IOException
 	 */
 	public static Set<Class<?>> getControllers(String scanPackageName) throws ClassNotFoundException, IOException {
-		Set<Class<?>> set = getAnnotationClass(ClassHelper.getClassSet(scanPackageName), Controller.class);
-		set.forEach(clazz -> log.info(clazz.getCanonicalName()));
-		return set;
+		Set<Class<?>> classSet = getAnnotationClass(ClassHelper.getClassSet(scanPackageName), Controller.class);
+		classSet.forEach(clazz -> log.info(clazz.getCanonicalName()));
+		return classSet;
 	}
 
 	/**
@@ -66,11 +69,11 @@ public final class ClassHelper {
 	 */
 	public static Set<Class<?>> getAnnotationClass(Set<Class<?>> classSet,
 			Class<? extends Annotation> annotationClass) {
-		Set<Class<?>> cs = new HashSet<>();
+		Set<Class<?>> set = new HashSet<>();
 		classSet.stream()
 		.filter(clazz -> clazz.isAnnotationPresent(annotationClass))
-		.forEach(c -> cs.add(c));
-		return cs;
+		.forEach(c -> set.add(c));
+		return set;
 	}
 	
 }

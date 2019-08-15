@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yshi</groupId>
 	<artifactId>base.parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -17,6 +17,7 @@
 		<module>base-CACHE</module>
 		<module>base-HTML</module>
 		<module>base-CRAWLER</module>
+		<module>base-WEB-WICKET</module>
 	</modules>
 
 	<properties>
@@ -41,7 +42,6 @@
 				<artifactId>guice</artifactId>
 				<version>${guice.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.google.inject.extensions</groupId>
 				<artifactId>guice-servlet</artifactId>
@@ -52,7 +52,6 @@
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
@@ -80,7 +79,6 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>3.9</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
@@ -103,7 +101,6 @@
 				<artifactId>shiro-guice</artifactId>
 				<version>1.4.1</version>
 			</dependency>
-
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

@@ -9,7 +9,7 @@
 	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
-	
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -17,13 +17,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>base-WEB-WICKET</artifactId>
 	<packaging>war</packaging>
-	
+
 	<parent>
 		<artifactId>base.parent</artifactId>
 		<groupId>org.yshi</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<!-- TODO project name -->
 	<name>quickstart</name>
 	<!-- <organization> <name>company name</name> <url>company url</url> </organization> -->
@@ -42,14 +42,14 @@
 		<!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->
 		<wtp.version>none</wtp.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.yshi</groupId>
 			<artifactId>base-DB</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-	
+
 		<!-- WICKET DEPENDENCIES -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
@@ -89,21 +89,20 @@
 		<!-- OPTIONAL DEPENDENCY <dependency> <groupId>org.apache.wicket</groupId> 
 			<artifactId>wicket-extensions</artifactId> <version>${wicket.version}</version> 
 			</dependency> -->
-			
+
 		<!-- https://mvnrepository.com/artifact/de.agilecoders.wicket/wicket-bootstrap-themes -->
 		<dependency>
-    		<groupId>de.agilecoders.wicket</groupId>
-    		<artifactId>wicket-bootstrap-themes</artifactId>
-    		<version>3.0.0-M11</version>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-themes</artifactId>
+			<version>3.0.0-M11</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/de.agilecoders.wicket/jquery-selectors -->
-<dependency>
-    <groupId>de.agilecoders.wicket</groupId>
-    <artifactId>jquery-selectors</artifactId>
-    <version>3.0.0-M2</version>
-</dependency>
-		
-		
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>jquery-selectors</artifactId>
+			<version>3.0.0-M2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

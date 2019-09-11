@@ -5,14 +5,14 @@ import java.io.IOException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-import base.annotation.Controller;
+import base.annotation.RestController;
 import base.rest.utils.HtmlHelper;
 
 /**
  * @author yshi
  *
  */
-@Controller
+@RestController
 public class CssController {
 	
 	@GET

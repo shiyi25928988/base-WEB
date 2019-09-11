@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-import base.annotation.Controller;
+import base.annotation.RestController;
 import base.rest.utils.HtmlHelper;
 import base.rest.utils.MimeType;
 import base.servlet.ServletHelper;
@@ -15,7 +15,7 @@ import base.servlet.ServletHelper;
  * @author yshi
  *
  */
-@Controller
+@RestController
 public class ImageController {
 
 	@GET

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import base.annotation.Controller;
+import base.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -47,7 +47,7 @@ public final class ClassHelper {
 	 * @throws IOException
 	 */
 	public static Set<Class<?>> getControllers(String scanPackageName) throws ClassNotFoundException, IOException {
-		Set<Class<?>> classSet = getAnnotationClass(ClassHelper.getClassSet(scanPackageName), Controller.class);
+		Set<Class<?>> classSet = getAnnotationClass(ClassHelper.getClassSet(scanPackageName), RestController.class);
 		classSet.forEach(clazz -> log.info(clazz.getCanonicalName()));
 		return classSet;
 	}

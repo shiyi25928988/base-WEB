@@ -1,4 +1,4 @@
-package base.rest;
+package base.rest.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;

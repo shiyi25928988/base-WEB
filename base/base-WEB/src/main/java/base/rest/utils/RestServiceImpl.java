@@ -1,4 +1,4 @@
-package base.rest;
+package base.rest.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

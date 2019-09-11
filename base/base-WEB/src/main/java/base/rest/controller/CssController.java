@@ -1,4 +1,4 @@
-package base.mvc.controller;
+package base.rest.controller;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import base.annotation.Controller;
-import base.rest.HtmlHelper;
+import base.rest.utils.HtmlHelper;
 
 /**
  * @author yshi

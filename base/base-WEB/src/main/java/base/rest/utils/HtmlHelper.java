@@ -1,4 +1,4 @@
-package base.rest;
+package base.rest.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

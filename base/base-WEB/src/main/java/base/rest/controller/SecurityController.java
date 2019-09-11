@@ -1,4 +1,4 @@
-package base.mvc.controller;
+package base.rest.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +14,7 @@ import org.apache.shiro.subject.Subject;
 import com.google.inject.Inject;
 
 import base.annotation.Controller;
-import base.rest.HtmlHelper;
+import base.rest.utils.HtmlHelper;
 import base.servlet.ServletHelper;
 import db.base.service.UserService;
 import html.base.page.LoginHtml;

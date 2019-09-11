@@ -1,4 +1,4 @@
-package base.mvc.controller;
+package base.rest.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,8 +7,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import base.annotation.Controller;
-import base.rest.HtmlHelper;
-import base.rest.MimeType;
+import base.rest.utils.HtmlHelper;
+import base.rest.utils.MimeType;
 import base.servlet.ServletHelper;
 
 /**

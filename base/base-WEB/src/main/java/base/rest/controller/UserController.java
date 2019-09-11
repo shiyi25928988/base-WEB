@@ -1,4 +1,4 @@
-package base.mvc.controller;
+package base.rest.controller;
 
 import java.util.Optional;
 
@@ -12,7 +12,7 @@ import javax.ws.rs.Path;
 import com.google.inject.Inject;
 
 import base.annotation.Controller;
-import base.rest.RestHelper;
+import base.rest.utils.RestHelper;
 import base.servlet.ServletHelper;
 import cache.base.service.CacheService;
 import db.base.entity.User;

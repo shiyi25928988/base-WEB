@@ -1,4 +1,4 @@
-package base.rest;
+package base.rest.utils;
 
 /**
  * @author yshi

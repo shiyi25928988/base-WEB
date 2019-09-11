@@ -7,8 +7,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 
 import base.IOC.ClassHelper;
-import base.rest.RestService;
-import base.rest.RestServiceImpl;
+import base.rest.utils.RestService;
+import base.rest.utils.RestServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 /**

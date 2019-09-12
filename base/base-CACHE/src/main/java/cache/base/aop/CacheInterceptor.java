@@ -15,6 +15,7 @@ public class CacheInterceptor implements MethodInterceptor {
 	@Inject
 	CacheService cacheService;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		

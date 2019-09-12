@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SecurityModule extends ShiroWebModule {
 
+	@SuppressWarnings("unused")
 	private ServletContext context;
 
 	/**

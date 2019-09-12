@@ -1,7 +1,6 @@
 package crawler.base;
 
 import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.regex.Pattern;
 
 import edu.uci.ics.crawler4j.crawler.Page;

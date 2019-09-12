@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
@@ -49,7 +48,6 @@ public class FileUploadApi {
 
 		HttpServletRequest request = ServletHelper.getRequest();
 		HttpServletResponse response = ServletHelper.getResponse();
-		ServletContext context = ServletHelper.getContext();
 
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			PrintWriter writer = response.getWriter();

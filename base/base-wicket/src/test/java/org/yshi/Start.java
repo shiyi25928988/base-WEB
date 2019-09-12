@@ -26,6 +26,7 @@ public class Start
 	 *
 	 * @param args
 	 */
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args)
 	{
 		System.setProperty("wicket.configuration", "development");

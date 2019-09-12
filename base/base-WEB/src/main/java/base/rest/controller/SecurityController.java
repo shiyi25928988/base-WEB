@@ -1,7 +1,6 @@
 package base.rest.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -43,7 +42,7 @@ public class SecurityController {
 	public void login_post_username_password() {
 		log.info("post login request..");
 		HttpServletRequest req = ServletHelper.getRequest();
-		HttpServletResponse resp = ServletHelper.getResponse();
+		//HttpServletResponse resp = ServletHelper.getResponse();
 		
 		String userName = req.getParameter("USER_NAME");
 		String passWord = req.getParameter("PASS_WORD");

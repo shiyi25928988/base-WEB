@@ -29,7 +29,7 @@ public class UserController {
 	UserService userService;
 
 	@Inject
-	CacheService cacheService;
+	CacheService<String, User> cacheService;
 
 	@GET
 	@Path(value = "/user")

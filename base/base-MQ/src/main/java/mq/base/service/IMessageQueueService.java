@@ -1,17 +1,8 @@
 package mq.base.service;
 
-import java.util.Map;
-
-import javax.jms.Connection;
 import javax.jms.JMSException;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageProducer;
-import javax.jms.Queue;
-import javax.jms.Session;
-import javax.jms.Topic;
 
 import mq.base.handler.IMessageHandler;
-import mq.base.module.AckMode;
 import mq.base.module.DestinationType;
 
 /**

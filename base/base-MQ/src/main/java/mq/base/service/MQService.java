@@ -13,11 +13,9 @@ import javax.jms.Session;
 
 import com.google.inject.Inject;
 
-import lombok.extern.java.Log;
 import mq.base.handler.IMessageHandler;
 import mq.base.module.DestinationType;
 
-@Log
 public class MQService implements IMessageQueueService {
 	
 	private final Connection connection;

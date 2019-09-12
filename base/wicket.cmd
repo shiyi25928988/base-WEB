@@ -1,0 +1,1 @@
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeGroupId=org.apache.wicket -DarchetypeArtifactId=wicket-archetype-quickstart -DarchetypeVersion=9.0.0-M3-SNAPSHOT -DgroupId=org.yshi -DartifactId=base-wicket -DarchetypeRepository=https://repository.apache.org/content/repositories/snapshots/ -DinteractiveMode=false

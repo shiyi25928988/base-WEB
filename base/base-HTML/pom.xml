@@ -18,41 +18,11 @@
 			<version>1.4.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-core -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-core</artifactId>
-			<version>8.5.0</version>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-guice -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-guice</artifactId>
-			<version>8.5.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-ioc -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-ioc</artifactId>
-			<version>8.5.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-extensions -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-extensions</artifactId>
-			<version>8.5.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-util -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-util</artifactId>
-			<version>8.5.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-auth-roles -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-auth-roles</artifactId>
-			<version>8.5.0</version>
+			<version>9.0.0-M2</version>
 		</dependency>
 
 		<dependency>

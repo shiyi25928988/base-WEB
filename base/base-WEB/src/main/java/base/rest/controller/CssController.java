@@ -16,6 +16,12 @@ import base.rest.utils.HtmlHelper;
 public class CssController {
 	
 	@GET
+	@Path(value = "/css/style.css")
+	public void getStyleCss() throws IOException {
+		HtmlHelper.sendCss("bootstrap.css");
+	}
+	
+	@GET
 	@Path(value = "/css/bootstrap.css")
 	public void getBootStrapCss() throws IOException {
 		HtmlHelper.sendCss("bootstrap.css");

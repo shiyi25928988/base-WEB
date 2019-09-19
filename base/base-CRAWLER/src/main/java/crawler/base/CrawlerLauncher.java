@@ -11,6 +11,10 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
+/**
+ * @author yshi
+ *
+ */
 public class CrawlerLauncher {
 
 	private static AtomicBoolean isLaunched = new AtomicBoolean(false);
@@ -18,10 +22,24 @@ public class CrawlerLauncher {
 	public static void launch() {
 		if (isLaunched.get())
 			return;
-
+	}
+	
+	/**
+	 * @param clazz
+	 * @param seeds
+	 * @throws Exception
+	 */
+	public static void start(Class<? extends AbstractCrawler> clazz, String...seeds) throws Exception {
+		start(clazz, CrawlerConstants.NUMBER_OF_CRAWLERS, seeds);
 	}
 
-	public static void start(String...seeds) throws Exception {
+	/**
+	 * @param clazz
+	 * @param numOfCrawler
+	 * @param seeds
+	 * @throws Exception
+	 */
+	public static void start(Class<? extends AbstractCrawler> clazz, int numOfCrawler, String...seeds) throws Exception {
 		
 		CrawlConfig config = CrawlerConfig.getConfig();
 
@@ -45,7 +63,7 @@ public class CrawlerLauncher {
 
 		new Thread(new MessageConsumer()).start();
 		
-		controller.start(Crawler.class, CrawlerConstants.NUMBER_OF_CRAWLERS);
+		controller.start(clazz, numOfCrawler);
 
 	}
 

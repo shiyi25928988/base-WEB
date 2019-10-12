@@ -23,7 +23,7 @@ import base.wicket.WicketApplication;
 public class ServletModule extends com.google.inject.servlet.ServletModule {
 
 	/*
-	 * (non-Javadoc)
+	 * (non-Javadoc) 
 	 * 
 	 * @see com.google.inject.servlet.ServletModule#configureServlets()
 	 */

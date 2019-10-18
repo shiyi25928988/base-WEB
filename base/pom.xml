@@ -20,6 +20,7 @@
 		<module>base-WEB-WICKET</module>
 		<module>base-wicket</module>
 		<module>DB-Igniter</module>
+		<module>base-CLI</module>
 	</modules>
 
 	<properties>

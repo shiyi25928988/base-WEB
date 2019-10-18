@@ -34,7 +34,7 @@
 		</license>
 	</licenses>
 	<properties>
-		<wicket.version>9.0.0-M3-SNAPSHOT</wicket.version>
+		<wicket.version>9.0.0-M3</wicket.version>
 		<jetty9.version>9.4.20.v20190813</jetty9.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<junit.version>5.5.2</junit.version>

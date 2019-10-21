@@ -17,8 +17,6 @@
 		<module>base-CACHE</module>
 		<module>base-HTML</module>
 		<module>base-CRAWLER</module>
-		<module>base-WEB-WICKET</module>
-		<module>base-wicket</module>
 		<module>DB-Igniter</module>
 		<module>base-CLI</module>
 	</modules>

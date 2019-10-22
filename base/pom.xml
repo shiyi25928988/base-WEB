@@ -17,7 +17,6 @@
 		<module>base-CRAWLER</module>
 		<module>DB-Igniter</module>
 		<module>base-CLI</module>
-    <module>base-WICKET</module>
   </modules>
 
 	<properties>

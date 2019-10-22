@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yshi</groupId>
@@ -17,7 +19,7 @@
 		<module>base-CRAWLER</module>
 		<module>DB-Igniter</module>
 		<module>base-CLI</module>
-  </modules>
+	</modules>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -33,6 +35,7 @@
 		<guava.version>27.1-jre</guava.version>
 		<javax.servlet.version>4.0.1</javax.servlet.version>
 		<shiro.version>1.4.1</shiro.version>
+		<wicket.version>9.0.0-M3</wicket.version>
 	</properties>
 
 	<dependencyManagement>
@@ -101,6 +104,8 @@
 				<artifactId>shiro-guice</artifactId>
 				<version>${shiro.version}</version>
 			</dependency>
+
+			<!-- junit -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

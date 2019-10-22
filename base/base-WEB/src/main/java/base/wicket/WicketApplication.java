@@ -3,7 +3,6 @@ package base.wicket;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.wicket.authroles.authentication.pages.SignInPage;
 import org.apache.wicket.guice.GuiceComponentInjector;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -41,7 +40,7 @@ public class WicketApplication extends WebApplication
 	@Override
 	public Class<? extends WebPage> getHomePage()
 	{
-		return SignInPage.class;
+		return HomePage.class;
 	}
 
 	/**

@@ -64,23 +64,9 @@
 		<!-- wicket -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-guice</artifactId>
-			<version>8.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-util</artifactId>
-			<version>8.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-auth-roles</artifactId>
-			<version>8.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-bean-validation</artifactId>
-			<version>8.6.0</version>
+			<artifactId>wicket</artifactId>
+			<version>9.0.0-M3</version>
+			<type>pom</type>
 		</dependency>
 
 		<!-- shiro -->

@@ -4,10 +4,19 @@
 
 <web-app>
 
-	<display-name>Archetype Created Web Application</display-name>
+	<display-name>Default Name</display-name>
+
 	<filter>
 		<filter-name>guiceFilter</filter-name>
 		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>TestApplication</filter-name>
+		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+		<init-param>
+			<param-name>applicationClassName</param-name>
+			<param-value>base.wicket.WicketApplication</param-value>
+		</init-param>
 	</filter>
 
 	<filter-mapping>

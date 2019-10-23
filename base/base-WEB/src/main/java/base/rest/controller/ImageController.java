@@ -25,5 +25,12 @@ public class ImageController {
 		HtmlHelper.sendImage(filePath, MimeType.IMAGE_PNG);
 	}
 	
+	@GET
+	@Path(value = "/logo.png")
+	public void getLogo() throws IOException {
+		String filePath = ServletHelper.getRealPath() + "WEB-INF" + File.separator +"image" + File.separator + "logo.png";
+		HtmlHelper.sendImage(filePath, MimeType.IMAGE_PNG);
+	}
+	
 
 }

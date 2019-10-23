@@ -18,7 +18,7 @@ public class CssController {
 	@GET
 	@Path(value = "/css/style.css")
 	public void getStyleCss() throws IOException {
-		HtmlHelper.sendCss("bootstrap.css");
+		HtmlHelper.sendCss("style.css");
 	}
 	
 	@GET

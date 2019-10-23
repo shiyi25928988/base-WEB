@@ -15,11 +15,13 @@ import com.google.inject.Singleton;
 import base.filter.SecureFilter;
 import base.servlet.DispatcherServlet;
 import base.wicket.WicketApplication;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  *
  */
+@Slf4j
 public class ServletModule extends com.google.inject.servlet.ServletModule {
 
 	/*
@@ -60,6 +62,8 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 
 				@Override
 				public void destroy(WicketFilter filter) {
+					log.info("WicketFilter destroy...");
+					filter.destroy();
 				}
 			};
 		}

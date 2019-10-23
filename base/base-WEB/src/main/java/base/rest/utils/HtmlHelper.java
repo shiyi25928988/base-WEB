@@ -41,6 +41,7 @@ public final class HtmlHelper {
 	 * @param cssFileName
 	 */
 	public static void sendCss(String cssFileName) {
+		log.info("requesting css file : " + cssFileName);
 		String filePath = ServletHelper.getRealPath() + "WEB-INF" + File.separator +"css" + File.separator + cssFileName;
 		File file = new File(filePath);
 		if (file.exists()) {

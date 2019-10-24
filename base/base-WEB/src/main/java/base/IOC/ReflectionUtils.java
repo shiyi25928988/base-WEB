@@ -16,13 +16,15 @@ public final class ReflectionUtils {
 	/**
 	 * @param clazz
 	 * @return
+	 * @throws Exception 
 	 */
-	public static Object newInstance(Class<?> clazz) {
+	public static Object newInstance(Class<?> clazz) throws Exception {
 		Object instance = null;
 		try {
 			instance = clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			log.error(e.getMessage());
+			throw new Exception(e);
 		}
 		return instance;
 	}
@@ -32,14 +34,16 @@ public final class ReflectionUtils {
 	 * @param method
 	 * @param args
 	 * @return
+	 * @throws Exception 
 	 */
-	public static Object invokeMethod(Object obj, Method method, Object...args) {
+	public static Object invokeMethod(Object obj, Method method, Object...args) throws Exception {
 		Object result = null;
 		method.setAccessible(true);
 		try {
 			result = method.invoke(obj, args);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			log.error(e.getMessage());
+			throw new Exception(e);
 		}
 		return result;
 	}
@@ -49,13 +53,15 @@ public final class ReflectionUtils {
 	 * @param obj
 	 * @param field
 	 * @param value
+	 * @throws Exception 
 	 */
-	public static void setField(Object obj, Field field, Object value) {
+	public static void setField(Object obj, Field field, Object value) throws Exception {
 		field.setAccessible(true);
 		try {
 			field.set(obj, value);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			log.error(e.getMessage());
+			throw new Exception(e);
 		}
 	}
 }

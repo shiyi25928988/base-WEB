@@ -115,16 +115,15 @@ public class RestServiceImpl implements RestService {
 		}
 	}
 	
-	private void invoke(final Map<String, Method> methodMap) {
+	private void invoke(final Map<String, Method> methodMap) throws Exception {
 		HttpServletRequest req = ServletHelper.getRequest();
-		//HttpServletResponse resp = ServletHelper.getResponse();
 		String restPath = StringUtils.remove(req.getRequestURI(), req.getContextPath());
 		Method method = methodMap.get(restPath);
 		Class<?> clazz = classMap.get(restPath);
 		invoke(clazz, method);
 	}
 	
-	private void invoke(Class<?> clazz, Method method) {
+	private void invoke(Class<?> clazz, Method method) throws Exception {
 		if(Objects.nonNull(clazz)) {
 			if(Objects.nonNull(method)) {
 				Object obj = ReflectionUtils.newInstance(clazz);
@@ -132,7 +131,12 @@ public class RestServiceImpl implements RestService {
 				Injector injector = GuiceServletConfig.getInjectorInstance();
 				Stream.of(fields).forEach(field->{
 					if(field.isAnnotationPresent(com.google.inject.Inject.class) || field.isAnnotationPresent(javax.inject.Inject.class)) {
-						ReflectionUtils.setField(obj, field, injector.getInstance(field.getType()));
+						try {
+							ReflectionUtils.setField(obj, field, injector.getInstance(field.getType()));
+						} catch (Exception e) {
+							e.printStackTrace();
+							log.error(e.getMessage());
+						}
 					}
 				});
 				ReflectionUtils.invokeMethod(obj, method);
@@ -142,32 +146,56 @@ public class RestServiceImpl implements RestService {
 	
 	@Override
 	public void doGet() {
-		invoke(methodMap_GET);
+		try {
+			invoke(methodMap_GET);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 
 	@Override
 	public void doPut() {
-		invoke(methodMap_PUT);
+		try {
+			invoke(methodMap_PUT);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 
 	@Override
 	public void doPost() {
-		invoke(methodMap_POST);
+		try {
+			invoke(methodMap_POST);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 
 	@Override
 	public void doHead() {
-		invoke(methodMap_HEAD);
+		try {
+			invoke(methodMap_HEAD);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 
 	@Override
 	public void doDelete() {
-		invoke(methodMap_DELETE);
+		try {
+			invoke(methodMap_DELETE);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 
 	@Override
 	public void doOptions() {
-		invoke(methodMap_OPTIONS);
+		try {
+			invoke(methodMap_OPTIONS);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 	
 	@Override

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 import base.IOC.ClassHelper;
 import base.rest.utils.RestService;

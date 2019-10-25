@@ -7,8 +7,11 @@ import org.apache.wicket.guice.GuiceComponentInjector;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
+import base.module.IocModule;
 import base.module.Modules;
+import base.module.ServletModule;
 import base.wicket.page.HomePage;
+import base.wicket.page.template.JugTemplate;
 import cache.base.module.CacheModule;
 import db.base.module.DataSourceModule;
 import lombok.extern.slf4j.Slf4j;
@@ -20,28 +23,14 @@ import lombok.extern.slf4j.Slf4j;
  * @see org.yshi.Start#main(String[])
  */
 @Slf4j
-public class WicketRootApplication extends WebApplication
-{
-	
-	//private static Properties messageQueueProp = new Properties();
-	private static Properties jdbcProp = new Properties();
-	static {
-		try {
-			//messageQueueProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mq.properties"));
-			jdbcProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"));
-		} catch (IOException e) {
-			log.error(e.getMessage());
-			System.exit(1);
-		}
-	}
-	
+public class WicketRootApplication extends WebApplication{
 	
 	/**
 	 * @see org.apache.wicket.Application#getHomePage() 
 	 */
 	@Override
 	public Class<? extends WebPage> getHomePage() {
-		return HomePage.class;
+		return JugTemplate.class;
 	}
 
 	/**
@@ -52,6 +41,5 @@ public class WicketRootApplication extends WebApplication
 		super.init();
 		log.info("WicketRootApplication init...");
 		getComponentInstantiationListeners().add(new GuiceComponentInjector(this, Modules.getModules()));
-		// add your configuration here
 	}
 }

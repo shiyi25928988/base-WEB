@@ -1,11 +1,13 @@
 package base.config;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Properties;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.servlet.GuiceServletContextListener;
 
 import base.module.IocModule;
@@ -34,7 +36,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 	@Override
 	protected synchronized Injector getInjector() {
 		if (Objects.isNull(injector)) {
-			injector = Guice.createInjector(Modules.getModules());
+			injector = Guice.createInjector(Modules.getAllModules());
 		}
 		return injector;
 	}

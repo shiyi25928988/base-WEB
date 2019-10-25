@@ -27,16 +27,35 @@ public abstract class Modules {
 		}
 	}
 	
+	private static DataSourceModule dataSourceModule = new DataSourceModule(jdbcProp);
+	private static MessageQueueModule messageQueueModule = new MessageQueueModule(messageQueueProp);
+	private static IocModule iocModule = new IocModule();
+	private static ServletModule servletModule = new ServletModule();
+	private static CacheModule cacheModule = new CacheModule();
+	private static EventBusModule eventBusModule = new EventBusModule();
+	
 	private static com.google.inject.Module[] modules = {
-			new DataSourceModule(jdbcProp),
-			new MessageQueueModule(messageQueueProp), 
-			new IocModule(),
-			new ServletModule(),
-			new CacheModule(),
-			new EventBusModule()
+			dataSourceModule,
+			messageQueueModule,
+			iocModule,
+			cacheModule,
+			eventBusModule
+	} ;
+	
+	private static com.google.inject.Module[] allModules = {
+			servletModule,
+			dataSourceModule,
+			messageQueueModule,
+			iocModule,
+			cacheModule,
+			eventBusModule
 	} ;
 	
 	public static com.google.inject.Module[] getModules() {
 		return modules;
+	}
+	
+	public static com.google.inject.Module[] getAllModules() {
+		return allModules;
 	}
 }

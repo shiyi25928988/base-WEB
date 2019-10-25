@@ -46,6 +46,7 @@ public class RestServiceImpl implements RestService {
 	private Map<String, Method> methodMap_HEAD    = new ConcurrentHashMap<>();
 	
 	/**
+	 * Constructor
 	 * @param classSet
 	 */
 	public RestServiceImpl(final Set<Class<?>> classSet) {
@@ -115,6 +116,10 @@ public class RestServiceImpl implements RestService {
 		}
 	}
 	
+	/**
+	 * @param methodMap
+	 * @throws Exception
+	 */
 	private void invoke(final Map<String, Method> methodMap) throws Exception {
 		HttpServletRequest req = ServletHelper.getRequest();
 		String restPath = StringUtils.remove(req.getRequestURI(), req.getContextPath());
@@ -123,6 +128,11 @@ public class RestServiceImpl implements RestService {
 		invoke(clazz, method);
 	}
 	
+	/**
+	 * @param clazz
+	 * @param method
+	 * @throws Exception
+	 */
 	private void invoke(Class<?> clazz, Method method) throws Exception {
 		if(Objects.nonNull(clazz)) {
 			if(Objects.nonNull(method)) {

@@ -51,6 +51,9 @@ public abstract class Modules {
 			eventBusModule
 	} ;
 	
+	/**
+	 * @return Module[]
+	 */
 	public static com.google.inject.Module[] getModules() {
 		return modules;
 	}

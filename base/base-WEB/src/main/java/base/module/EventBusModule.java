@@ -15,13 +15,23 @@ import com.google.inject.Singleton;
  */
 public class EventBusModule extends AbstractModule{
 
+	/**
+	 *
+	 */
 	@Override
 	protected void configure() {
 		bind(EventBus.class).toProvider(EventBusProvider.class).in(Singleton.class);
 	}
 	
+	/**
+	 * @author yshi
+	 *
+	 */
 	public static class EventBusProvider implements Provider<EventBus>{
 		ExecutorService executor = Executors.newSingleThreadExecutor();
+		/**
+		 *
+		 */
 		@Override
 		public EventBus get() {
 			return new AsyncEventBus(executor);

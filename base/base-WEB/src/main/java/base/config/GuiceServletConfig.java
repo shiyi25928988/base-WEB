@@ -1,22 +1,13 @@
 package base.config;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Properties;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.servlet.GuiceServletContextListener;
 
-import base.module.IocModule;
 import base.module.Modules;
-import base.module.ServletModule;
-import cache.base.module.CacheModule;
-import db.base.module.DataSourceModule;
 import lombok.extern.slf4j.Slf4j;
-import mq.base.module.MessageQueueModule;
 
 /**
  * @author yshi
@@ -46,8 +37,10 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 	 * @throws NullPointerException
 	 */
 	public static Injector getInjectorInstance() throws NullPointerException {
-		if (Objects.isNull(injector))
+		if (Objects.isNull(injector)) {
+			log.error("Injector is null...");
 			throw new NullPointerException();
+		}
 		return injector;
 	}
 }

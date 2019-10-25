@@ -51,7 +51,4 @@ public class IocModule extends AbstractModule {
 			return new RestServiceImpl(controllerClassSet);
 		}
 	}
-	
-	
-	
 }

@@ -1,5 +1,6 @@
 package base.IOC;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -20,8 +21,9 @@ public final class ReflectionUtils {
 	 */
 	public static Object newInstance(Class<?> clazz) throws Exception {
 		Object instance = null;
+		Constructor<?> constructor = clazz.getConstructor(clazz);
 		try {
-			instance = clazz.newInstance();
+			instance = constructor.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			log.error(e.getMessage());
 			throw new Exception(e);

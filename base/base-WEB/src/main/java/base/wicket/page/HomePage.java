@@ -2,6 +2,7 @@ package base.wicket.page;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
+import cache.base.service.CacheService;
 import db.base.service.UserService;
 
 import org.apache.wicket.markup.html.basic.Label;
@@ -15,14 +16,20 @@ public class HomePage extends WebPage {
 	
 	@Inject
 	UserService userService;
+	
+	@Inject
+	CacheService cache;
 
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
 
 		//add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
 		
-		add(new Label("version", userService.getUser("002").get().getUserName()));
+		cache.put("002", userService.getUser("002").get().getUserName());
+		
+		add(new Label("version", cache.get("002").get().toString()));
 
+		
 		// TODO Add your page's components here
 
 	}

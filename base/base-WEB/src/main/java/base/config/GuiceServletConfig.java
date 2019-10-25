@@ -9,6 +9,7 @@ import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 
 import base.module.IocModule;
+import base.module.Modules;
 import base.module.ServletModule;
 import cache.base.module.CacheModule;
 import db.base.module.DataSourceModule;
@@ -21,22 +22,7 @@ import mq.base.module.MessageQueueModule;
  */
 @Slf4j
 public class GuiceServletConfig extends GuiceServletContextListener {
-	/*
-	 * The properties loading 
-	 * */
-	private static Properties messageQueueProp = new Properties();
-	private static Properties jdbcProp = new Properties();
-	static {
-		try {
-			messageQueueProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mq.properties"));
-			jdbcProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"));
-		} catch (IOException e) {
-			log.error(e.getMessage());
-			System.exit(1);
-		}
-	}
 
-	
 	/**
 	 * Injector
 	 */
@@ -48,12 +34,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 	@Override
 	protected synchronized Injector getInjector() {
 		if (Objects.isNull(injector)) {
-			injector = Guice.createInjector(
-					new DataSourceModule(jdbcProp),
-					new MessageQueueModule(messageQueueProp), 
-					new IocModule(),
-					new ServletModule(),
-					new CacheModule());
+			injector = Guice.createInjector(Modules.getModules());
 		}
 		return injector;
 	}

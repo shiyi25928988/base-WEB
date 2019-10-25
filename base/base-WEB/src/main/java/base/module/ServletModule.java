@@ -14,7 +14,7 @@ import com.google.inject.Singleton;
 
 import base.filter.SecureFilter;
 import base.servlet.DispatcherServlet;
-import base.wicket.WicketApplication;
+import base.wicket.WicketRootApplication;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -38,7 +38,7 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 		bind(SecureFilter.class).in(Scopes.SINGLETON);
 		
 		filter("/*").through(WicketFilter.class, createWicketFilterInitParams());
-		bind(WebApplication.class).to(WicketApplication.class);
+		bind(WebApplication.class).to(WicketRootApplication.class);
 		bind(WicketFilter.class).to(CustomWicketFilter.class).in(Scopes.SINGLETON);
 
 		/** DISPATCH */
@@ -72,7 +72,7 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 	private Map<String, String> createWicketFilterInitParams() {
 		Map<String, String> wicketFilterParams = new HashMap<String, String>();
 		wicketFilterParams.put(WicketFilter.FILTER_MAPPING_PARAM, "/*");
-		wicketFilterParams.put("applicationClassName", "base.wicket.WicketApplication");
+		wicketFilterParams.put("applicationClassName", "base.wicket.WicketRootApplication");
 		return wicketFilterParams;
 	}
 }

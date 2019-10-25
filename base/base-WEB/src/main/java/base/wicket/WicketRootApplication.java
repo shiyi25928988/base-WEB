@@ -7,7 +7,9 @@ import org.apache.wicket.guice.GuiceComponentInjector;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
+import base.module.Modules;
 import base.wicket.page.HomePage;
+import cache.base.module.CacheModule;
 import db.base.module.DataSourceModule;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  * @see org.yshi.Start#main(String[])
  */
 @Slf4j
-public class WicketApplication extends WebApplication
+public class WicketRootApplication extends WebApplication
 {
 	
 	//private static Properties messageQueueProp = new Properties();
@@ -38,8 +40,7 @@ public class WicketApplication extends WebApplication
 	 * @see org.apache.wicket.Application#getHomePage() 
 	 */
 	@Override
-	public Class<? extends WebPage> getHomePage()
-	{
+	public Class<? extends WebPage> getHomePage() {
 		return HomePage.class;
 	}
 
@@ -47,10 +48,10 @@ public class WicketApplication extends WebApplication
 	 * @see org.apache.wicket.Application#init()
 	 */
 	@Override
-	public void init()
-	{
+	public void init() {
 		super.init();
-		getComponentInstantiationListeners().add(new GuiceComponentInjector(this, new DataSourceModule(jdbcProp)));
+		log.info("WicketRootApplication init...");
+		getComponentInstantiationListeners().add(new GuiceComponentInjector(this, Modules.getModules()));
 		// add your configuration here
 	}
 }

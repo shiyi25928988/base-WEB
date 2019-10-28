@@ -8,7 +8,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
 import base.module.IocModule;
-import base.module.Modules;
+import base.module.ModulesConfig;
 import base.module.ServletModule;
 import base.wicket.page.HomePage;
 import base.wicket.page.template.JugTemplate;
@@ -40,6 +40,6 @@ public class WicketRootApplication extends WebApplication{
 	public void init() {
 		super.init();
 		log.info("WicketRootApplication init...");
-		getComponentInstantiationListeners().add(new GuiceComponentInjector(this, Modules.getModules()));
+		getComponentInstantiationListeners().add(new GuiceComponentInjector(this, ModulesConfig.getModules()));
 	}
 }

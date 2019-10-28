@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import mq.base.module.MessageQueueModule;
 
 @Slf4j
-public abstract class Modules {
+public abstract class ModulesConfig {
 
 	private static Properties messageQueueProp = new Properties();
 	private static Properties jdbcProp = new Properties();

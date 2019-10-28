@@ -6,7 +6,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 
-import base.module.Modules;
+import base.module.ModulesConfig;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -27,7 +27,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 	@Override
 	protected synchronized Injector getInjector() {
 		if (Objects.isNull(injector)) {
-			injector = Guice.createInjector(Modules.getAllModules());
+			injector = Guice.createInjector(ModulesConfig.getAllModules());
 		}
 		return injector;
 	}

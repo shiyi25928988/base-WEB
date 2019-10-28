@@ -1,4 +1,4 @@
-package base.rest.controller;
+package base.rest.api;
 
 import java.util.Optional;
 

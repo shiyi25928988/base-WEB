@@ -1,4 +1,4 @@
-package base.rest.controller;
+package base.rest.api;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;

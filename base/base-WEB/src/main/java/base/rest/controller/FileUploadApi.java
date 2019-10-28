@@ -15,7 +15,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import base.annotation.RestController;
+import base.annotation.RestAPI;
 import base.rest.utils.HtmlHelper;
 import base.servlet.ServletHelper;
 import html.base.form.UploadForm;
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-@RestController
+@RestAPI
 public class FileUploadApi {
 
 	private static final String UPLOAD_DIRECTORY = "upload";

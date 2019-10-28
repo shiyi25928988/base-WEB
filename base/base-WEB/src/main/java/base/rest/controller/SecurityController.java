@@ -12,7 +12,7 @@ import org.apache.shiro.subject.Subject;
 
 import com.google.inject.Inject;
 
-import base.annotation.RestController;
+import base.annotation.RestAPI;
 import base.rest.utils.HtmlHelper;
 import base.servlet.ServletHelper;
 import db.base.service.UserService;
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-@RestController
+@RestAPI
 public class SecurityController {
 	
 	@Inject

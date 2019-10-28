@@ -11,7 +11,7 @@ import javax.ws.rs.Path;
 
 import com.google.inject.Inject;
 
-import base.annotation.RestController;
+import base.annotation.RestAPI;
 import base.rest.utils.RestHelper;
 import base.servlet.ServletHelper;
 import cache.base.service.CacheService;
@@ -22,7 +22,7 @@ import db.base.service.UserService;
  * @author yshi
  *
  */
-@RestController
+@RestAPI
 public class UserController {
 
 	@Inject

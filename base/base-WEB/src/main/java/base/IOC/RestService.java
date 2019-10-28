@@ -1,4 +1,4 @@
-package base.rest.utils;
+package base.IOC;
 
 /**
  * @author yshi

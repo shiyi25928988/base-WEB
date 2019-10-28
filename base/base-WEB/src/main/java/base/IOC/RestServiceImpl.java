@@ -1,4 +1,4 @@
-package base.rest.utils;
+package base.IOC;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -22,7 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Strings;
 import com.google.inject.Injector;
 
-import base.IOC.ReflectionUtils;
 import base.config.GuiceServletConfig;
 import base.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -121,10 +120,10 @@ public class RestServiceImpl implements RestService {
 	 * @throws Exception
 	 */
 	private void invoke(final Map<String, Method> methodMap) throws Exception {
-		HttpServletRequest req = ServletHelper.getRequest();
-		String restPath = StringUtils.remove(req.getRequestURI(), req.getContextPath());
-		Method method = methodMap.get(restPath);
-		Class<?> clazz = classMap.get(restPath);
+		var req = ServletHelper.getRequest();
+		var path = StringUtils.remove(req.getRequestURI(), req.getContextPath());
+		var method = methodMap.get(path);
+		var clazz = classMap.get(path);
 		invoke(clazz, method);
 	}
 	

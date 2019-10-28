@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.inject.Inject;
 
-import base.rest.utils.RestService;
+import base.IOC.RestService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

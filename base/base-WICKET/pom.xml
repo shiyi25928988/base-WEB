@@ -12,10 +12,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<artifactId>base-WICKET</artifactId>
+	
 	<modelVersion>4.0.0</modelVersion>
-	<version>1.0-SNAPSHOT</version>
-	<name>base</name>
+	<groupId>org.yshi</groupId>
+	<artifactId>base-WICKET</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>base-WICKET</name>
 	
 	<parent>
 		<artifactId>base.parent</artifactId>

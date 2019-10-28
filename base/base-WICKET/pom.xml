@@ -26,7 +26,8 @@
 	</parent>
 
 	<modules>
-		<module>base-WICKET-HOMEPAGE</module>
+
+	<module>base-WICKET-homepage</module>
 	</modules>
 
 </project>

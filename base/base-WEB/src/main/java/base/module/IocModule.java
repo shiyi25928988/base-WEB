@@ -23,6 +23,9 @@ public class IocModule extends AbstractModule {
 	
 	static {
 		try {
+			/*
+			 * To collect all the classes from the given DIR
+			 * */
 			controllerClassSet = ClassHelper.getControllers("base");
 		} catch (ClassNotFoundException | IOException e) {
 			log.error(e.getMessage());

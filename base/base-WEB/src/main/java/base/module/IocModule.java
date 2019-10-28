@@ -8,8 +8,8 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 import base.IOC.ClassHelper;
-import base.IOC.RestService;
-import base.IOC.RestServiceImpl;
+import base.IOC.RestApiService;
+import base.IOC.RestApiServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -35,20 +35,20 @@ public class IocModule extends AbstractModule {
 	 */
 	@Override
 	protected void configure() {
-		bind(RestService.class).toProvider(RestServiceProvider.class);
+		bind(RestApiService.class).toProvider(RestServiceProvider.class);
 	}
 
 	/**
 	 * To provide a RestService implement class
 	 *
 	 */
-	public static class RestServiceProvider implements Provider<RestService> {
+	public static class RestServiceProvider implements Provider<RestApiService> {
 		/* 
 		 * RestService is designed to process the classes which was annotated by the rest method
 		 */
 		@Override
-		public RestService get() {
-			return new RestServiceImpl(controllerClassSet);
+		public RestApiService get() {
+			return new RestApiServiceImpl(controllerClassSet);
 		}
 	}
 }

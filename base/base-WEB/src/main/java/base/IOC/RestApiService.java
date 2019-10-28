@@ -4,7 +4,7 @@ package base.IOC;
  * @author yshi
  *
  */
-public interface RestService {
+public interface RestApiService {
 	
 	/**
 	 * HTTP GET

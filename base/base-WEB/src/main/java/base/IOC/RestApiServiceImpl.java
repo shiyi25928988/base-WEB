@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class RestServiceImpl implements RestService {
+public class RestApiServiceImpl implements RestApiService {
 
 	private Set<Class<?>> classSet;
 	
@@ -48,7 +48,7 @@ public class RestServiceImpl implements RestService {
 	 * Constructor
 	 * @param classSet
 	 */
-	public RestServiceImpl(final Set<Class<?>> classSet) {
+	public RestApiServiceImpl(final Set<Class<?>> classSet) {
 		this.classSet = classSet;
 		if (Objects.nonNull(this.classSet) && this.classSet.size() >= 1) {
 			classSet.stream().forEach(clazz -> {

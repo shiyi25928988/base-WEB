@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.inject.Inject;
 
-import base.IOC.RestService;
+import base.IOC.RestApiService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,7 +31,7 @@ public class DispatcherServlet extends HttpServlet {
 	private static final String METHOD_TRACE = "TRACE";
 
 	@Inject
-	RestService restService;
+	RestApiService restService;
 	
 	private ServletContext servletContext;
 

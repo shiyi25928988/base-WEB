@@ -13,7 +13,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yshi</groupId>
 	<artifactId>base-WICKET</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>base-WICKET</name>
 	
@@ -21,6 +20,7 @@
 		<artifactId>base.parent</artifactId>
 		<groupId>org.yshi</groupId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<modules>

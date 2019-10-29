@@ -19,7 +19,7 @@
 			<groupId>org.yshi</groupId>
 			<artifactId>wicket-bootstrap</artifactId>
 			<version>${project.version}</version>
-		</dependency> 
+		</dependency>
 		<dependency>
 			<groupId>org.yshi</groupId>
 			<artifactId>base-DB</artifactId>

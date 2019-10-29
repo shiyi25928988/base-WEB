@@ -8,12 +8,6 @@ import base.module.ModulesConfig;
 import lombok.extern.slf4j.Slf4j;
 import wicket.base.bootstrap.layout.BootstrapBasePage;
 
-/**
- * Application object for your web application.
- * If you want to run this application without deploying, run the Start class.
- * 
- * @see org.yshi.Start#main(String[])
- */
 @Slf4j
 public class WicketRootApplication extends WebApplication{
 	

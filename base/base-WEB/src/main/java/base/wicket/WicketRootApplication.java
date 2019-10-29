@@ -1,20 +1,12 @@
 package base.wicket;
 
-import java.io.IOException;
-import java.util.Properties;
-
 import org.apache.wicket.guice.GuiceComponentInjector;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
-import base.module.IocModule;
 import base.module.ModulesConfig;
-import base.module.ServletModule;
-import base.wicket.page.HomePage;
-import base.wicket.page.template.JugTemplate;
-import cache.base.module.CacheModule;
-import db.base.module.DataSourceModule;
 import lombok.extern.slf4j.Slf4j;
+import wicket.base.bootstrap.layout.BootstrapBasePage;
 
 /**
  * Application object for your web application.
@@ -30,7 +22,7 @@ public class WicketRootApplication extends WebApplication{
 	 */
 	@Override
 	public Class<? extends WebPage> getHomePage() {
-		return JugTemplate.class;
+		return BootstrapBasePage.class;
 	}
 
 	/**

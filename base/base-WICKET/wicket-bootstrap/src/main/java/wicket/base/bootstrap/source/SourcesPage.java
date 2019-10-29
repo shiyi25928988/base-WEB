@@ -55,78 +55,73 @@ import org.apache.wicket.util.lang.PackageName;
 import org.apache.wicket.util.string.AppendingStringBuffer;
 import org.apache.wicket.util.string.StringValue;
 import org.apache.wicket.util.string.Strings;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.uwyn.jhighlight.renderer.Renderer;
 import com.uwyn.jhighlight.renderer.XhtmlRendererFactory;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Displays the resources in a packages directory in a browsable format.
  * 
  * @author Martijn Dashorst
  */
-public class SourcesPage extends WebPage
-{
-	private static final Logger log = LoggerFactory.getLogger(SourcesPage.class);
+@Slf4j
+public class SourcesPage extends WebPage {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Model for retrieving the source code from the classpath of a packaged resource.
+	 * Model for retrieving the source code from the classpath of a packaged
+	 * resource.
 	 */
-	private class SourceModel implements IModel<String>
-	{
+	private class SourceModel implements IModel<String> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/**
 		 * Returns the contents of the file loaded from the classpath.
 		 * 
 		 * @return the contents of the file identified by name
 		 */
 		@Override
-		public String getObject()
-		{
+		public String getObject() {
 			// name contains the name of the selected file
 			StringValue sourceParam = getPageParameters().get(SOURCE);
-			if (Strings.isEmpty(name) && sourceParam.isEmpty())
-			{
+			if (Strings.isEmpty(name) && sourceParam.isEmpty()) {
 				return "";
 			}
 
 			String source = null;
 			InputStream resourceAsStream = null;
-			try
-			{
+			try {
 				source = (name != null) ? name : sourceParam.toString();
 				resourceAsStream = getPageTargetClass().getResourceAsStream(source);
-				if (resourceAsStream == null)
-				{
+				if (resourceAsStream == null) {
 					return "Unable to read the source for " + source;
 				}
 
 				int lastDot = source.lastIndexOf('.');
-				if (lastDot != -1)
-				{
+				if (lastDot != -1) {
 					String type = source.substring(lastDot + 1);
 					Renderer renderer = XhtmlRendererFactory.getRenderer(type);
-					if (renderer != null)
-					{
+					if (renderer != null) {
 						ByteArrayOutputStream output = new ByteArrayOutputStream();
 						renderer.highlight(source, resourceAsStream, output, "UTF-8", true);
 						return output.toString("UTF-8");
 					}
 				}
 
-				CharSequence escaped = Strings.escapeMarkup(IOUtils.toString(resourceAsStream),
-					false, true);
+				CharSequence escaped = Strings.escapeMarkup(IOUtils.toString(resourceAsStream), false, true);
 				return Strings.replaceAll(escaped, "\n", "<br />").toString();
-			}
-			catch (IOException e)
-			{
-				log.error(
-					"Unable to read resource stream for: " + source + "; Page=" + page.toString(),
-					e);
+			} catch (IOException e) {
+				log.error("Unable to read resource stream for: " + source + "; Page=" + page.toString(), e);
 				return "";
-			}
-			finally
-			{
+			} finally {
 				IOUtils.closeQuietly(resourceAsStream);
 			}
 		}
@@ -135,80 +130,63 @@ public class SourcesPage extends WebPage
 	/**
 	 * Model for retrieving the contents of a package directory from the class path.
 	 */
-	public class PackagedResourcesModel extends LoadableDetachableModel<List<String>>
-	{
+	public class PackagedResourcesModel extends LoadableDetachableModel<List<String>> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/**
 		 * Returns the list of resources found in the package of the page.
 		 * 
 		 * @return the list of resources found in the package of the page.
 		 */
 		@Override
-		protected List<String> load()
-		{
+		protected List<String> load() {
 			return get(getPageTargetClass());
 		}
 
-		private void addResources(final AppendingStringBuffer relativePath, final File dir,
-			List<String> resources)
-		{
+		private void addResources(final AppendingStringBuffer relativePath, final File dir, List<String> resources) {
 			File[] files = dir.listFiles();
-			for (File file : files)
-			{
-				if (file.isDirectory())
-				{
-					addResources(new AppendingStringBuffer(relativePath).append(file.getName())
-						.append('/'), file, resources);
-				}
-				else
-				{
+			for (File file : files) {
+				if (file.isDirectory()) {
+					addResources(new AppendingStringBuffer(relativePath).append(file.getName()).append('/'), file,
+							resources);
+				} else {
 					String name = file.getName();
-					if (!name.endsWith("class"))
-					{
+					if (!name.endsWith("class")) {
 						resources.add(relativePath + name);
 					}
 				}
 			}
 		}
 
-		private List<String> get(Class<?> scope)
-		{
+		private List<String> get(Class<?> scope) {
 			List<String> resources = new ArrayList<>();
 
-			String packageRef = Strings.replaceAll(PackageName.forClass(scope).getName(), ".", "/")
-				.toString();
+			String packageRef = Strings.replaceAll(PackageName.forClass(scope).getName(), ".", "/").toString();
 			ClassLoader loader = scope.getClassLoader();
-			try
-			{
+			try {
 				// loop through the resources of the package
 				Enumeration<URL> packageResources = loader.getResources(packageRef);
-				while (packageResources.hasMoreElements())
-				{
+				while (packageResources.hasMoreElements()) {
 					URL resource = packageResources.nextElement();
 					URLConnection connection = resource.openConnection();
-					if (connection instanceof JarURLConnection)
-					{
-						JarFile jf = ((JarURLConnection)connection).getJarFile();
+					if (connection instanceof JarURLConnection) {
+						JarFile jf = ((JarURLConnection) connection).getJarFile();
 						scanJarFile(packageRef, jf, resources);
-					}
-					else
-					{
+					} else {
 						String absolutePath = scope.getResource("").toExternalForm();
 						File basedir;
 						URI uri;
-						try
-						{
+						try {
 							uri = new URI(absolutePath);
-						}
-						catch (URISyntaxException e)
-						{
+						} catch (URISyntaxException e) {
 							throw new RuntimeException(e);
 						}
-						try
-						{
+						try {
 							basedir = new File(uri);
-						}
-						catch (IllegalArgumentException e)
-						{
+						} catch (IllegalArgumentException e) {
 							log.debug("Can't construct the uri as a file: " + absolutePath);
 							// if this is throwen then the path is not really a
 							// file. but could be a zip.
@@ -233,17 +211,13 @@ public class SourcesPage extends WebPage
 							scanJarFile(packageRef, jarFile, resources);
 							return resources;
 						}
-						if (!basedir.isDirectory())
-						{
-							throw new IllegalStateException(
-								"unable to read resources from directory " + basedir);
+						if (!basedir.isDirectory()) {
+							throw new IllegalStateException("unable to read resources from directory " + basedir);
 						}
 						addResources(new AppendingStringBuffer(), basedir, resources);
 					}
 				}
-			}
-			catch (IOException e)
-			{
+			} catch (IOException e) {
 				throw new WicketRuntimeException(e);
 			}
 			Collections.sort(resources);
@@ -251,18 +225,14 @@ public class SourcesPage extends WebPage
 			return resources;
 		}
 
-		private void scanJarFile(String packageRef, JarFile jf, List<String> resources)
-		{
+		private void scanJarFile(String packageRef, JarFile jf, List<String> resources) {
 			Enumeration<JarEntry> enumeration = jf.entries();
-			while (enumeration.hasMoreElements())
-			{
+			while (enumeration.hasMoreElements()) {
 				JarEntry je = enumeration.nextElement();
 				String name = je.getName();
-				if (name.startsWith(packageRef))
-				{
+				if (name.startsWith(packageRef)) {
 					name = name.substring(packageRef.length() + 1);
-					if (!name.endsWith("class") && !name.endsWith("/"))
-					{
+					if (!name.endsWith("class") && !name.endsWith("/")) {
 						resources.add(name);
 					}
 				}
@@ -273,28 +243,25 @@ public class SourcesPage extends WebPage
 	/**
 	 * Displays the resources embedded in a package in a list.
 	 */
-	public class FilesBrowser extends WebMarkupContainer
-	{
+	public class FilesBrowser extends WebMarkupContainer {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/**
 		 * Constructor.
 		 * 
-		 * @param id
-		 *            the component identifier
+		 * @param id the component identifier
 		 */
-		public FilesBrowser(String id)
-		{
+		public FilesBrowser(String id) {
 			super(id);
-			ListView<String> lv = new ListView<String>("file", new PackagedResourcesModel())
-			{
+			ListView<String> lv = new ListView<String>("file", new PackagedResourcesModel()) {
 				@Override
-				protected void populateItem(final ListItem<String> item)
-				{
-					AjaxFallbackLink<String> link = new AjaxFallbackLink<String>("link",
-						item.getModel())
-					{
+				protected void populateItem(final ListItem<String> item) {
+					AjaxFallbackLink<String> link = new AjaxFallbackLink<String>("link", item.getModel()) {
 						@Override
-						public void onClick(Optional<AjaxRequestTarget> optionalTarget)
-						{
+						public void onClick(Optional<AjaxRequestTarget> optionalTarget) {
 							setName(getDefaultModelObjectAsString());
 
 							optionalTarget.ifPresent(target -> {
@@ -304,21 +271,17 @@ public class SourcesPage extends WebPage
 						}
 
 						@Override
-						protected CharSequence getURL()
-						{
-							return urlFor(SourcesPage.class, SourcesPage.generatePageParameters(
-								getPageTargetClass(), item.getModel().getObject()));
+						protected CharSequence getURL() {
+							return urlFor(SourcesPage.class, SourcesPage.generatePageParameters(getPageTargetClass(),
+									item.getModel().getObject()));
 						}
 
 						@Override
-						protected void updateAjaxAttributes(AjaxRequestAttributes attributes)
-						{
+						protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
 							super.updateAjaxAttributes(attributes);
-							AjaxCallListener ajaxCallListener = new AjaxCallListener()
-							{
+							AjaxCallListener ajaxCallListener = new AjaxCallListener() {
 								@Override
-								public CharSequence getFailureHandler(Component component)
-								{
+								public CharSequence getFailureHandler(Component component) {
 									return "window.location=this.href;";
 								}
 							};
@@ -335,19 +298,21 @@ public class SourcesPage extends WebPage
 	}
 
 	/**
-	 * Container for displaying the source of the selected page, resource or other element from the
-	 * package.
+	 * Container for displaying the source of the selected page, resource or other
+	 * element from the package.
 	 */
-	public class CodePanel extends WebMarkupContainer
-	{
+	public class CodePanel extends WebMarkupContainer {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/**
 		 * Constructor.
 		 * 
-		 * @param id
-		 *            the component id
+		 * @param id the component id
 		 */
-		public CodePanel(String id)
-		{
+		public CodePanel(String id) {
 			super(id);
 			Label code = new Label("code", new SourceModel());
 			code.setEscapeModelStrings(false);
@@ -383,11 +348,9 @@ public class SourcesPage extends WebPage
 	/**
 	 * Sets the name.
 	 * 
-	 * @param name
-	 *            the name to set.
+	 * @param name the name to set.
 	 */
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -396,11 +359,9 @@ public class SourcesPage extends WebPage
 	 * 
 	 * @return the name.
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
-
 
 	/**
 	 * 
@@ -408,15 +369,13 @@ public class SourcesPage extends WebPage
 	 * 
 	 * @param params
 	 */
-	public SourcesPage(final PageParameters params)
-	{
+	public SourcesPage(final PageParameters params) {
 		super(params);
 
 		filename = new Label("filename", () -> {
-			return name != null ? name : getPage().getRequest().getRequestParameters()
-				.getParameterValue(SOURCE).toOptionalString();
-			}
-		);
+			return name != null ? name
+					: getPage().getRequest().getRequestParameters().getParameterValue(SOURCE).toOptionalString();
+		});
 		filename.setOutputMarkupId(true);
 		add(filename);
 		codePanel = new CodePanel("codepanel").setOutputMarkupId(true);
@@ -429,8 +388,7 @@ public class SourcesPage extends WebPage
 	 * @param page
 	 * @return PageParameters for reconstructing the bookmarkable page.
 	 */
-	public static PageParameters generatePageParameters(Page page)
-	{
+	public static PageParameters generatePageParameters(Page page) {
 		return generatePageParameters(page.getClass(), null);
 	}
 
@@ -440,40 +398,31 @@ public class SourcesPage extends WebPage
 	 * @param fileName
 	 * @return PageParameters for reconstructing the bookmarkable page.
 	 */
-	public static PageParameters generatePageParameters(Class<? extends Page> clazz, String fileName)
-	{
+	public static PageParameters generatePageParameters(Class<? extends Page> clazz, String fileName) {
 		PageParameters p = new PageParameters();
 		p.set(PAGE_CLASS, clazz.getName());
-		if (fileName != null)
-		{
+		if (fileName != null) {
 			p.set(SOURCE, fileName);
 		}
 		return p;
 	}
 
-	private Class<? extends Page> getPageTargetClass()
-	{
-		if (page == null)
-		{
+	private Class<? extends Page> getPageTargetClass() {
+		if (page == null) {
 			String pageParam = getPageParameters().get(PAGE_CLASS).toOptionalString();
-			if (pageParam == null)
-			{
-				if (log.isErrorEnabled())
-				{
+			if (pageParam == null) {
+				if (log.isErrorEnabled()) {
 					log.error("key: " + PAGE_CLASS + " is null.");
 				}
 				getRequestCycle().replaceAllRequestHandlers(
-					new ErrorCodeRequestHandler(404,
-						"Could not find sources for the page you requested"));
+						new ErrorCodeRequestHandler(404, "Could not find sources for the page you requested"));
 			}
-			
+
 			page = WicketObjects.resolveClass(pageParam);
 
-			if (page == null)
-			{
+			if (page == null) {
 				getRequestCycle().replaceAllRequestHandlers(
-					new ErrorCodeRequestHandler(404,
-						"Could not find sources for the page you requested"));
+						new ErrorCodeRequestHandler(404, "Could not find sources for the page you requested"));
 			}
 		}
 		return page;

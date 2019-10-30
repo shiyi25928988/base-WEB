@@ -27,6 +27,7 @@
 
 	<modules>
 		<module>wicket-bootstrap</module>
+		<module>wicket-upload</module>
 	</modules>
 
 	<dependencies>

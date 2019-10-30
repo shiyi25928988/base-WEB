@@ -25,7 +25,7 @@ public final class ReflectionUtils {
 		try {
 			instance = constructor.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
 			throw new Exception(e);
 		}
 		return instance;

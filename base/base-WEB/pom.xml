@@ -17,6 +17,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.yshi</groupId>
+			<artifactId>wicket-login</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.yshi</groupId>
 			<artifactId>wicket-upload</artifactId>
 			<version>${project.version}</version>
 		</dependency>

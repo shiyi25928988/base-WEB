@@ -7,6 +7,7 @@ import org.apache.wicket.protocol.http.WebApplication;
 import base.module.ModulesConfig;
 import lombok.extern.slf4j.Slf4j;
 import wicket.base.bootstrap.layout.BootstrapBasePage;
+import wicket.base.login.Login;
 import wicket.base.upload.UploadSingleFile;
 
 @Slf4j
@@ -17,7 +18,7 @@ public class WicketRootApplication extends WebApplication{
 	 */
 	@Override
 	public Class<? extends WebPage> getHomePage() {
-		return UploadSingleFile.class;
+		return Login.class;
 	}
 
 	/**

@@ -158,7 +158,7 @@ public class RestApiServiceImpl implements RestApiService {
 		try {
 			invoke(methodMap_GET);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
 		}
 	}
 

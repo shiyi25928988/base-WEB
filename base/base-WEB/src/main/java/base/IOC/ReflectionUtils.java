@@ -21,7 +21,7 @@ public final class ReflectionUtils {
 	 */
 	public static Object newInstance(Class<?> clazz) throws Exception {
 		Object instance = null;
-		Constructor<?> constructor = clazz.getConstructor(clazz);
+		Constructor<?> constructor = clazz.getConstructor();
 		try {
 			instance = constructor.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {

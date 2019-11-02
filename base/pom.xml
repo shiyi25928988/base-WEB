@@ -17,7 +17,8 @@
 		<module>base-CRAWLER</module>
 		<module>base-CLI</module>
 		<module>base-WICKET</module>
-  </modules>
+		<module>base-NEUROPH</module>
+	</modules>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>

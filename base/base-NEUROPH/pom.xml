@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>base-NEUROPH</artifactId>
-	
+
 	<properties>
 		<neuroph.version>2.96</neuroph.version>
 	</properties>
@@ -26,36 +26,32 @@
 			<artifactId>neuroph-core</artifactId>
 			<version>${neuroph.version}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.neuroph</groupId>
-			<artifactId>neuroph-imgrec</artifactId>
-			<version>${neuroph.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.neuroph</groupId>
-			<artifactId>neuroph-ocr</artifactId>
-			<version>${neuroph.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.neuroph</groupId>
-			<artifactId>neuroph-contrib</artifactId>
-			<version>${neuroph.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.neuroph</groupId>
-			<artifactId>neuroph-adapters</artifactId>
-			<version>${neuroph.version}</version>
-		</dependency>
-		
+
 		<dependency>
 			<groupId>org.neuroph</groupId>
 			<artifactId>neuroph-samples</artifactId>
 			<version>${neuroph.version}</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
 	</dependencies>
 </project>

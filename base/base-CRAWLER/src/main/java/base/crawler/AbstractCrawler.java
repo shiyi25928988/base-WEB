@@ -20,16 +20,23 @@ public abstract class AbstractCrawler extends WebCrawler {
 	
 	Queue<CrawlResults> queue = QueueHolder.getQuene();
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean shouldVisit(Page referringPage, WebURL url) {
 		String link = url.getURL().toLowerCase();
 		return !getPattern().matcher(link).matches();
 	}
 	
-	 @Override
+	 /**
+	 *
+	 */
+	@Override
      public void visit(Page page) {
 
          if (page.getParseData() instanceof HtmlParseData) {
+        	 
         	 String url = page.getWebURL().getURL();
         	 log.info("crawler visting : " + url);
              HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();

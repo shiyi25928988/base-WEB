@@ -1,9 +1,14 @@
-package base.crawler;
+package base.crawler.config;
 
+import java.util.Collection;
 import java.util.HashSet;
 
+import org.apache.http.Header;
+import org.apache.http.conn.DnsResolver;
+import org.apache.http.impl.conn.SystemDefaultDnsResolver;
 import org.apache.http.message.BasicHeader;
 
+import base.crawler.CrawlerConstants;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 
 /**
@@ -12,15 +17,35 @@ import edu.uci.ics.crawler4j.crawler.CrawlConfig;
  */
 public class CrawlerConfig extends CrawlConfig{
 	
-	static CrawlConfig config;
+	private static final DnsResolver dnsResolver = new SystemDefaultDnsResolver();
+	private static String crawlStorageFolder;
+	private static Boolean resumableCrawling;
+	private static Long dbLockTimeout;
+	private static Integer maxDepthOfCrawling;
+	private static Integer maxPagesToFetch;
+	private static String userAgentString;
+	private static Collection<? extends Header> defaultHeaders;
+	
+	
+	
+	private static CrawlConfig config;
 	
 	static{
 		config = new CrawlerConfig();
 		initConfig(config);
 	}
 	
-	private CrawlerConfig() {}
+	/**
+	 * 
+	 */
+	private CrawlerConfig() {
+		throw new RuntimeException();
+	}
 	
+	/**
+	 * Init crawler configuration.
+	 * @param config
+	 */
 	private static void initConfig(final CrawlConfig config){
 		config.setCrawlStorageFolder(CrawlerConstants.CURRENT_PATH);
 		config.setConnectionTimeout(50*1000);

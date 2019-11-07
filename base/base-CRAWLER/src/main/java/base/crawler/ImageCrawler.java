@@ -1,4 +1,4 @@
-package crawler.base;
+package base.crawler;
 
 import java.io.File;
 import java.io.IOException;

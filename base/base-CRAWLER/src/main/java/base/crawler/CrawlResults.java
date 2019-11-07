@@ -1,4 +1,4 @@
-package crawler.base;
+package base.crawler;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

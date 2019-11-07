@@ -1,4 +1,4 @@
-package crawler.base;
+package base.crawler;
 
 public interface CrawlerConstants {
 	

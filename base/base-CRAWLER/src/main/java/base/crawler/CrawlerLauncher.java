@@ -1,4 +1,4 @@
-package crawler.base;
+package base.crawler;
 
 import java.util.Arrays;
 import java.util.Objects;

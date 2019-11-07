@@ -1,4 +1,4 @@
-package crawler.base;
+package base.crawler;
 
 import java.util.Queue;
 import java.util.regex.Pattern;

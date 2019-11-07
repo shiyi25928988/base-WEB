@@ -1,7 +1,7 @@
 package crawler.base.test;
 
-import crawler.base.CrawlerLauncher;
-import crawler.base.TextCrawler;
+import base.crawler.CrawlerLauncher;
+import base.crawler.TextCrawler;
 
 public class TestCrawler {
 	

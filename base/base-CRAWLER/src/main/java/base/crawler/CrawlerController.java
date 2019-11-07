@@ -1,4 +1,4 @@
-package crawler.base;
+package base.crawler;
 
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;

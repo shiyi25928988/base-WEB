@@ -18,14 +18,31 @@ import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 public class CrawlerConfig extends CrawlConfig{
 	
 	private static final DnsResolver dnsResolver = new SystemDefaultDnsResolver();
-	private static String crawlStorageFolder;
-	private static Boolean resumableCrawling;
-	private static Long dbLockTimeout;
-	private static Integer maxDepthOfCrawling;
-	private static Integer maxPagesToFetch;
-	private static String userAgentString;
-	private static Collection<? extends Header> defaultHeaders;
 	
+	private static String crawlStorageFolder;
+	private static Boolean resumableCrawling = false;
+	private static Long dbLockTimeout = 500L;
+	private static Integer maxDepthOfCrawling = -1;
+	private static Integer maxPagesToFetch = -1;
+	private static String userAgentString = HttpHeader.VALUE_USER_AGENT;
+	private static Collection<? extends Header> defaultHeaders = HttpHeader.getHeaders();
+	private static Integer politenessDelay = 1000; // milliseconds delay between request 
+	private static Boolean includeHttpsPages = true;
+	private static Boolean includeBinaryContentInCrawling = true; //fetch binary content e.g image sound
+	private static Boolean processBinaryContentInCrawling = true; //using Apache TIKA to parse the binary content
+	
+	private static Integer maxConnectionsPerHost = 16;
+	private static Integer maxTotalConnections = 1024;
+	
+	private static Integer socketTimeout = 10000; //10 seconds
+	
+	private static Integer maxOutgoingLinksToFollow = 16;
+	
+	private static Integer maxDownloadSize = 1024 * 1024 * 100; //100M
+	
+	private static Boolean followRedirects = true; 
+	
+	private static Boolean shutdownOnEmptyQueue = true;
 	
 	
 	private static CrawlConfig config;

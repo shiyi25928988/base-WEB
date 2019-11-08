@@ -1,7 +1,9 @@
-package base.crawler;
+package base.crawler.config;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import base.crawler.CrawlResults;
 
 /**
  * @author yshi

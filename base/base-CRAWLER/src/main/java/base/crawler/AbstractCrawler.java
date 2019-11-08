@@ -3,21 +3,20 @@ package base.crawler;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
+import base.crawler.config.QueueHolder;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
+import edu.uci.ics.crawler4j.parser.BinaryParseData;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
+import edu.uci.ics.crawler4j.parser.TextParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  *
  */
-@Slf4j
 public abstract class AbstractCrawler extends WebCrawler {
 
-	//private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$");
-	
 	Queue<CrawlResults> queue = QueueHolder.getQuene();
 
 	/**
@@ -28,25 +27,33 @@ public abstract class AbstractCrawler extends WebCrawler {
 		String link = url.getURL().toLowerCase();
 		return !getPattern().matcher(link).matches();
 	}
-	
-	 /**
-	 *
-	 */
-	@Override
-     public void visit(Page page) {
 
-         if (page.getParseData() instanceof HtmlParseData) {
-        	 
-        	 String url = page.getWebURL().getURL();
-        	 log.info("crawler visting : " + url);
-             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-             String text = htmlParseData.getText();
-             log.info("html title : " + htmlParseData.getTitle());
-             log.info("html contents : " + text);
-             queue.offer(new CrawlResults(url, text));
-         }
-	 }
-	 
-	 abstract protected Pattern getPattern();
+	/**
+	*
+	*/
+	@Override
+	public void visit(Page page) {
+		var url = page.getWebURL().getURL();
+		var extension = "";
+		if(url.contains(".")) {
+			extension = url.substring(url.lastIndexOf('.'));
+		}
+		
+		if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.HtmlParseData) {
+			var htmlParseData = (HtmlParseData) page.getParseData();
+			var content = htmlParseData.getHtml();
+			queue.offer(new CrawlResults(url, content.getBytes(), extension, CrawlResults.ResultType.Html));
+		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.TextParseData) {
+			var textParseData = (TextParseData) page.getParseData();
+			var content = textParseData.getTextContent();
+			queue.offer(new CrawlResults(url, content.getBytes(), extension, CrawlResults.ResultType.Text));
+		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.BinaryParseData) {
+			var binaryParseData = (BinaryParseData) page.getParseData();
+			var content = binaryParseData.getHtml();
+			queue.offer(new CrawlResults(url, content.getBytes(), extension, CrawlResults.ResultType.Binary));
+		}
+	}
+
+	abstract protected Pattern getPattern();
 
 }

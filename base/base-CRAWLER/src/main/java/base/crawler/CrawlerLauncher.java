@@ -2,9 +2,9 @@ package base.crawler;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import base.crawler.config.CrawlerConfig;
+import base.crawler.config.CrawlerConstants;
 import base.crawler.exceptions.InvalidSeedException;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
@@ -18,13 +18,6 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
  */
 public class CrawlerLauncher {
 
-	private static AtomicBoolean isLaunched = new AtomicBoolean(false);
-
-	public static void launch() {
-		if (isLaunched.get())
-			return;
-	}
-	
 	/**
 	 * @param clazz
 	 * @param seeds

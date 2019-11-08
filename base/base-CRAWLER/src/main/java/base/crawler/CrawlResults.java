@@ -13,5 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CrawlResults {
 	public String url;
-	public String text;
+	public byte[] content;
+	public String extension;
+	public ResultType type;
+	
+	public CrawlResults() {}
+	
+	enum ResultType{
+		Html,
+		Text,
+		Binary
+	}
 }

@@ -23,12 +23,16 @@ public class MessageConsumer implements Runnable {
 	 */
 	public void run() {
 		while (!stop.get()) {
-			
 			CrawlResults results = this.queue.poll();
 			if (Objects.isNull(results)) {
+				try {
+					Thread.currentThread().sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				continue;
 			}
-			log.error("============================================");
 			WriteFile.writeResult(results);
 		}
 	}

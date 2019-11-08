@@ -20,7 +20,8 @@ public abstract class WriteFile {
 		var content = new String(result.getContent());
 		var extension = result.getExtension();
 		try {
-			string2File(result.getUrl() + "\n\r" + content,CrawlerConstants.CURRENT_PATH + UUID.randomUUID() + extension);
+			string2File(result.getUrl() + "\n\r" + content, 
+					CrawlerConstants.CURRENT_PATH + File.pathSeparator + UUID.randomUUID() + extension);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

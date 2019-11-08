@@ -10,11 +10,13 @@ import edu.uci.ics.crawler4j.parser.BinaryParseData;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.parser.TextParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  *
  */
+@Slf4j
 public abstract class AbstractCrawler extends WebCrawler {
 
 	Queue<CrawlResults> queue = QueueHolder.getQuene();
@@ -25,7 +27,7 @@ public abstract class AbstractCrawler extends WebCrawler {
 	@Override
 	public boolean shouldVisit(Page referringPage, WebURL url) {
 		String link = url.getURL().toLowerCase();
-		return !getPattern().matcher(link).matches();
+		return getPattern().matcher(link).matches();
 	}
 
 	/**

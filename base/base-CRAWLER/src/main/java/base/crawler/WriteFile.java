@@ -6,24 +6,33 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.UUID;
 
 import base.crawler.config.CrawlerConstants;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  *
  */
+@Slf4j
 public abstract class WriteFile {
 	
 	public static void writeResult(CrawlResults result){
-		var content = new String(result.getContent());
+		var content = result.getContent();
 		var extension = result.getExtension();
-		try {
-			string2File(result.getUrl() + "\n\r" + content, 
-					CrawlerConstants.CURRENT_PATH + File.pathSeparator + UUID.randomUUID() + extension);
+		writeTOfile(content, 
+				CrawlerConstants.CURRENT_PATH + File.separator + UUID.randomUUID() + extension);
+	}
+	
+	public static void writeTOfile(byte[] source, String filePath) {
+         try {
+			Files.write(Path.of(filePath), source, StandardOpenOption.CREATE);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			log.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
@@ -35,6 +44,7 @@ public abstract class WriteFile {
 	 * @throws IOException
 	 */
 	public static boolean string2File(String res, String filePath) throws IOException {  
+		
         boolean flag = true;  
         BufferedReader bufferedReader = null;  
         BufferedWriter bufferedWriter = null;  

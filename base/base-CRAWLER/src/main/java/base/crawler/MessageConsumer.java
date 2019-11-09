@@ -17,7 +17,7 @@ public class MessageConsumer implements Runnable {
 	Queue<CrawlResults> queue = QueueHolder.getQuene();
 
 	private AtomicBoolean stop = new AtomicBoolean(false);
-
+	
 	/**
 	 *
 	 */

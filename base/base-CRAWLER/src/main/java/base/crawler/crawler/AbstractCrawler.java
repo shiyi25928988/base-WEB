@@ -1,8 +1,10 @@
-package base.crawler;
+package base.crawler.crawler;
 
 import java.util.Queue;
 import java.util.regex.Pattern;
 
+import base.crawler.CrawlResults;
+import base.crawler.CrawlResults.ResultType;
 import base.crawler.config.QueueHolder;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
@@ -39,6 +41,8 @@ public abstract class AbstractCrawler extends WebCrawler {
 		var extension = "";
 		if(url.contains(".")) {
 			extension = url.substring(url.lastIndexOf('.'));
+			
+			log.error("extension : " + extension);
 		}
 		
 		if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.HtmlParseData) {
@@ -51,8 +55,9 @@ public abstract class AbstractCrawler extends WebCrawler {
 			queue.offer(new CrawlResults(url, content.getBytes(), extension, CrawlResults.ResultType.Text));
 		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.BinaryParseData) {
 			var binaryParseData = (BinaryParseData) page.getParseData();
-			var content = binaryParseData.getHtml();
-			queue.offer(new CrawlResults(url, content.getBytes(), extension, CrawlResults.ResultType.Binary));
+			//var content = binaryParseData.getHtml();
+			var content = page.getContentData();
+			queue.offer(new CrawlResults(url, content, extension, CrawlResults.ResultType.Binary));
 		}
 	}
 

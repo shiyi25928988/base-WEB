@@ -19,7 +19,7 @@ public class CrawlResults {
 	
 	public CrawlResults() {}
 	
-	enum ResultType{
+	public enum ResultType{
 		Html,
 		Text,
 		Binary

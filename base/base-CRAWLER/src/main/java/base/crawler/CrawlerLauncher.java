@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import base.crawler.config.CrawlerConfig;
 import base.crawler.config.CrawlerConstants;
+import base.crawler.crawler.AbstractCrawler;
 import base.crawler.exceptions.InvalidSeedException;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
@@ -55,7 +56,9 @@ public class CrawlerLauncher {
 			});
 		}
 
-		new Thread(new MessageConsumer()).start();
+		//new Thread(new MessageConsumer()).start();
+		
+		new MessageConsumerGroup().start();
 		
 		controller.start(clazz, numOfCrawler);
 

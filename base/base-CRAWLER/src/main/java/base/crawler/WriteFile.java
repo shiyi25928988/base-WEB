@@ -30,6 +30,12 @@ public abstract class WriteFile {
 	
 	public static void writeTOfile(byte[] source, String filePath) {
          try {
+        	 
+        	 File distFile = new File(filePath);  
+             if (!distFile.getParentFile().exists()) {
+                 distFile.getParentFile().mkdirs();  
+             }  
+        	 
 			Files.write(Path.of(filePath), source, StandardOpenOption.CREATE);
 		} catch (IOException e) {
 			log.error(e.getLocalizedMessage());

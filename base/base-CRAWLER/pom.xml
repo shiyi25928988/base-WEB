@@ -12,6 +12,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.yshi</groupId>
+			<artifactId>base-COMMON</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>

@@ -30,7 +30,7 @@ public class Main {
 	}
 
 	public static void main(String... args) {
-		
+		 System.out.println("start");
 		try {
 			CommandLine cmd = parser.parse(options, args);
 			
@@ -39,7 +39,7 @@ public class Main {
 			    System.out.println(cmd.getOptionValue( "address" ));
 			}
 			
-			formatter.printHelp("crawl", options);
+			//formatter.printHelp("crawl", options);
 			
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block

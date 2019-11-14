@@ -36,7 +36,7 @@ public class CrawlerConfig extends CrawlConfig{
 	
 	private static Boolean includeBinaryContentInCrawling = true; //fetch binary content e.g image sound
 	
-	private static Boolean processBinaryContentInCrawling = false; //using Apache TIKA to parse the binary content
+	private static Boolean processBinaryContentInCrawling = true; //using Apache TIKA to parse the binary content
 	
 	private static Integer maxConnectionsPerHost = 16;
 	

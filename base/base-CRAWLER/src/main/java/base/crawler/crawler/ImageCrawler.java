@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  */
 public class ImageCrawler extends AbstractCrawler {
 
-	private static final Pattern imgPatterns = Pattern.compile(".*(\\.(bmp|gif|jpe?g|png|tiff?))$");
+	private static final Pattern imgPatterns = Pattern.compile(".(\\.(bmp|gif|jpe?g|png))$");
 	
 	/**
 	 *

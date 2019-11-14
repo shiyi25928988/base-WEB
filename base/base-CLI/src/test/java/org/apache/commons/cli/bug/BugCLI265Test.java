@@ -26,7 +26,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -69,7 +69,7 @@ public class BugCLI265Test {
         final CommandLine commandLine = parser.parse(options, twoShortOptions);
 
         assertTrue(commandLine.hasOption("t1"));
-        assertNotEquals("Second option has been used as value for first option", "-last", commandLine.getOptionValue("t1"));
+        assertNotSame("Second option has been used as value for first option", "-last", commandLine.getOptionValue("t1"));
         assertTrue("Second option has not been detected", commandLine.hasOption("last"));
     }
 

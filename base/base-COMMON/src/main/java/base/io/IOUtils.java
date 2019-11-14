@@ -18,7 +18,7 @@ public abstract class IOUtils {
 	 * @param fileName
 	 */
 	public static void writeFile(byte[] content, String dir, String fileName) {
-		File f = new File(dir);
+		var f = new File(dir);
 		f.setWritable(true);
 		if (!f.exists()) {
 			f.mkdir();
@@ -31,8 +31,8 @@ public abstract class IOUtils {
 			filePath = dir + File.separator + fileName;
 		}
 
-		try (FileOutputStream fileOutputStream = new FileOutputStream(filePath, true);
-				FileChannel fileChannel = fileOutputStream.getChannel()) {
+		try (var fileOutputStream = new FileOutputStream(filePath, true);
+				var fileChannel = fileOutputStream.getChannel()) {
 			ByteBuffer byteBuff = ByteBuffer.wrap(content);
 			byteBuff.put(content);
 			byteBuff.flip();

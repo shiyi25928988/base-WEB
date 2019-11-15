@@ -1,11 +1,13 @@
 package base.crawler.crawler;
 
+import java.io.File;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
 import base.crawler.CrawlResults;
 import base.crawler.CrawlResults.ResultType;
 import base.crawler.config.QueueHolder;
+import base.io.IOUtils;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.BinaryParseData;
@@ -38,6 +40,7 @@ public abstract class AbstractCrawler extends WebCrawler {
 	@Override
 	public void visit(Page page) {
 		var url = page.getWebURL().getURL();
+		IOUtils.writeStringFile(url+File.separator, "c://ext_temp//", "url.txt");
 		var extension = "";
 		if(url.contains(".")) {
 			extension = url.substring(url.lastIndexOf('.'));
@@ -48,6 +51,8 @@ public abstract class AbstractCrawler extends WebCrawler {
 		if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.HtmlParseData) {
 			var htmlParseData = (HtmlParseData) page.getParseData();
 			var content = htmlParseData.getHtml();
+			log.info(htmlParseData.getContentCharset());
+			log.info(content);
 			queue.offer(new CrawlResults(url, content.getBytes(), extension, CrawlResults.ResultType.Html));
 		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.TextParseData) {
 			var textParseData = (TextParseData) page.getParseData();

@@ -30,13 +30,13 @@ public class CrawlerConfig extends CrawlConfig{
 	
 	private static Collection<? extends Header> defaultHeaders = HttpHeader.getHeaders();
 	
-	private static Integer politenessDelay = 500; // milliseconds delay between request 
+	private static Integer politenessDelay = 1000; // milliseconds delay between request 
 	
 	private static Boolean includeHttpsPages = true;
 	
 	private static Boolean includeBinaryContentInCrawling = true; //fetch binary content e.g image sound
 	
-	private static Boolean processBinaryContentInCrawling = true; //using Apache TIKA to parse the binary content
+	private static Boolean processBinaryContentInCrawling = false; //using Apache TIKA to parse the binary content
 	
 	private static Integer maxConnectionsPerHost = 16;
 	
@@ -63,7 +63,7 @@ public class CrawlerConfig extends CrawlConfig{
 	
 	private static List<AuthInfo> authInfos;
 	
-	private static CrawlConfig config;
+	private static volatile CrawlConfig config;
 	
 	static{
 		config = new CrawlerConfig();

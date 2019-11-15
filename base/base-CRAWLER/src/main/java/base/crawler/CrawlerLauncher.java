@@ -39,8 +39,12 @@ public class CrawlerLauncher {
 		CrawlConfig config = CrawlerConfig.getConfig();
 
 		PageFetcher pageFetcher = new PageFetcher(config);
-
+		
 		RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
+		
+		robotstxtConfig.setIgnoreUADiscrimination(true);
+		
+		robotstxtConfig.setUserAgentName("Googlebot");
 		
 	    robotstxtConfig.setEnabled(false);// enable the Robots protocols 
 		
@@ -56,8 +60,6 @@ public class CrawlerLauncher {
 			});
 		}
 
-		//new Thread(new MessageConsumer()).start();
-		
 		new MessageConsumerGroup().start();
 		
 		controller.start(clazz, numOfCrawler);

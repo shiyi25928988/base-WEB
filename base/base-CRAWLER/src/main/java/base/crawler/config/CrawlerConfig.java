@@ -46,7 +46,7 @@ public class CrawlerConfig extends CrawlConfig{
 	
 	private static Integer connectionTimeout = 60 * 1000; //60 second
 	
-	private static Integer maxOutgoingLinksToFollow = 16;
+	private static Integer maxOutgoingLinksToFollow = Integer.MAX_VALUE;//-1;
 	
 	private static Integer maxDownloadSize = 1024 * 1024 * 100; //100M
 	

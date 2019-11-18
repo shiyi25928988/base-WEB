@@ -62,6 +62,8 @@ public abstract class AbstractCrawler extends WebCrawler {
 			log.error("extension : " + extension);
 		}
 		
+		log.error("type : " + page.getContentType());
+		
 		if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.HtmlParseData) {
 			var htmlParseData = (HtmlParseData) page.getParseData();
 			var content = htmlParseData.getHtml();

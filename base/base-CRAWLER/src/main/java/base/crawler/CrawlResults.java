@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CrawlResults {
 	public String url;
+	public String name;
 	public byte[] content;
 	public String extension;
 	public ResultType type;

@@ -2,6 +2,7 @@ package base.crawler.crawler;
 
 import java.io.File;
 import java.util.Queue;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 import base.crawler.CrawlResults;
@@ -22,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class AbstractCrawler extends WebCrawler {
+	
+	private static final String domainSuffixReg = ".(com|net|org|cn|edu|gov|top|info|xxx|idv|name|coop|museum|aero|pro|biz|int|xyz|co|mobi|club|rec|asia|travel|vip|win).";
 
 	Queue<CrawlResults> queue = QueueHolder.getQuene();
 
@@ -40,29 +43,38 @@ public abstract class AbstractCrawler extends WebCrawler {
 	@Override
 	public void visit(Page page) {
 		var url = page.getWebURL().getURL();
-		IOUtils.writeStringFile(url+File.separator, "c://ext_temp//", "url.txt");
+		var name = "";
+		if(url.contains("/") && url.contains(".")) {
+			if(url.lastIndexOf('/') < url.lastIndexOf('.')) {
+				name = url.substring(url.lastIndexOf('/'), url.lastIndexOf('.'));
+			}
+		}
+		if(url.lastIndexOf('/') == (url.length() - 1)) {
+			name = UUID.randomUUID().toString();
+		}
+		
 		var extension = "";
 		if(url.contains(".")) {
 			extension = url.substring(url.lastIndexOf('.'));
-			
+			if(Pattern.compile(domainSuffixReg).matcher(extension).find()) {
+				extension = ".html";
+			}
 			log.error("extension : " + extension);
 		}
 		
 		if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.HtmlParseData) {
 			var htmlParseData = (HtmlParseData) page.getParseData();
 			var content = htmlParseData.getHtml();
-			log.info(htmlParseData.getContentCharset());
-			log.info(content);
-			queue.offer(new CrawlResults(url, content.getBytes(), extension, CrawlResults.ResultType.Html));
+			queue.offer(new CrawlResults(url, name ,content.getBytes(), extension, CrawlResults.ResultType.Html));
 		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.TextParseData) {
 			var textParseData = (TextParseData) page.getParseData();
 			var content = textParseData.getTextContent();
-			queue.offer(new CrawlResults(url, content.getBytes(), extension, CrawlResults.ResultType.Text));
+			queue.offer(new CrawlResults(url, name, content.getBytes(), extension, CrawlResults.ResultType.Text));
 		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.BinaryParseData) {
-			var binaryParseData = (BinaryParseData) page.getParseData();
+			//var binaryParseData = (BinaryParseData) page.getParseData();
 			//var content = binaryParseData.getHtml();
 			var content = page.getContentData();
-			queue.offer(new CrawlResults(url, content, extension, CrawlResults.ResultType.Binary));
+			queue.offer(new CrawlResults(url, name, content, extension, CrawlResults.ResultType.Binary));
 		}
 	}
 

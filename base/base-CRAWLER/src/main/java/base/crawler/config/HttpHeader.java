@@ -24,6 +24,9 @@ public class HttpHeader {
 
 	public static final String KEY_CONNECTION = "Connection";
 	public static final String VALUE_CONNECTION = "keep-alive";
+	
+	public static final String KEY_CONTENT_TYPE = "Content-Type";
+	public static final String VALUE_CONTENT_TYPE = "text/html; charset=UTF-8";
 
 	private static HashSet<BasicHeader> headers = new HashSet<BasicHeader>();
 
@@ -36,6 +39,7 @@ public class HttpHeader {
 		headers.add(new BasicHeader(KEY_ACCEPT_ENCODING, VALUE_ACCEPT_ENCODING));
 		headers.add(new BasicHeader(KEY_ACCEPT_LANGUAGE, VALUE_ACCEPT_LANGUAGE));
 		headers.add(new BasicHeader(KEY_CONNECTION, VALUE_CONNECTION));
+		headers.add(new BasicHeader(KEY_CONTENT_TYPE, VALUE_CONTENT_TYPE));
 		
 		headers.add(new BasicHeader("sec-fetch-mode", "navigate"));
 		headers.add(new BasicHeader("sec-fetch-site", "none"));

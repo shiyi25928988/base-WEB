@@ -8,7 +8,7 @@ import base.crawler.crawler.TextCrawler;
 public class TestCrawler {
 	
 	public static void  main(String...strings) throws Exception {
-		CrawlerLauncher.start(EveryThingCrawler.class, "https://www.lvv2.com/nsfw");
+		CrawlerLauncher.start(EveryThingCrawler.class, "https://www.xsnvshen.com");
 	}
 
 }

@@ -1,7 +1,8 @@
 package base.crawler.config;
 
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import base.crawler.CrawlResults;
 
@@ -11,9 +12,12 @@ import base.crawler.CrawlResults;
  */
 public class QueueHolder {
 
-	private static Queue<CrawlResults> queue = new ConcurrentLinkedQueue<CrawlResults>();
+	private static BlockingQueue<CrawlResults> queue = new LinkedBlockingQueue<CrawlResults>();
 
-	public static Queue<CrawlResults> getQuene() {
+	/**
+	 * @return queue instance.
+	 */
+	public static BlockingQueue<CrawlResults> getQuene() {
 		return queue;
 	}
 }

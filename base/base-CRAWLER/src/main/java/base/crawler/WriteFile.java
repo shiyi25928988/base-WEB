@@ -1,5 +1,6 @@
 package base.crawler;
 
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -20,7 +21,9 @@ public abstract class WriteFile {
 	public static void writeResult(CrawlResults result){
 		var content = result.getContent();
 		var name = result.getName();
-		var extension = filePattern.matcher(result.getExtension()).replaceAll("_");
+		var extension = result.getExtension();
+		if(Objects.nonNull(extension))
+			extension = filePattern.matcher(extension).replaceAll("_");
 
 		//var extension = result.getExtension().replace("/", "_");
 		IOUtils.writeFile(content, 

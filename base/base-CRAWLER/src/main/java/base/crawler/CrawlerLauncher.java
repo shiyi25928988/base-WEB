@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import base.crawler.config.CrawlerConfig;
 import base.crawler.config.CrawlerConstants;
+import base.crawler.config.QueueMoniter;
 import base.crawler.crawler.AbstractCrawler;
 import base.crawler.exceptions.InvalidSeedException;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
@@ -36,6 +37,8 @@ public class CrawlerLauncher {
 	 */
 	public static void start(Class<? extends AbstractCrawler> clazz, int numOfCrawler, String...seeds) throws Exception {
 		
+		
+		
 		CrawlConfig config = CrawlerConfig.getConfig();
 
 		PageFetcher pageFetcher = new PageFetcher(config);
@@ -60,7 +63,11 @@ public class CrawlerLauncher {
 			});
 		}
 
-		new MessageConsumerGroup().start();
+		//new MessageConsumerGroup(1).start();
+		
+		new Thread(new MessageConsumer(), "consumer-thread").start();
+		
+		QueueMoniter.startMoniter();
 		
 		controller.start(clazz, numOfCrawler);
 

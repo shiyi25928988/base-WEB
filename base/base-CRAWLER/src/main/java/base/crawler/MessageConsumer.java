@@ -2,6 +2,7 @@ package base.crawler;
 
 import java.util.Objects;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import base.crawler.config.QueueHolder;
@@ -14,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MessageConsumer implements Runnable {
 
-	Queue<CrawlResults> queue = QueueHolder.getQuene();
+	BlockingQueue<CrawlResults> queue = QueueHolder.getQuene();
 
 	private AtomicBoolean stop = new AtomicBoolean(false);
 	
@@ -22,15 +23,16 @@ public class MessageConsumer implements Runnable {
 	 *
 	 */
 	public void run() {
-		while (!stop.get()) {
-			CrawlResults results = this.queue.poll();
-			if (Objects.isNull(results)) {
-				try {
-					Thread.currentThread().sleep(500);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		
+		for(;;){
+
+			CrawlResults results;
+			try {
+				results = this.queue.take();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				log.error(e.toString());
 				continue;
 			}
 			WriteFile.writeResult(results);

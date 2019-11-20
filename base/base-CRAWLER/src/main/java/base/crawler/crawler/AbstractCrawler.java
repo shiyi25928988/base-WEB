@@ -59,6 +59,10 @@ public abstract class AbstractCrawler extends WebCrawler {
 			e1.printStackTrace();
 		}
 		
+		if(name.endsWith(extension)) {
+			name = name.replaceFirst(extension, "");
+		}
+		
 		if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.HtmlParseData) {
 			var htmlParseData = (HtmlParseData) page.getParseData();
 			var content = htmlParseData.getHtml();

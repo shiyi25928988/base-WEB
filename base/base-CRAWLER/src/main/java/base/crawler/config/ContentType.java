@@ -60,7 +60,7 @@ public abstract class ContentType {
 		
 		typeMap.put("application/java-archive", ".jar");
 		
-		typeMap.put("image/jpeg", ".jpeg");
+		typeMap.put("image/jpeg", ".jpg");
 		
 		typeMap.put("text/javascript", ".js");
 		

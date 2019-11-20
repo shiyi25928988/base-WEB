@@ -22,13 +22,13 @@ public class Main {
 		try {
 			CommandLine cmd = parser.parse(CommandLineOptions.getOptions(), args);
 			
-			if( cmd.hasOption(CommandLineOptions.OptionType.help.get()) ) {
+			if( cmd.hasOption(CommandLineOptions.OPT_HELP) ) {
 				formatter.printHelp("crawl", CommandLineOptions.getOptions(), true);
 			}
 			
-			if( cmd.hasOption(CommandLineOptions.OptionType.address.get()) ) {
+			if( cmd.hasOption(CommandLineOptions.OPT_ADDRESS) ) {
 				
-				Arrays.stream(cmd.getOptionValues(CommandLineOptions.OptionType.address.get())).forEach(arg -> {
+				Arrays.stream(cmd.getOptionValues(CommandLineOptions.OPT_ADDRESS)).forEach(arg -> {
 					try {
 						CrawlerLauncher.start(EveryThingCrawler.class, arg);
 					} catch (Exception e) {
@@ -36,7 +36,6 @@ public class Main {
 					}
 				});
 			}
-			
 			
 		} catch (ParseException e1) {
 			e1.printStackTrace();

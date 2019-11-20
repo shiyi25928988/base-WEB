@@ -1,20 +1,16 @@
 package base.crawler.crawler;
 
-import java.io.File;
-import java.util.Queue;
-import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.regex.Pattern;
 
+import com.google.common.base.Strings;
+
 import base.crawler.CrawlResults;
-import base.crawler.CrawlResults.ResultType;
 import base.crawler.config.ContentType;
 import base.crawler.config.QueueHolder;
 import base.crawler.exceptions.ExtendTypeNotFoundException;
-import base.io.IOUtils;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
-import edu.uci.ics.crawler4j.parser.BinaryParseData;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.parser.TextParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
@@ -49,19 +45,14 @@ public abstract class AbstractCrawler extends WebCrawler {
 		if(page.getStatusCode() != 200) return; // return if http status code is not 200 OK
 		
 		var url = page.getWebURL().getURL();
-		var name = url.replace('/', '_');
-		if(url.contains("/") && url.contains(".")) {
-			if(url.lastIndexOf('/') < url.lastIndexOf('.')) {
-				name = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.'));
-			}
-		}
-		if(url.lastIndexOf('/') == (url.length() - 1)) {
-			name = UUID.randomUUID().toString();
+		var name = url.substring(url.lastIndexOf('/') + 1);
+		if(Strings.isNullOrEmpty(name)) {
+			name = "index";
 		}
 		
 		var extension = "";
 
-		log.error("type : " + page.getContentType());
+		log.error("page type : " + page.getContentType());
 		try {
 			extension = ContentType.getExtend(page.getContentType().trim());
 		} catch (ExtendTypeNotFoundException e1) {
@@ -74,7 +65,6 @@ public abstract class AbstractCrawler extends WebCrawler {
 			try {
 				queue.put(new CrawlResults(url, name ,content.getBytes(), extension, CrawlResults.ResultType.Html));
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.TextParseData) {
@@ -83,22 +73,22 @@ public abstract class AbstractCrawler extends WebCrawler {
 			try {
 				queue.put(new CrawlResults(url, name, content.getBytes(), extension, CrawlResults.ResultType.Text));
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.BinaryParseData) {
-			//var binaryParseData = (BinaryParseData) page.getParseData();
-			//var content = binaryParseData.getHtml();
 			var content = page.getContentData();
 			try {
 				queue.put(new CrawlResults(url, name, content, extension, CrawlResults.ResultType.Binary));
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
+	/**
+	 * Customized url filter pattern.
+	 * @return
+	 */
 	abstract protected Pattern getPattern();
 
 }

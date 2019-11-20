@@ -37,8 +37,6 @@ public class CrawlerLauncher {
 	 */
 	public static void start(Class<? extends AbstractCrawler> clazz, int numOfCrawler, String...seeds) throws Exception {
 		
-		
-		
 		CrawlConfig config = CrawlerConfig.getConfig();
 
 		PageFetcher pageFetcher = new PageFetcher(config);
@@ -63,9 +61,9 @@ public class CrawlerLauncher {
 			});
 		}
 
-		//new MessageConsumerGroup(1).start();
+		new MessageConsumerGroup(1).start();
 		
-		new Thread(new MessageConsumer(), "consumer-thread").start();
+		//new Thread(new MessageConsumer(), "consumer-thread").start();
 		
 		QueueMoniter.startMoniter();
 		

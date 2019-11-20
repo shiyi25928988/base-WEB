@@ -18,9 +18,9 @@ public class CommandLineOptions {
 	private static final boolean notHasArgs = false;
 	
 	static {
-		options.addOption(new Option("h", OPT_HELP, notHasArgs, "Helper."));
-		options.addOption(new Option("a", OPT_ADDRESS, hasArg, "The target web sit host address."));
-		options.addOption(new Option("f", OPT_FOLDER, hasArg, "The crawled files store folder path."));
+		options.addOption("h", OPT_HELP, notHasArgs, "Helper.");
+		options.addRequiredOption("a", OPT_ADDRESS, hasArg, "The target web sit host address.");
+		//options.addOption("f", OPT_FOLDER, hasArg, "The crawled files store folder path.");
 		//..... add options here
 	}
 	

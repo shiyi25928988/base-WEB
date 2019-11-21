@@ -6,6 +6,8 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Objects;
 
+import javax.print.DocFlavor.URL;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -68,15 +70,10 @@ public class Main {
 	 * @return
 	 * @throws IOException
 	 */
-	private static boolean isAddressReacheable(String host) throws IOException {
-		String addr = host;
-		if(host.startsWith("http")) {
-			addr = host.substring(host.indexOf("//") + 2);
-		}
-		if(addr.contains("/")) {
-			addr = addr.substring(addr.indexOf("/") + 1);
-		}
-		InetAddress address = InetAddress.getByName(addr);
+	private static boolean isAddressReacheable(String addr) throws IOException {
+		java.net.URL url = new java.net.URL(addr);
+		String host = url.getHost();
+		InetAddress address = InetAddress.getByName(host);
 		return address.isReachable(500);
 	}
 }

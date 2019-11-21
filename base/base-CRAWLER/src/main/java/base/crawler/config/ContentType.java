@@ -2,6 +2,7 @@ package base.crawler.config;
 
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import base.crawler.exceptions.ExtendTypeNotFoundException;
 
@@ -11,7 +12,7 @@ import base.crawler.exceptions.ExtendTypeNotFoundException;
  */
 public abstract class ContentType {
 	
-	private static Map<String, String> typeMap = new Hashtable<>();
+	private static Map<String, String> typeMap = new ConcurrentHashMap<>();
 	
 	static {
 		typeMap.put("audio/aac", ".aac");
@@ -65,6 +66,8 @@ public abstract class ContentType {
 		typeMap.put("text/javascript", ".js");
 		
 		typeMap.put("application/javascript", ".js");
+		
+		typeMap.put("application/x-javascript", ".js");
 		
 		typeMap.put("application/json", ".json");
 		
@@ -166,9 +169,17 @@ public abstract class ContentType {
 	 * @throws ExtendTypeNotFoundException 
 	 */
 	public static String getExtend(String contentType) throws ExtendTypeNotFoundException {
-		if(!typeMap.containsKey(contentType))
+		
+		var temp = contentType.toLowerCase();
+		
+		if(temp.contains(";")) {
+			temp = temp.substring(0, temp.indexOf(';'));
+		}
+		
+		if(!typeMap.containsKey(temp))
 			throw new ExtendTypeNotFoundException(contentType + " not specified the extend type.");
-		return typeMap.get(contentType);
+		return typeMap.get(temp);
+		
 	}
-
+	
 }

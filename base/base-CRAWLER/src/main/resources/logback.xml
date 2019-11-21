@@ -1,5 +1,4 @@
 <configuration debug="false">
-
 	<contextName>crawler</contextName>
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">

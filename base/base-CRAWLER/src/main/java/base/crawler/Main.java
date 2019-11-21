@@ -44,7 +44,7 @@ public class Main {
 			
 			String[] addresses = cmd.getOptionValues(CommandLineOptions.OPT_ADDRESS);
 			
-			if(Objects.nonNull(addresses)) {
+			if(Objects.nonNull(addresses) && addresses.length > 0) {
 				Arrays.stream(addresses).forEach(a ->{
 					try {
 						if (isAddressReacheable(a)) {
@@ -74,6 +74,6 @@ public class Main {
 		java.net.URL url = new java.net.URL(addr);
 		String host = url.getHost();
 		InetAddress address = InetAddress.getByName(host);
-		return address.isReachable(500);
+		return address.isReachable(500);//500ms
 	}
 }

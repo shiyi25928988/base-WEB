@@ -17,7 +17,6 @@
 		<module>base-CRAWLER</module>
 		<module>base-CLI</module>
 		<module>base-WICKET</module>
-		<module>base-NEUROPH</module>
 		<module>base-COMMON</module>
 	</modules>
 

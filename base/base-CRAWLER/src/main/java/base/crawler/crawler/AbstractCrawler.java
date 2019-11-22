@@ -45,6 +45,8 @@ public abstract class AbstractCrawler extends WebCrawler {
 		if(page.getStatusCode() != 200) return; // return if http status code is not 200 OK
 		
 		var url = page.getWebURL().getURL();
+		log.info("visiting : " + url);
+		
 		var name = url.substring(url.lastIndexOf('/') + 1);
 		if(Strings.isNullOrEmpty(name)) {
 			name = "index";
@@ -52,7 +54,7 @@ public abstract class AbstractCrawler extends WebCrawler {
 		
 		var extension = "";
 
-		log.error("page type : " + page.getContentType());
+		log.info("page type : " + page.getContentType());
 		try {
 			extension = ContentType.getExtend(page.getContentType().trim());
 		} catch (ExtendTypeNotFoundException e1) {

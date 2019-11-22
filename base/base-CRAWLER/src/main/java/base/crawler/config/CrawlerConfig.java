@@ -18,50 +18,50 @@ public class CrawlerConfig extends CrawlConfig{
 	
 	private static final DnsResolver dnsResolver = new SystemDefaultDnsResolver();
 	
-	private static String crawlStorageFolder = System.getProperty("user.dir"); 
+	public static String crawlStorageFolder = System.getProperty("user.dir"); 
 	
-	private static Boolean resumableCrawling = false;
+	public static Boolean resumableCrawling = false;
 	
-	private static Integer maxDepthOfCrawling = -1;
+	public static Integer maxDepthOfCrawling = -1;
 	
-	private static Integer maxPagesToFetch = -1;
+	public static Integer maxPagesToFetch = -1;
 	
-	private static String userAgentString = HttpHeader.VALUE_USER_AGENT;
+	public static String userAgentString = HttpHeader.VALUE_USER_AGENT;
 	
-	private static Collection<? extends Header> defaultHeaders = HttpHeader.getHeaders();
+	public static Collection<? extends Header> defaultHeaders = HttpHeader.getHeaders();
 	
-	private static Integer politenessDelay = 1000; // milliseconds delay between request 
+	public static Integer politenessDelay = 1000; // milliseconds delay between request 
 	
-	private static Boolean includeHttpsPages = true;
+	public static Boolean includeHttpsPages = true;
 	
-	private static Boolean includeBinaryContentInCrawling = true; //fetch binary content e.g image sound
+	public static Boolean includeBinaryContentInCrawling = true; //fetch binary content e.g image sound
 	
-	private static Boolean processBinaryContentInCrawling = false; //using Apache TIKA to parse the binary content
+	public static Boolean processBinaryContentInCrawling = false; //using Apache TIKA to parse the binary content
 	
-	private static Integer maxConnectionsPerHost = 16;
+	public static Integer maxConnectionsPerHost = 16;
 	
-	private static Integer maxTotalConnections = 1024;
+	public static Integer maxTotalConnections = 1024;
 	
-	private static Integer socketTimeout = 10 * 1000; //10 seconds
+	public static Integer socketTimeout = 10 * 1000; //10 seconds
 	
-	private static Integer connectionTimeout = 60 * 1000; //60 second
+	public static Integer connectionTimeout = 60 * 1000; //60 second
 	
-	private static Integer maxOutgoingLinksToFollow = Integer.MAX_VALUE;//-1;
+	public static Integer maxOutgoingLinksToFollow = Integer.MAX_VALUE;//-1;
 	
-	private static Integer maxDownloadSize = 1024 * 1024 * 100; //100M
+	public static Integer maxDownloadSize = 1024 * 1024 * 100; //100M
 	
-	private static Boolean followRedirects = true; 
+	public static Boolean followRedirects = true; 
 	
-	private static Boolean shutdownOnEmptyQueue = true;
+	public static Boolean shutdownOnEmptyQueue = true;
 	
-	private static Boolean onlineTldListUpdate = false; //update Top-level Domain
+	public static Boolean onlineTldListUpdate = false; //update Top-level Domain
 	
-	private static String ProxyHost; //if crawler need behind a proxy
-	private static Integer proxyPort;
-	private static String proxyUsername;
-	private static String proxyPassword;
+	public static String ProxyHost; //if crawler need behind a proxy
+	public static Integer proxyPort;
+	public static String proxyUsername;
+	public static String proxyPassword;
 	
-	private static List<AuthInfo> authInfos;
+	public static List<AuthInfo> authInfos;
 	
 	private static volatile CrawlConfig config;
 	

@@ -14,7 +14,7 @@ public class CommandLineOptions {
 	public static final String OPT_ADDRESS = "address";
 	public static final String OPT_ROBOT = "robot";
 	public static final String OPT_DEPTH = "depth";
-	public static final String OPT_CRAWLER_THREAD = "thread";
+	public static final String OPT_CRAWLER_NUM = "number";
 	
 	public static final String OPT_AUTHTYPE = "auth";
 	public static final String OPT_USER = "user";
@@ -34,12 +34,12 @@ public class CommandLineOptions {
 				  "If enable robot.txt protocol with specified User-Agent.  " + System.lineSeparator()
 				+ "e.g. 'Googlebot' 'Baiduspider' 'Bingbot' 'Yahoo! Slurp' 'Pinterestbot'");
 		
-		options.addOption("t", OPT_CRAWLER_THREAD, hasArg, "The number of crawler thread.");
+		options.addOption("n", OPT_CRAWLER_NUM, hasArg, "The number of crawlers.");
 		
-		options.addOption("au", OPT_AUTHTYPE, hasArg, "Web site auth type : " + System.lineSeparator()
-													+ "1.Basic Auth " + System.lineSeparator()
-				                                    + "2.Form Auth " + System.lineSeparator()
-				                                    + "3.Windows Domain Auth");
+//		options.addOption("au", OPT_AUTHTYPE, hasArg, "Web site auth type : " + System.lineSeparator()
+//													+ "1.Basic Auth " + System.lineSeparator()
+//				                                    + "2.Form Auth " + System.lineSeparator()
+//				                                    + "3.Windows Domain Auth");
 		//..... add options here
 	}
 	

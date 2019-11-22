@@ -1,4 +1,4 @@
-package base.crawler.crawler;
+package base.crawler.cli;
 
 public class CrawledHostList {
 

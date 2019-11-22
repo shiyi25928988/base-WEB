@@ -3,6 +3,7 @@ package base.crawler;
 import java.util.Arrays;
 import java.util.Objects;
 
+import base.crawler.cli.GlobalVars;
 import base.crawler.config.CrawlerConfig;
 import base.crawler.config.CrawlerConstants;
 import base.crawler.config.QueueMoniter;
@@ -26,7 +27,7 @@ public class CrawlerLauncher {
 	 * @throws Exception
 	 */
 	public static void start(Class<? extends AbstractCrawler> clazz, String...seeds) throws Exception {
-		start(clazz, CrawlerConstants.NUMBER_OF_CRAWLERS, seeds);
+		start(clazz, GlobalVars.crawlerNumber, seeds);
 	}
 
 	/**
@@ -45,9 +46,9 @@ public class CrawlerLauncher {
 		
 		robotstxtConfig.setIgnoreUADiscrimination(true);
 		
-		robotstxtConfig.setUserAgentName("Googlebot");
+		robotstxtConfig.setUserAgentName(GlobalVars.robotUserAgent);
 		
-	    robotstxtConfig.setEnabled(false);// enable the Robots protocols 
+	    robotstxtConfig.setEnabled(GlobalVars.isRobotTxtEnabled);// enable the Robots protocols 
 		
 		RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
 

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 
 /**
  * @author yshi
@@ -18,10 +17,13 @@ public abstract class IOUtils {
 	 * @param fileName
 	 */
 	public static void writeFile(byte[] content, String dir, String fileName) {
+		
+		System.out.println(dir);
+		System.out.println(fileName);
 		var f = new File(dir);
 		f.setWritable(true);
 		if (!f.exists()) {
-			f.mkdir();
+			f.mkdirs();
 		}
 
 		String filePath;
@@ -30,7 +32,7 @@ public abstract class IOUtils {
 		} else {
 			filePath = dir + File.separator + fileName;
 		}
-
+		System.out.println(filePath);
 		try (var fileOutputStream = new FileOutputStream(filePath, true);
 				var fileChannel = fileOutputStream.getChannel()) {
 			ByteBuffer byteBuff = ByteBuffer.wrap(content);
@@ -52,4 +54,5 @@ public abstract class IOUtils {
 		writeFile(content.getBytes(), dir, fileName);
 
 	}
+	
 }

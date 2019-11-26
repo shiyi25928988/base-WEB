@@ -1,14 +1,14 @@
-package base.crawler;
+package base.crawler.guice;
 
 import com.google.inject.AbstractModule;
 
-import base.crawler.guice.CrawlerService;
-import base.crawler.guice.CrawlerServiceImpl;
+import cache.base.module.CacheModule;
 
 public class CrawlerModule extends AbstractModule {
 	
 	@Override
 	protected void configure() {
+		install(new CacheModule());
 		bind(CrawlerService.class).to(CrawlerServiceImpl.class);
 	}
 }

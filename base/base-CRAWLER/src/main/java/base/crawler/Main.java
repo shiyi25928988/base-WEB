@@ -2,11 +2,8 @@ package base.crawler;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Objects;
-
-import javax.print.DocFlavor.URL;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -21,6 +18,7 @@ import base.crawler.cli.CommandLineOptions;
 import base.crawler.cli.GlobalVars;
 import base.crawler.config.CrawlerConfig;
 import base.crawler.crawler.EveryThingCrawler;
+import base.crawler.guice.CrawlerModule;
 import base.crawler.guice.CrawlerService;
 import lombok.extern.slf4j.Slf4j;
 

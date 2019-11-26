@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import base.crawler.cli.GlobalVars;
 import base.crawler.config.CrawlerConfig;
-import base.crawler.config.CrawlerConstants;
 import base.crawler.config.QueueMoniter;
 import base.crawler.crawler.AbstractCrawler;
 import base.crawler.exceptions.InvalidSeedException;

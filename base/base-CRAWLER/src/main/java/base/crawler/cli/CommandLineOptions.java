@@ -15,6 +15,7 @@ public class CommandLineOptions {
 	public static final String OPT_ROBOT = "robot";
 	public static final String OPT_DEPTH = "depth";
 	public static final String OPT_CRAWLER_NUM = "number";
+	public static final String OPT_TIME_INTERVAL = "time-interval";
 	
 	public static final String OPT_AUTHTYPE = "auth";
 	public static final String OPT_USER = "user";
@@ -33,8 +34,8 @@ public class CommandLineOptions {
 		options.addOption("r", OPT_ROBOT, hasArg, 
 				  "If enable robot.txt protocol with specified User-Agent.  " + System.lineSeparator()
 				+ "e.g. 'Googlebot' 'Baiduspider' 'Bingbot' 'Yahoo! Slurp' 'Pinterestbot'");
-		
 		options.addOption("n", OPT_CRAWLER_NUM, hasArg, "The number of crawlers.");
+		options.addOption("ti", OPT_TIME_INTERVAL, hasArg, "Time interval(ms) between each http request .");
 		
 //		options.addOption("au", OPT_AUTHTYPE, hasArg, "Web site auth type : " + System.lineSeparator()
 //													+ "1.Basic Auth " + System.lineSeparator()

@@ -14,10 +14,14 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 import base.crawler.cli.CommandLineOptions;
 import base.crawler.cli.GlobalVars;
 import base.crawler.config.CrawlerConfig;
 import base.crawler.crawler.EveryThingCrawler;
+import base.crawler.guice.CrawlerService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -37,7 +41,9 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String... args) {
-
+		
+		Injector injector = Guice.createInjector(new CrawlerModule());
+		CrawlerService service = injector.getInstance(CrawlerService.class);
 		try {
 			CommandLine cmd = parser.parse(CommandLineOptions.getOptions(), args);
 			
@@ -60,6 +66,11 @@ public class Main {
 			/** --crawler number */
 			if (cmd.hasOption(CommandLineOptions.OPT_CRAWLER_NUM)) {
 				GlobalVars.crawlerNumber = Integer.parseInt(cmd.getOptionValue(CommandLineOptions.OPT_CRAWLER_NUM));
+			}
+			
+			/** --time-interval */
+			if (cmd.hasOption(CommandLineOptions.OPT_TIME_INTERVAL)) {
+				CrawlerConfig.politenessDelay = Integer.parseInt(cmd.getOptionValue(CommandLineOptions.OPT_TIME_INTERVAL));
 			}
 			
 			/** --address */

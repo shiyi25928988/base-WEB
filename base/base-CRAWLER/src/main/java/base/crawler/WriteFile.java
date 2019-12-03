@@ -21,8 +21,6 @@ public abstract class WriteFile {
 		
 		var extension = result.getExtension();
 		
-		var url = result.getUrl();
-		
 		var realPath = CrawlerConstants.CURRENT_PATH + File.separator + result.getRootFolder() + result.getFileName().substring(0, result.getFileName().lastIndexOf("/")).replace("/", File.separator);
 
 		var fileName = result.getFileName().substring(result.getFileName().lastIndexOf("/") + 1);

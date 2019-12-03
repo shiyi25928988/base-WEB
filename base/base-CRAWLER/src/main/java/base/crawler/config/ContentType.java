@@ -1,15 +1,16 @@
 package base.crawler.config;
 
-import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import base.crawler.exceptions.ExtendTypeNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  * https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
  */
+@Slf4j
 public abstract class ContentType {
 	
 	private static Map<String, String> typeMap = new ConcurrentHashMap<>();
@@ -180,6 +181,24 @@ public abstract class ContentType {
 			throw new ExtendTypeNotFoundException(contentType + " not specified the extend type.");
 		return typeMap.get(temp);
 		
+	}
+	
+	/**
+	 * @param contentType
+	 * @return
+	 */
+	public static String getCharSet(String contentType) {
+		String cs = "utf-8";
+		var temp = contentType.toLowerCase();
+		if(temp.contains(";")) {
+			String args[] = temp.split(";");
+			for(String arg : args) {
+				if(arg.trim().startsWith("charset=")) {
+					cs = arg.trim().substring(8);
+				}
+			}
+		}
+		return cs;
 	}
 	
 }

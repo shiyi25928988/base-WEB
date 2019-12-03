@@ -19,6 +19,7 @@ public class CrawlResults {
 	public ResultType type;
 	public String rootFolder;
 	public String protocol;
+	public String charSet;
 	
 	public CrawlResults() {}
 	

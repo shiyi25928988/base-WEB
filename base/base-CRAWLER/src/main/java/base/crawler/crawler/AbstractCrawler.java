@@ -48,12 +48,12 @@ public abstract class AbstractCrawler extends WebCrawler {
 		var url = page.getWebURL().getURL();
 		var rootFolder = "";
 		var fileName = "";
-		var rotocol = "";
+		var protocol = "";
 		try {
 			java.net.URL urlObj = new java.net.URL(url);
 			rootFolder = urlObj.getHost();
 			fileName = urlObj.getFile();
-			rotocol = urlObj.getProtocol();
+			protocol = urlObj.getProtocol();
 		} catch (MalformedURLException e2) {
 			e2.printStackTrace();
 		}
@@ -63,6 +63,7 @@ public abstract class AbstractCrawler extends WebCrawler {
 		}
 		
 		var extension = "";
+		var charSet = "UTF-8";
 		
 		try {
 			extension = ContentType.getExtend(page.getContentType().trim());
@@ -70,6 +71,7 @@ public abstract class AbstractCrawler extends WebCrawler {
 			log.error(e1.getMessage());
 			extension = ".txt";
 		}
+		charSet = ContentType.getCharSet(page.getContentType());
 		
 		if(fileName.endsWith(extension)) {
 			fileName = fileName.replaceFirst(extension, "");
@@ -81,7 +83,7 @@ public abstract class AbstractCrawler extends WebCrawler {
 			var htmlParseData = (HtmlParseData) page.getParseData();
 			var content = htmlParseData.getHtml();
 			try {
-				queue.put(new CrawlResults(url, fileName ,content.getBytes(), extension, CrawlResults.ResultType.Html, rootFolder, rotocol));
+				queue.put(new CrawlResults(url, fileName ,content.getBytes(), extension, CrawlResults.ResultType.Html, rootFolder, protocol, charSet));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -89,14 +91,14 @@ public abstract class AbstractCrawler extends WebCrawler {
 			var textParseData = (TextParseData) page.getParseData();
 			var content = textParseData.getTextContent();
 			try {
-				queue.put(new CrawlResults(url, fileName, content.getBytes(), extension, CrawlResults.ResultType.Text, rootFolder, rotocol));
+				queue.put(new CrawlResults(url, fileName, content.getBytes(), extension, CrawlResults.ResultType.Text, rootFolder, protocol, charSet));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		} else if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.BinaryParseData) {
 			var content = page.getContentData();
 			try {
-				queue.put(new CrawlResults(url, fileName, content, extension, CrawlResults.ResultType.Binary, rootFolder, rotocol));
+				queue.put(new CrawlResults(url, fileName, content, extension, CrawlResults.ResultType.Binary, rootFolder, protocol, charSet));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

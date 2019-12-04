@@ -29,7 +29,7 @@ public abstract class WriteFile {
 		
 		var content = result.getContent();
 
-		IOUtils.writeFile(content, realPath, fileName + extension);
+		IOUtils.writeBinaryFile(content, realPath, fileName + extension);
 	}
 
 }

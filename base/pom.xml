@@ -18,6 +18,7 @@
 		<module>base-CLI</module>
 		<module>base-WICKET</module>
 		<module>base-COMMON</module>
+		<module>base-NEUROPH</module>
 	</modules>
 
 	<properties>

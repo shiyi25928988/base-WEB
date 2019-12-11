@@ -43,7 +43,7 @@ public class DataSourceModule extends MyBatisModule {
 	}
 	
 	/**
-	 * bind service
+	 * configure bind services
 	 */
 	private void bindService() {
 		bind(UserService.class).to(UserServiceImpl.class);

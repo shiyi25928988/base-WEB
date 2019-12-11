@@ -10,8 +10,10 @@ import com.google.inject.Inject;
 import db.base.entity.User;
 import db.base.mapper.UserMapper;
 
-
-
+/**
+ * @author yshi
+ *
+ */
 public class UserServiceImpl implements UserService{
 
     private UserMapper userMapper;

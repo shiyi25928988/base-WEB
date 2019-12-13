@@ -1,5 +1,5 @@
 package base.crawler.guice;
 
 public interface CrawlerService {
-	void start(String...args);
+	void start(String...args) throws Exception;
 }

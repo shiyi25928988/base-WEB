@@ -45,7 +45,7 @@ public class CrawlerLauncher {
 		
 		robotstxtConfig.setIgnoreUADiscrimination(true);
 		
-		robotstxtConfig.setUserAgentName(GlobalVars.robotUserAgent);
+		robotstxtConfig.setUserAgentName(GlobalVars.robotUserAgent);//set user agent
 		
 	    robotstxtConfig.setEnabled(GlobalVars.isRobotTxtEnabled);// enable the Robots protocols 
 		

@@ -1,5 +1,6 @@
 package base.crawler.config;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,11 +10,13 @@ import org.apache.http.impl.conn.SystemDefaultDnsResolver;
 
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.authentication.AuthInfo;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yshi
  *
  */
+@Slf4j
 public class CrawlerConfig extends CrawlConfig{
 	
 	private static final DnsResolver dnsResolver = new SystemDefaultDnsResolver();
@@ -61,7 +64,7 @@ public class CrawlerConfig extends CrawlConfig{
 	public static String proxyUsername;
 	public static String proxyPassword;
 	
-	public static List<AuthInfo> authInfos;
+	public static List<AuthInfo> authInfos = new ArrayList<>();
 	
 	private static volatile CrawlConfig config;
 	
@@ -81,6 +84,9 @@ public class CrawlerConfig extends CrawlConfig{
 	 * @param config
 	 */
 	private static void initConfig(final CrawlConfig config){
+		
+		log.info("init crawler config");
+		
 		config.setDnsResolver(dnsResolver);
 		config.setDefaultHeaders(defaultHeaders);
 		config.setConnectionTimeout(connectionTimeout);
@@ -107,5 +113,10 @@ public class CrawlerConfig extends CrawlConfig{
 	
 	public static CrawlConfig getConfig() {
 		return config;
+	}
+	
+	public static void setAuth(AuthInfo authInfo) {
+		authInfos.add(authInfo);
+		config.setAuthInfos(authInfos);
 	}
 }

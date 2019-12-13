@@ -21,7 +21,12 @@ public class Main {
 	public static void main(String... args) {
 		Injector injector = Guice.createInjector(new CrawlerModule());
 		CrawlerService service = injector.getInstance(CrawlerService.class);
-		service.start(args);
+		try {
+			service.start(args);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

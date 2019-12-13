@@ -17,9 +17,11 @@ public class CommandLineOptions {
 	public static final String OPT_CRAWLER_NUM = "number";
 	public static final String OPT_TIME_INTERVAL = "time-interval";
 	
-	public static final String OPT_AUTHTYPE = "auth";
-	public static final String OPT_USER = "user";
+	public static final String OPT_AUTHURL = "auth-url";
+	public static final String OPT_USERNAME = "user-name";
 	public static final String OPT_PASSWD = "password";
+	public static final String OPT_USERNAME_ELEMENT = "user-name-element";
+	public static final String OPT_PASSWD_ELEMENT = "password-element";
 	
 	
 	
@@ -37,10 +39,11 @@ public class CommandLineOptions {
 		options.addOption("n", OPT_CRAWLER_NUM, hasArg, "The number of crawlers.");
 		options.addOption("ti", OPT_TIME_INTERVAL, hasArg, "Time interval(ms) between each http request .");
 		
-//		options.addOption("au", OPT_AUTHTYPE, hasArg, "Web site auth type : " + System.lineSeparator()
-//													+ "1.Basic Auth " + System.lineSeparator()
-//				                                    + "2.Form Auth " + System.lineSeparator()
-//				                                    + "3.Windows Domain Auth");
+		options.addOption("al", OPT_AUTHURL, hasArg, "Login page url.");
+		options.addOption("au", OPT_USERNAME, hasArg, "Login user name.");
+		options.addOption("ap", OPT_PASSWD, hasArg, "Login password.");
+		options.addOption("aue", OPT_USERNAME_ELEMENT, hasArg, "Login user name input element's name attr");
+		options.addOption("ape", OPT_PASSWD_ELEMENT, hasArg, "Login password element's name attr");
 		//..... add options here
 	}
 	

@@ -61,9 +61,7 @@ public class CrawlerLauncher {
 			});
 		}
 
-		new MessageConsumerGroup(1).start();
-		
-		//new Thread(new MessageConsumer(), "consumer-thread").start();
+		new MessageConsumerGroup(8).start();
 		
 		QueueMoniter.startMoniter();
 		

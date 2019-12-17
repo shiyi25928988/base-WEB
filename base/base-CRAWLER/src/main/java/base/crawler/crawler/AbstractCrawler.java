@@ -4,8 +4,6 @@ import java.net.MalformedURLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.regex.Pattern;
 
-import com.google.common.base.Strings;
-
 import base.crawler.CrawlResults;
 import base.crawler.config.ContentType;
 import base.crawler.config.QueueHolder;
@@ -24,8 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AbstractCrawler extends WebCrawler {
 	
-	private static final String domainSuffixReg = ".(com|net|org|cn|edu|gov|top|info|xxx|idv|name|coop|museum|aero|pro|biz|int|xyz|co|mobi|club|rec|asia|travel|vip|win|fun).";
-
 	BlockingQueue<CrawlResults> queue = QueueHolder.getQuene();
 
 	/**

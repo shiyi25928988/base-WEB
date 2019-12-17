@@ -28,7 +28,6 @@ public class MessageConsumer implements Runnable {
 			try {
 				results = this.queue.take();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				log.error(e.toString());
 				continue;

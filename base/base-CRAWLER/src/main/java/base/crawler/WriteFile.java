@@ -3,6 +3,8 @@ package base.crawler;
 import java.io.File;
 import java.util.regex.Pattern;
 
+import com.google.common.net.UrlEscapers;
+
 import base.crawler.config.CrawlerConstants;
 import base.io.IOUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -21,15 +23,6 @@ public abstract class WriteFile {
 	 */
 	public static void writeResult(CrawlResults result) {
 
-		switch (result.getType()) {
-		case Html:
-		case Text:
-			break;
-		case Binary:
-			break;
-			default:
-		}
-
 		var extension = result.getExtension();
 
 		var realPath = CrawlerConstants.CURRENT_PATH + File.separator + result.getRootFolder()
@@ -37,6 +30,8 @@ public abstract class WriteFile {
 
 		var fileName = result.getFileName().substring(result.getFileName().lastIndexOf("/") + 1);
 
+		fileName = UrlEscapers.urlPathSegmentEscaper().escape(fileName);
+		
 		fileName = filePattern.matcher(fileName).replaceAll("_");
 
 		var content = result.getContent();

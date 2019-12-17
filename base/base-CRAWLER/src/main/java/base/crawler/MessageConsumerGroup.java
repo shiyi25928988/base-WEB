@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
+import base.crawler.exceptions.ConsumerThreadExceptionHandler;
+
 /**
  * @author yshi
  *
@@ -39,10 +41,14 @@ public class MessageConsumerGroup {
 			consumers.add(new MessageConsumer());
 		}
 		
-		executor = Executors.newFixedThreadPool(this.messageConsumerCount, new ThreadFactory() {
+		executor = Executors.newCachedThreadPool(new ThreadFactory() {
+			
 			@Override
 			public Thread newThread(Runnable r) {
-				return new Thread(new ThreadGroup("CONSUMER-THREAD"), r);
+				
+				Thread thread = new Thread(new ThreadGroup("CONSUMER-THREAD"), r);
+				thread.setUncaughtExceptionHandler(new ConsumerThreadExceptionHandler(executor));
+				return thread;
 			}
 			
 		});

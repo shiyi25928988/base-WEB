@@ -1,9 +1,5 @@
 package base.crawler.cli;
 
-import java.io.File;
-
-import org.apache.commons.cli.Option;
-
 /**
  * @author yshi
  *
@@ -22,7 +18,6 @@ public class CommandLineOptions {
 	public static final String OPT_PASSWD = "password";
 	public static final String OPT_USERNAME_ELEMENT = "user-name-element";
 	public static final String OPT_PASSWD_ELEMENT = "password-element";
-	
 	
 	
 	private static final org.apache.commons.cli.Options options = new org.apache.commons.cli.Options();

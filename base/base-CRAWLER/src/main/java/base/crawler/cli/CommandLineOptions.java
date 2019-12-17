@@ -19,6 +19,7 @@ public class CommandLineOptions {
 	public static final String OPT_USERNAME_ELEMENT = "user-name-element";
 	public static final String OPT_PASSWD_ELEMENT = "password-element";
 	
+	public static final String OPT_FILE_FILTER = "file-type-filter";
 	
 	private static final org.apache.commons.cli.Options options = new org.apache.commons.cli.Options();
 	private static final boolean hasArg = true;
@@ -39,6 +40,7 @@ public class CommandLineOptions {
 		options.addOption("ap", OPT_PASSWD, hasArg, "Login password.");
 		options.addOption("aue", OPT_USERNAME_ELEMENT, hasArg, "Login user name input element's name attr");
 		options.addOption("ape", OPT_PASSWD_ELEMENT, hasArg, "Login password element's name attr");
+		options.addOption("type", OPT_FILE_FILTER, hasArg, "Only keep the specified extend type filter, e.g exe, gif, jpg, pdf");
 		//..... add options here
 	}
 	

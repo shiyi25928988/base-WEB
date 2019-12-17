@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import base.crawler.CrawlResults;
 import base.crawler.config.ContentType;
+import base.crawler.config.ExtendTypeFilter;
 import base.crawler.config.QueueHolder;
 import base.crawler.exceptions.ExtendTypeNotFoundException;
 import edu.uci.ics.crawler4j.crawler.Page;
@@ -63,6 +64,11 @@ public abstract class AbstractCrawler extends WebCrawler {
 		
 		try {
 			extension = ContentType.getExtend(page.getContentType().trim());
+			
+			if(ExtendTypeFilter.isNotMatch(extension)) {
+				return;
+			}
+			
 		} catch (ExtendTypeNotFoundException e1) {
 			log.error(e1.getMessage());
 			extension = ".txt";

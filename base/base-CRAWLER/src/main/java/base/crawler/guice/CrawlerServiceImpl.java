@@ -15,6 +15,7 @@ import base.crawler.CrawlerLauncher;
 import base.crawler.cli.CommandLineOptions;
 import base.crawler.cli.GlobalVars;
 import base.crawler.config.CrawlerConfig;
+import base.crawler.config.ExtendTypeFilter;
 import base.crawler.crawler.EveryThingCrawler;
 import base.crawler.exceptions.AuthInfoInvalidException;
 import edu.uci.ics.crawler4j.crawler.authentication.AuthInfo;
@@ -63,6 +64,11 @@ public class CrawlerServiceImpl implements CrawlerService {
 				CrawlerConfig.politenessDelay = Integer
 						.parseInt(cmd.getOptionValue(CommandLineOptions.OPT_TIME_INTERVAL));
 			}
+			
+			/** --file filter */
+			if (cmd.hasOption(CommandLineOptions.OPT_FILE_FILTER)) {
+				ExtendTypeFilter.setType(cmd.getOptionValue(CommandLineOptions.OPT_FILE_FILTER));
+			}
 
 			/** form authentication */
 			if (cmd.hasOption(CommandLineOptions.OPT_AUTHURL)) {
@@ -93,7 +99,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 					}
 					
 				} else {
-					throw new AuthInfoInvalidException();
+					throw new AuthInfoInvalidException("Invalid authentication parameter.");
 				}
 			}
 

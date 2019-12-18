@@ -1,6 +1,10 @@
 package base.crawler.cli;
 
+import java.io.File;
+
 public abstract class GlobalVars {
+	
+	public static final String CURRENT_PATH = System.getProperty("user.dir") + File.separator + "crawl" ; 
 
 	public static boolean isRobotTxtEnabled = false;
 	

@@ -9,6 +9,9 @@ import java.net.InetAddress;
  */
 public class CrawlerUtils {
 	
+	/**
+	 * CONNECTION_TIMEOUT
+	 */
 	private static final int CONNECTION_TIMEOUT = 500;
 	
 	/**

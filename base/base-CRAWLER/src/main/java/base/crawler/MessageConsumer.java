@@ -16,15 +16,16 @@ public class MessageConsumer implements Runnable {
 	BlockingQueue<CrawlResults> queue = QueueHolder.getQuene();
 
 	private AtomicBoolean stop = new AtomicBoolean(false);
-	
+
 	/**
 	 *
 	 */
+	@Override
 	public void run() {
 		
+		CrawlResults results;
+		
 		for(;;){
-
-			CrawlResults results;
 			try {
 				results = this.queue.take();
 			} catch (InterruptedException e) {

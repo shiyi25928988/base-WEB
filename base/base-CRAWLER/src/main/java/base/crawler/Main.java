@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 
 import base.crawler.guice.CrawlerModule;
 import base.crawler.guice.CrawlerService;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Entry class
@@ -12,6 +13,7 @@ import base.crawler.guice.CrawlerService;
  * @author yshi
  *
  */
+@Slf4j
 public class Main {
 
 
@@ -24,8 +26,7 @@ public class Main {
 		try {
 			service.start(args);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 	}
 

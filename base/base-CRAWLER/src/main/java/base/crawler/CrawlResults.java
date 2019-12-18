@@ -2,6 +2,7 @@ package base.crawler;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CrawlResults {
 	public String url;
 	public String fileName;
@@ -20,8 +22,6 @@ public class CrawlResults {
 	public String rootFolder;
 	public String protocol;
 	public String charSet;
-	
-	public CrawlResults() {}
 	
 	public enum ResultType{
 		Html,

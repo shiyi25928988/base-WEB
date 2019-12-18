@@ -13,13 +13,13 @@ public class CommandLineOptions {
 	public static final String OPT_CRAWLER_NUM = "number";
 	public static final String OPT_TIME_INTERVAL = "time-interval";
 	
-	public static final String OPT_AUTHURL = "auth-url";
-	public static final String OPT_USERNAME = "user-name";
+	public static final String OPT_AUTHURL = "loginurl";
+	public static final String OPT_USERNAME = "username";
 	public static final String OPT_PASSWD = "password";
-	public static final String OPT_USERNAME_ELEMENT = "user-name-element";
-	public static final String OPT_PASSWD_ELEMENT = "password-element";
+	public static final String OPT_USERNAME_ELEMENT = "username-element-name";
+	public static final String OPT_PASSWD_ELEMENT = "password-element-name";
 	
-	public static final String OPT_FILE_FILTER = "file-type-filter";
+	public static final String OPT_FILE_FILTER = "type-filter";
 	
 	private static final org.apache.commons.cli.Options options = new org.apache.commons.cli.Options();
 	private static final boolean hasArg = true;
@@ -35,15 +35,18 @@ public class CommandLineOptions {
 		options.addOption("n", OPT_CRAWLER_NUM, hasArg, "The number of crawlers.");
 		options.addOption("ti", OPT_TIME_INTERVAL, hasArg, "Time interval(ms) between each http request .");
 		
-		options.addOption("al", OPT_AUTHURL, hasArg, "Login page url.");
-		options.addOption("au", OPT_USERNAME, hasArg, "Login user name.");
-		options.addOption("ap", OPT_PASSWD, hasArg, "Login password.");
-		options.addOption("aue", OPT_USERNAME_ELEMENT, hasArg, "Login user name input element's name attr");
-		options.addOption("ape", OPT_PASSWD_ELEMENT, hasArg, "Login password element's name attr");
-		options.addOption("type", OPT_FILE_FILTER, hasArg, "Only keep the specified extend type filter, e.g exe, gif, jpg, pdf");
+		options.addOption("l", OPT_AUTHURL, hasArg, "Login page url.");
+		options.addOption("u", OPT_USERNAME, hasArg, "Login user name.");
+		options.addOption("p", OPT_PASSWD, hasArg, "Login password.");
+		options.addOption("ue", OPT_USERNAME_ELEMENT, hasArg, "Login user name input element's name attr");
+		options.addOption("pe", OPT_PASSWD_ELEMENT, hasArg, "Login password element's name attr");
+		options.addOption("t", OPT_FILE_FILTER, hasArg, "Only keep the specified extend type filter, e.g exe, gif, jpg, pdf");
 		//..... add options here
 	}
 	
+	/**
+	 * @return
+	 */
 	public static org.apache.commons.cli.Options getOptions(){
 		return CommandLineOptions.options;
 	}

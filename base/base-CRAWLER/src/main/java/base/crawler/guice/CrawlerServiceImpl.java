@@ -1,7 +1,5 @@
 package base.crawler.guice;
 
-import java.io.IOException;
-import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -12,10 +10,10 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
 
 import base.crawler.CrawlerLauncher;
+import base.crawler.CrawlerUtils;
 import base.crawler.cli.CommandLineOptions;
 import base.crawler.cli.GlobalVars;
 import base.crawler.config.CrawlerConfig;
-import base.crawler.config.ExtendTypeFilter;
 import base.crawler.crawler.EveryThingCrawler;
 import base.crawler.exceptions.AuthInfoInvalidException;
 import edu.uci.ics.crawler4j.crawler.authentication.AuthInfo;
@@ -32,6 +30,8 @@ public class CrawlerServiceImpl implements CrawlerService {
 	private static CommandLineParser parser = new DefaultParser();
 
 	private static HelpFormatter formatter = new HelpFormatter();
+	
+	private static String fileType = "";
 
 	@Override
 	public void start(String... args) throws Exception {
@@ -65,18 +65,13 @@ public class CrawlerServiceImpl implements CrawlerService {
 						.parseInt(cmd.getOptionValue(CommandLineOptions.OPT_TIME_INTERVAL));
 			}
 			
-			/** --file filter */
-			if (cmd.hasOption(CommandLineOptions.OPT_FILE_FILTER)) {
-				ExtendTypeFilter.setType(cmd.getOptionValue(CommandLineOptions.OPT_FILE_FILTER));
-			}
-
 			/** form authentication */
 			if (cmd.hasOption(CommandLineOptions.OPT_AUTHURL)) {
 				String url = cmd.getOptionValue(CommandLineOptions.OPT_AUTHURL);
 				AuthInfo authInfo;
 				//FormAuthInfo 
 				
-				if (isAddressReacheable(url)) {
+				if (CrawlerUtils.isAddressReacheable(url)) {
 					
 					if (cmd.hasOption(CommandLineOptions.OPT_USERNAME)) {//get user name
 						String userName = cmd.getOptionValue(CommandLineOptions.OPT_USERNAME);
@@ -102,18 +97,24 @@ public class CrawlerServiceImpl implements CrawlerService {
 					throw new AuthInfoInvalidException("Invalid authentication parameter.");
 				}
 			}
+			
+			/** --file filter */
+			if (cmd.hasOption(CommandLineOptions.OPT_FILE_FILTER)) {
+				//TODO
+				GlobalVars.targetFileType = cmd.getOptionValue(CommandLineOptions.OPT_FILE_FILTER);
+			}
 
 			/** --address */
 			if (cmd.hasOption(CommandLineOptions.OPT_ADDRESS)) {
 				String[] addresses = cmd.getOptionValues(CommandLineOptions.OPT_ADDRESS);
 
 				if (Objects.nonNull(addresses) && addresses.length > 0) {
-					Arrays.stream(addresses).forEach(a -> {
+					Arrays.stream(addresses).forEach(addr -> {
 						try {
-							if (isAddressReacheable(a)) {
-								CrawlerLauncher.start(EveryThingCrawler.class, a);
+							if (CrawlerUtils.isAddressReacheable(addr)) {
+								CrawlerLauncher.start(EveryThingCrawler.class, addr);
 							} else {
-								log.error(a + "is unReacheable in 500ms");
+								log.error(addr + "is unReacheable.");
 							}
 						} catch (Exception e) {
 							log.error(e.getMessage());
@@ -126,18 +127,5 @@ public class CrawlerServiceImpl implements CrawlerService {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-
-	}
-
-	/**
-	 * @param host
-	 * @return
-	 * @throws IOException
-	 */
-	private boolean isAddressReacheable(String addr) throws IOException {
-		java.net.URL url = new java.net.URL(addr);
-		String host = url.getHost();
-		InetAddress address = InetAddress.getByName(host);
-		return address.isReachable(500);// 500ms
 	}
 }

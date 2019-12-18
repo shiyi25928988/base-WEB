@@ -8,4 +8,6 @@ public abstract class GlobalVars {
 	
 	public static int crawlerNumber = Runtime.getRuntime().availableProcessors();
 	
+	public static String targetFileType = "";
+	
 }

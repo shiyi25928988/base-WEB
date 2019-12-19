@@ -3,6 +3,7 @@ package selenium.base.test;
 import java.io.File;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -34,12 +35,23 @@ public class ChromeTest {
 //
 //		driver.getTitle();
 
-		driver.get("http://www.google.com");
-		WebElement searchForm = driver.findElement(By.tagName("form"));
-		WebElement searchBox = searchForm.findElement(By.name("q"));
-		searchBox.sendKeys("webdriver");
+//		driver.get("http://www.google.com");
+//		WebElement searchForm = driver.findElement(By.tagName("form"));
+//		WebElement searchBox = searchForm.findElement(By.name("q"));
+//		searchBox.sendKeys("webdriver");
+//		
+//		WebElement button  = searchForm.findElement(By.name("btnK"));
+//		button.click();
 		
-		WebElement button  = searchForm.findElement(By.name("btnK"));
-		button.click();
+        //WebDriver driver = new FirefoxDriver();
+        try {
+            // Navigate to Url
+            driver.get("https://google.com");
+
+            // Enter text "q" and perform keyboard action "Enter"
+            driver.findElement(By.name("q")).sendKeys("q" + Keys.ENTER);
+        } finally {
+            driver.quit();
+        }
 	}
 }

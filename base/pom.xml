@@ -19,6 +19,7 @@
 		<module>base-WICKET</module>
 		<module>base-COMMON</module>
 		<module>base-NEUROPH</module>
+		<module>base-SELENIUM</module>
 	</modules>
 
 	<properties>

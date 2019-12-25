@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 import com.google.common.net.UrlEscapers;
 
+import base.common.io.IOUtils;
 import base.crawler.cli.GlobalVars;
-import base.io.IOUtils;
 
 /**
  * @author yshi

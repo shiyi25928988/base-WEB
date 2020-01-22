@@ -1,6 +1,6 @@
 package selenium.base.script;
 
-public interface ICommand<T> {
+public interface ICommand {
 	
 	Result execute();
 }

@@ -24,6 +24,8 @@ public class CommandLineOptions {
 		options.addOption("b", OPT_BROWSER, hasArgs, "Specified which kind of web browser. e.g. chrome");
 		options.addOption("bv", OPT_BROWSER_VERSION, hasArgs, "Browser's version.");
 		
+		options.addOption("s", OPT_SCRIPT, hasArgs, "Specified the script file.");
+		
 	}
 	
 	

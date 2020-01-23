@@ -1,10 +1,14 @@
 package selenium.base.cli;
 
+import java.util.List;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
+
+import selenium.base.script.IScript;
 
 public class CliArgsProcessor {
 
@@ -25,5 +29,10 @@ public class CliArgsProcessor {
 		}
 		
 		
+	}
+	
+	private List<IScript> searchScriptFiles(){
+		
+		return null;
 	}
 }

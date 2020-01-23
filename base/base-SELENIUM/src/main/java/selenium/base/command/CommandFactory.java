@@ -10,25 +10,19 @@ import selenium.base.script.ICommand;
 public class CommandFactory {
 
 	public ICommand buildCommand(CommandType type) {
-		
-		switch (type){
+
+		switch (type) {
 		case CLICK:
-		case CTRL_A:
-			break;
-		case CTRL_C:
-			break;
-		case CTRL_V:
-			break;
-		case F1:
+
 			break;
 		case INPUT:
 			break;
 		case OPEN:
 			break;
 		default:
-			break; 
+			break;
 		}
-		
+
 		return new EmptyCommand();
 	}
 }

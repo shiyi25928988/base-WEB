@@ -2,5 +2,5 @@ package selenium.base.script;
 
 public interface ICommand {
 	
-	Result execute();
+	Result execute(String...args);
 }

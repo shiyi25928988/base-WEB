@@ -10,7 +10,7 @@ import selenium.base.script.Result;
 public class ImportCommand implements ICommand{
 
 	@Override
-	public Result execute() {
+	public Result execute(String... args) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -5,7 +5,8 @@ import selenium.base.script.Result;
 
 public class ClickCommand implements ICommand{
 
-	public Result execute() {
+	@Override
+	public Result execute(String... args) {
 		// TODO Auto-generated method stub
 		return null;
 	}

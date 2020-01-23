@@ -2,6 +2,14 @@ package selenium.base.guice;
 
 import com.google.inject.AbstractModule;
 
-public class SeleniumModule extends AbstractModule{
+/**
+ * @author shiyi
+ *
+ */
+public class SeleniumModule extends AbstractModule {
 
+	@Override
+	protected void configure() {
+		bind(SeleniumExecuteService.class).to(SeleniumExecuteServiceImpl.class);
+	}
 }

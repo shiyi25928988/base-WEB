@@ -10,10 +10,13 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+/**
+ * @author shiyi
+ *
+ */
 public class WebDriverFactory {
 
 	private static WebDriver webDriver;
-
 	
 	public static Optional<WebDriver> getWebDriver(BrowserType type) {
 		

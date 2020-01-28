@@ -29,6 +29,10 @@ public class CliArgsProcessor {
 			GlobleVargs.browserType = cmd.getOptionValue(CommandLineOptions.OPT_BROWSER);
 		}
 		
+		if (cmd.hasOption(CommandLineOptions.OPT_SCRIPT)) {
+			
+		}
+		
 		
 	}
 	

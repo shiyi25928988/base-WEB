@@ -8,6 +8,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
 
+import selenium.base.GlobleVargs;
 import selenium.base.script.IScript;
 
 public class CliArgsProcessor {
@@ -25,7 +26,7 @@ public class CliArgsProcessor {
 		}
 		
 		if (cmd.hasOption(CommandLineOptions.OPT_BROWSER)) {
-			CliGlobleVargs.browserType = cmd.getOptionValue(CommandLineOptions.OPT_BROWSER);
+			GlobleVargs.browserType = cmd.getOptionValue(CommandLineOptions.OPT_BROWSER);
 		}
 		
 		

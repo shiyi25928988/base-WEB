@@ -18,6 +18,10 @@ public final class GlobleVargs {
 	public static final String firefoxDriverPropertyKey = "webdriver.gecko.driver";
 	public static final String firefoxDriverPath = driverPath + "firefox" + File.separator + "0.26.0" + File.separator + "geckodriver.exe";
 	
+	public static final String edgeDriverPropertyKey = "webdriver.edge.driver";
+	
+	public static final String ieDriverPropertyKey = "webdriver.ie.driver";
+	
 	public static String browserType;
 	public static String browserVersion;
 	public static String scriptFile;

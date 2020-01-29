@@ -1,7 +1,5 @@
 package selenium.base.command;
 
-import selenium.base.script.ICommand;
-
 /**
  * @author yshi
  *

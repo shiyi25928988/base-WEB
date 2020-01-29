@@ -10,6 +10,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import selenium.base.GlobleVargs;
+import selenium.base.WebDriverPath;
+
 /**
  * @author shiyi
  *
@@ -22,6 +25,7 @@ public class WebDriverFactory {
 		
 		switch (type) {
 		case Chrome:
+			System.setProperty(WebDriverPath.chromeDriverPropertyKey, WebDriverPath.chromeDriverPath_v79);
 			webDriver = new ChromeDriver();
 			break;
 		case Edge:

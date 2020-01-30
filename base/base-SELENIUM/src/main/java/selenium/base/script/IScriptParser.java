@@ -1,9 +1,10 @@
 package selenium.base.script;
 
-import selenium.base.command.ICommand;
+import java.util.Queue;
+
 import selenium.base.exception.ScriptParseException;
 
 public interface IScriptParser {
 
-	ICommand parse(IScript script) throws ScriptParseException;
+	Queue<ICommand> parse(IScript script) throws ScriptParseException;
 }

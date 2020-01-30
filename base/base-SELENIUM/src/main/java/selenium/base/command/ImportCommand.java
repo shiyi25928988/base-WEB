@@ -1,5 +1,6 @@
 package selenium.base.command;
 
+import selenium.base.script.ICommand;
 import selenium.base.script.Result;
 
 /**
@@ -9,7 +10,7 @@ import selenium.base.script.Result;
 public class ImportCommand implements ICommand{
 
 	@Override
-	public Result execute(String... args) {
+	public Result execute() {
 		// TODO Auto-generated method stub
 		return null;
 	}

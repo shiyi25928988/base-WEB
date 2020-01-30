@@ -1,9 +1,8 @@
 package selenium.base.command;
 
-import selenium.base.script.ICommand;
 import selenium.base.script.Result;
 
-public class ClickCommand implements ICommand{
+public class ClickCommand extends AbstractCommand{
 
 	@Override
 	public Result execute() {

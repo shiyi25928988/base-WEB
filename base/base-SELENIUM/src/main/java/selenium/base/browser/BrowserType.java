@@ -9,6 +9,11 @@ import selenium.base.exception.UnsupportedBrowserException;
 public enum BrowserType {
 	Chrome, Edge, Firefox, IE, Opera, Safari;
 
+	/**
+	 * @param browserType
+	 * @return
+	 * @throws UnsupportedBrowserException
+	 */
 	public static BrowserType getBrowserType(String browserType) throws UnsupportedBrowserException {
 		if (browserType.contains("chrome")) {
 			return BrowserType.Chrome;

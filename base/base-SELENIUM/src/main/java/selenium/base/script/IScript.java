@@ -1,7 +1,7 @@
 package selenium.base.script;
 
 /**
- * @author 86135
+ * @author shiyi
  *
  */
 public interface IScript {

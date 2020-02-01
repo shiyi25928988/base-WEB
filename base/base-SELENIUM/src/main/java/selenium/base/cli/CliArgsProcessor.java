@@ -12,6 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import selenium.base.browser.BrowserType;
 import selenium.base.browser.WebDriverFactory;
 import selenium.base.exception.ScriptFileNotExistException;
+import selenium.base.script.DefaultScriptParser;
+import selenium.base.script.IScriptParser;
+import selenium.base.script.Script;
+import selenium.base.script.ScriptObjGenerator;
 import selenium.base.utils.IOUtils;
 
 /**
@@ -20,10 +24,12 @@ import selenium.base.utils.IOUtils;
  */
 @Slf4j
 public class CliArgsProcessor {
+	
+	private IScriptParser scriptParser = new DefaultScriptParser();
 
-	private static CommandLineParser parser = new DefaultParser();
+	private CommandLineParser parser = new DefaultParser();
 
-	private static HelpFormatter formatter = new HelpFormatter();
+	private HelpFormatter formatter = new HelpFormatter();
 
 	public void process(String...args) throws Exception {
 		
@@ -54,7 +60,8 @@ public class CliArgsProcessor {
 				log.debug("script file exists!!");
 			}
 			
-			
+			Script script = ScriptObjGenerator.gen(scriptFile);
+			scriptParser.parse(script);
 		}
 		
 		

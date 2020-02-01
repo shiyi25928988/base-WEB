@@ -1,6 +1,6 @@
 package selenium.base.command;
 
-import selenium.base.script.ICommand;
+import selenium.base.command.impl.EmptyCommand;
 
 /**
  * @author yshi

@@ -1,25 +1,25 @@
 package selenium.base.command;
 
-import selenium.base.script.ICommand;
+import selenium.base.script.Script;
 
 public abstract class AbstractCommand implements ICommand{
 
-	private String scriptFileName;
+	private Script script;
 	private int lineNum;
-
-	public String getScriptFileName() {
-		return scriptFileName;
+	
+	public AbstractCommand(final Script script, final int lineNum) {
+		this.script = script;
+		this.lineNum = lineNum;
 	}
 
-	public void setScriptFileName(String scriptFileName) {
-		this.scriptFileName = scriptFileName;
+
+	public Script getScript() {
+		return script;
 	}
+
 
 	public int getLineNum() {
 		return lineNum;
 	}
 
-	public void setLineNum(int lineNum) {
-		this.lineNum = lineNum;
-	}
 }

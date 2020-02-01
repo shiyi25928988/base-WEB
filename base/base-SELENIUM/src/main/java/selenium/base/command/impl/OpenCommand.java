@@ -1,9 +1,9 @@
-package selenium.base.command;
+package selenium.base.command.impl;
 
-import selenium.base.script.ICommand;
+import selenium.base.command.ICommand;
 import selenium.base.script.Result;
 
-public class EmptyCommand implements ICommand{
+public class OpenCommand implements ICommand{
 
 	@Override
 	public Result execute() {

@@ -1,15 +1,47 @@
 package selenium.base.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import lombok.extern.slf4j.Slf4j;
+import selenium.base.script.ScriptLineObject;
 
 /**
  * @author shiyi
  *
  */
+@Slf4j
 public final class IOUtils {
+	
+	/**
+	 * @param filePath
+	 * @return
+	 */
+	public static Queue<ScriptLineObject> readLines(String filePath) throws FileNotFoundException{
+		int line = 0;
+		Queue<ScriptLineObject> queue = new LinkedBlockingQueue<>(); 
+		if(!isFileExist(filePath)) {
+			throw new FileNotFoundException(filePath + " not exist!");
+		}
+		BufferedReader reader = new BufferedReader(new FileReader(filePath));
+		String str;
+		try {
+			while((str = reader.readLine()) != null) {
+				line++;
+				queue.add(new ScriptLineObject(str, line));
+			}
+		} catch (IOException e) {
+			log.error(e.toString());
+		}
+		return queue;
+	}
 
 	/**
 	 * @param filePath

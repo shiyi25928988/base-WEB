@@ -21,7 +21,7 @@ public class WebDriverFactory {
 
 	private static WebDriver webDriver;
 	
-	public static Optional<WebDriver> getWebDriver(BrowserType type) {
+	public static WebDriver getWebDriver(BrowserType type) {
 		
 		switch (type) {
 		case Chrome:
@@ -47,7 +47,13 @@ public class WebDriverFactory {
 			webDriver = null;
 			break;
 		}
-		Optional<WebDriver> opt = Optional.ofNullable(webDriver);
-		return opt;
+		return webDriver;
+	}
+	
+	/**
+	 * @return
+	 */
+	public static WebDriver getWebDriverInstance() {
+		return webDriver;
 	}
 }

@@ -1,8 +1,6 @@
-package selenium.base.script;
+package selenium.base.command;
 
 import java.util.Queue;
-
-import selenium.base.command.ICommand;
 
 /**
  * @author shiyi

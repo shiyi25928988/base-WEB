@@ -1,5 +1,6 @@
 package selenium.base.cli;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.commons.cli.CommandLine;
@@ -11,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import lombok.extern.slf4j.Slf4j;
 import selenium.base.browser.BrowserType;
 import selenium.base.browser.WebDriverFactory;
+import selenium.base.command.CommandExecutor;
 import selenium.base.exception.ScriptFileNotExistException;
 import selenium.base.script.DefaultScriptParser;
 import selenium.base.script.IScriptParser;
@@ -44,9 +46,9 @@ public class CliArgsProcessor {
 		if (cmd.hasOption(CommandLineOptions.OPT_BROWSER)) {
 			//GlobleVargs.browserType = cmd.getOptionValue(CommandLineOptions.OPT_BROWSER);
 			String browserType = cmd.getOptionValue(CommandLineOptions.OPT_BROWSER);
-			Optional<WebDriver> opt = WebDriverFactory.getWebDriver(BrowserType.getBrowserType(browserType));
-			if(opt.isEmpty()) {
-				throw new RuntimeException();
+			WebDriver webDriver = WebDriverFactory.getWebDriver(BrowserType.getBrowserType(browserType));
+			if(Objects.isNull(webDriver)) {
+				throw new RuntimeException("WebDriver not been found!");
 			}
 		}
 		
@@ -61,7 +63,12 @@ public class CliArgsProcessor {
 			}
 			
 			Script script = ScriptObjGenerator.gen(scriptFile);
-			scriptParser.parse(script);
+			//TODO 
+			
+			CommandExecutor exec = new CommandExecutor(scriptParser.parse(script));
+			
+			exec.run();
+			
 		}
 		
 		

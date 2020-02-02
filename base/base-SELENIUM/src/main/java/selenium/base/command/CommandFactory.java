@@ -9,8 +9,14 @@ import selenium.base.command.impl.EmptyCommand;
 
 public class CommandFactory {
 
-	public ICommand buildCommand(CommandType type) {
-
+	/**
+	 * @param scriptLine
+	 * @param lineNum
+	 * @return
+	 */
+	public static ICommand buildCommand(String scriptLine, int lineNum) {
+		CommandType type = getCommandType(scriptLine);
+		
 		switch (type) {
 		case CLICK:
 
@@ -24,5 +30,23 @@ public class CommandFactory {
 		}
 
 		return new EmptyCommand();
+	}
+	
+	/**
+	 * @param scriptLine
+	 * @return
+	 */
+	private static CommandType getCommandType(String scriptLine) {
+		
+		if (scriptLine.toLowerCase().startsWith("open")){
+			return CommandType.OPEN;
+		}
+		
+		if (scriptLine.toLowerCase().startsWith("click")){
+			return CommandType.CLICK;
+		}
+		
+		
+		return CommandType.EMPTY;
 	}
 }

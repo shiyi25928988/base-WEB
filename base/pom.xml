@@ -35,7 +35,7 @@
 		<guice.version>4.2.2</guice.version>
 		<guava.version>27.1-jre</guava.version>
 		<javax.servlet.version>4.0.1</javax.servlet.version>
-		<shiro.version>1.4.1</shiro.version>
+		<shiro.version>1.5.0</shiro.version>
 		<wicket.version>9.0.0-M3</wicket.version>
 	</properties>
 

@@ -26,8 +26,10 @@ import com.google.common.base.Strings;
 import com.google.inject.Injector;
 
 import base.config.GuiceServletConfig;
+import base.rest.utils.RestHelper;
 import base.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;
+import mq.base.utils.JsonUtils;
 
 /**
  * @author yshi
@@ -184,7 +186,8 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 				});
-				ReflectionUtils.invokeMethod(obj, method, args);
+				RestHelper.sendResponseData(
+						ReflectionUtils.invokeMethod(obj, method, args), ServletHelper.getResponse());
 			}
 		}
 	}

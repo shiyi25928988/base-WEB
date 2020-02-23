@@ -34,8 +34,8 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 
 		install(new SecurityModule(this.getServletContext()));
 
-		filter("/*").through(SecureFilter.class);
-		bind(SecureFilter.class).in(Scopes.SINGLETON);
+//		filter("/*").through(SecureFilter.class);
+//		bind(SecureFilter.class).in(Scopes.SINGLETON);
 		
 		filter("/*").through(WicketFilter.class, createWicketFilterInitParams());
 		bind(WebApplication.class).to(WicketRootApplication.class);

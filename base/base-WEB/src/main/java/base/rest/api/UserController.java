@@ -34,26 +34,13 @@ public class UserController {
 
 	@GET
 	@Path(value = "/user")
-	public void getUserByID(@PathParam(value="USER_ID") String userId) {
-		//HttpServletRequest req = ServletHelper.getRequest();
-		HttpServletResponse resp = ServletHelper.getResponse();
-		//String userId = req.getParameter("USER_ID");
-		
-
-		Optional<User> opUser = cacheService.get(userId);
-
+	public JSON<User> getUserByID(@PathParam(value = "USER_ID") String userId) {
+		User user = new User();
+		Optional<User> opUser = userService.getUser(userId);
 		if (opUser.isPresent()) {
-			opUser.ifPresent(u -> {
-				RestHelper.sendResponseData(u, resp);
-			});
-		} else {
-			opUser = userService.getUser(userId);
-			if (opUser.isPresent()) {
-				User user = opUser.get();
-				cacheService.put(userId, user);
-				RestHelper.sendResponseData(user, resp);
-			}
+			user = opUser.get();
 		}
+		return new JSON<User>(user);
 	}
 
 	@POST

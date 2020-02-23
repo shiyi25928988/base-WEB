@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import com.google.inject.Inject;
 
@@ -33,10 +34,11 @@ public class UserController {
 
 	@GET
 	@Path(value = "/user")
-	public void getUserByID() {
-		HttpServletRequest req = ServletHelper.getRequest();
+	public void getUserByID(@PathParam(value="USER_ID") String userId) {
+		//HttpServletRequest req = ServletHelper.getRequest();
 		HttpServletResponse resp = ServletHelper.getResponse();
-		String userId = req.getParameter("USER_ID");
+		//String userId = req.getParameter("USER_ID");
+		
 
 		Optional<User> opUser = cacheService.get(userId);
 

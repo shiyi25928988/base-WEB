@@ -2,13 +2,15 @@ package base.IOC;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
@@ -16,6 +18,7 @@ import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,6 +47,8 @@ public class RestApiServiceImpl implements RestApiService {
 	private Map<String, Method> methodMap_OPTIONS = new ConcurrentHashMap<>();
 	private Map<String, Method> methodMap_HEAD    = new ConcurrentHashMap<>();
 	
+	private Map<Method, List<String>> parameterMap = new ConcurrentHashMap<>();
+	
 	/**
 	 * Constructor
 	 * @param classSet
@@ -62,6 +67,7 @@ public class RestApiServiceImpl implements RestApiService {
 							if(!Strings.isNullOrEmpty(path.value())) {
 								methodMap_GET.put(path.value(), m);
 								classMap.put(path.value(), clazz);
+								addMethodParameter(m);
 							}
 						}
 					}
@@ -71,6 +77,7 @@ public class RestApiServiceImpl implements RestApiService {
 							if(!Strings.isNullOrEmpty(path.value())) {
 								methodMap_PUT.put(path.value(), m);
 								classMap.put(path.value(), clazz);
+								addMethodParameter(m);
 							}
 						}
 					}
@@ -80,6 +87,7 @@ public class RestApiServiceImpl implements RestApiService {
 							if(!Strings.isNullOrEmpty(path.value())) {
 								methodMap_POST.put(path.value(), m);
 								classMap.put(path.value(), clazz);
+								addMethodParameter(m);
 							}
 						}
 					}
@@ -89,6 +97,7 @@ public class RestApiServiceImpl implements RestApiService {
 							if(!Strings.isNullOrEmpty(path.value())) {
 								methodMap_DELETE.put(path.value(), m);
 								classMap.put(path.value(), clazz);
+								addMethodParameter(m);
 							}
 						}
 					}
@@ -98,6 +107,7 @@ public class RestApiServiceImpl implements RestApiService {
 							if(!Strings.isNullOrEmpty(path.value())) {
 								methodMap_OPTIONS.put(path.value(), m);
 								classMap.put(path.value(), clazz);
+								addMethodParameter(m);
 							}
 						}
 					}
@@ -107,12 +117,33 @@ public class RestApiServiceImpl implements RestApiService {
 							if(!Strings.isNullOrEmpty(path.value())) {
 								methodMap_HEAD.put(path.value(), m);
 								classMap.put(path.value(), clazz);
+								addMethodParameter(m);
 							}
 						}
 					}
 				});
 			});
 		}
+	}
+	
+	/**
+	 * @param method
+	 */
+	private void addMethodParameter(final Method method) {
+		if(method.getParameterCount() <= 0) return;
+		List<String> list = new LinkedList<>();
+		
+		Stream.of(method.getParameters()).forEach(p ->{
+			if(p.isAnnotationPresent(PathParam.class)) {
+				PathParam pathParam = (PathParam)p.getAnnotation(PathParam.class);
+				if(Strings.isNullOrEmpty(pathParam.value())){
+					//throw new InvalidPathParameterException();
+				}else {
+					list.add(pathParam.value());
+				}
+			}
+		});
+		parameterMap.put(method, list);
 	}
 	
 	/**
@@ -124,7 +155,12 @@ public class RestApiServiceImpl implements RestApiService {
 		var path = StringUtils.remove(req.getRequestURI(), req.getContextPath());
 		var method = methodMap.get(path);
 		var clazz = classMap.get(path);
-		invoke(clazz, method);
+		List<String> parameters = parameterMap.get(method);
+		List<String> args = new ArrayList<>();
+		parameters.forEach(p->{
+			args.add(ServletHelper.getRequest().getParameter(p));
+		});
+		invoke(clazz, method, args.toArray());
 	}
 	
 	/**
@@ -132,7 +168,7 @@ public class RestApiServiceImpl implements RestApiService {
 	 * @param method
 	 * @throws Exception
 	 */
-	private void invoke(Class<?> clazz, Method method) throws Exception {
+	private void invoke(Class<?> clazz, Method method, Object[] args) throws Exception {
 		if(Objects.nonNull(clazz)) {
 			if(Objects.nonNull(method)) {
 				Object obj = ReflectionUtils.newInstance(clazz);
@@ -148,7 +184,7 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 				});
-				ReflectionUtils.invokeMethod(obj, method);
+				ReflectionUtils.invokeMethod(obj, method, args);
 			}
 		}
 	}

@@ -44,9 +44,15 @@ public class CliArgsProcessor {
 		
 		/** --browser information */
 		if (cmd.hasOption(CommandLineOptions.OPT_BROWSER)) {
-			//GlobleVargs.browserType = cmd.getOptionValue(CommandLineOptions.OPT_BROWSER);
+			//TODO ADD browser version support
+			
+			//Get browser type.
 			String browserType = cmd.getOptionValue(CommandLineOptions.OPT_BROWSER);
-			WebDriver webDriver = WebDriverFactory.getWebDriver(BrowserType.getBrowserType(browserType));
+			//Build web driver object instance.
+			//Once after building a web driver instance , 
+			//can directly use  WebDriverFactory#getWebDriverInstance() 
+			//to get an existing web driver instance.
+			WebDriver webDriver = WebDriverFactory.buildWebDriver(BrowserType.getBrowserType(browserType));
 			if(Objects.isNull(webDriver)) {
 				throw new RuntimeException("WebDriver not been found!");
 			}

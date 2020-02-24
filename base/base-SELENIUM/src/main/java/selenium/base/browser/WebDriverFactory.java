@@ -21,7 +21,7 @@ public class WebDriverFactory {
 
 	private static WebDriver webDriver;
 	
-	public static WebDriver getWebDriver(BrowserType type) {
+	public static WebDriver buildWebDriver(BrowserType type) {
 		
 		switch (type) {
 		case Chrome:

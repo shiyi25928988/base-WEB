@@ -2,8 +2,6 @@ package base.rest.api;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -13,8 +11,6 @@ import javax.ws.rs.PathParam;
 import com.google.inject.Inject;
 
 import base.annotation.RestAPI;
-import base.rest.utils.RestHelper;
-import base.servlet.ServletHelper;
 import cache.base.service.CacheService;
 import db.base.entity.User;
 import db.base.service.UserService;

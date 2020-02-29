@@ -20,6 +20,7 @@
 		<module>base-COMMON</module>
 		<module>base-NEUROPH</module>
 		<module>base-SELENIUM</module>
+		<module>base-jetty-boot</module>
 	</modules>
 
 	<properties>

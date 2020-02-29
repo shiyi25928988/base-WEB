@@ -3,6 +3,8 @@ package base.filter;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.shiro.web.servlet.ShiroFilter;
 
+import com.google.inject.Inject;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -13,6 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 public class SecureFilter extends ShiroFilter{
 
 	WebSecurityManager webSecurityManager;
+	
+	public SecureFilter() {
+		//this.setSecurityManager(sm);
+	}
 
 	/* (non-Javadoc)
 	 * @see org.apache.shiro.web.servlet.ShiroFilter#init()
@@ -21,6 +27,6 @@ public class SecureFilter extends ShiroFilter{
 	public void init() throws Exception {
 		super.init();
 		log.info("SecureFilter init...");
-		webSecurityManager = this.getSecurityManager();
+		this.webSecurityManager = this.getSecurityManager();
 	}
 }

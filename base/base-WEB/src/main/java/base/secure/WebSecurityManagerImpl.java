@@ -15,6 +15,7 @@ import org.apache.shiro.session.mgt.SessionKey;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,9 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class WebSecurityManagerImpl implements WebSecurityManager{
-
+	
+	private WebSecurityManager webSecurityManager = new DefaultWebSecurityManager();
+	
 	@Override
 	public Subject login(Subject subject, AuthenticationToken authenticationToken) throws AuthenticationException {
 		log.info("WebSecurityManager login");

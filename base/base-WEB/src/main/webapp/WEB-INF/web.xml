@@ -10,7 +10,7 @@
 		<filter-name>guiceFilter</filter-name>
 		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>guiceFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -19,4 +19,10 @@
 	<listener>
 		<listener-class>base.config.GuiceServletConfig</listener-class>
 	</listener>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+
 </web-app>

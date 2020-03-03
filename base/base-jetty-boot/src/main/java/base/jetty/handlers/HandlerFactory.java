@@ -1,9 +1,11 @@
 package base.jetty.handlers;
 
 import org.eclipse.jetty.server.handler.ContextHandlerCollection;
+import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 
@@ -26,11 +28,17 @@ public final class HandlerFactory {
 	 */
 	public static HandlerList getHandlerList() {
 		HandlerList list = new HandlerList();
-
+		
+		//ServletHandler map request to servlet object
 		list.addHandler(new ServletHandler());
-
-		log.info("Adding WebAppContext handler...");
+		
+		list.addHandler(new ResourceHandler());
+		
 		list.addHandler(new WebAppContext());
+		
+		list.addHandler(new DefaultHandler());
+
+
 		return list;
 
 	}

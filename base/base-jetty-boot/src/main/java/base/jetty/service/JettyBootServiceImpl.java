@@ -45,4 +45,10 @@ public class JettyBootServiceImpl implements JettyBootService{
 		}
 	}
 
+	@Override
+	public void setContext(String path) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

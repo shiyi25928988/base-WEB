@@ -8,6 +8,7 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(value=JettyBootServiceImpl.class)
 public interface JettyBootService {
+	void setContext(String path);
 	void start(int port);
 	void stop();
 }

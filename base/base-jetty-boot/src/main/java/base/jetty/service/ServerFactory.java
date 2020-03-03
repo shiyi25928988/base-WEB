@@ -28,17 +28,6 @@ public final class ServerFactory {
 	/**
 	 * @param port
 	 * @param handler
-	 * @return
-	 */
-	public static Server buildServer(int port, ServletHandler handler) {
-		Server server = new Server(port);
-		server.setHandler(handler);
-		return buildServer(port, handler, null);
-	}
-
-	/**
-	 * @param port
-	 * @param handler
 	 * @param servlets
 	 * @return
 	 */

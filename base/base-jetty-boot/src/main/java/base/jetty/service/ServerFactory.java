@@ -1,6 +1,7 @@
 package base.jetty.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -39,7 +40,8 @@ public final class ServerFactory {
 				Stream.of(servlets).forEach(s -> {
 					holderList.add(new ServletHolder(s));
 				});
-				handler.setServlets((ServletHolder[]) holderList.toArray());
+				ServletHolder[] holder = new ServletHolder[holderList.size()];
+				handler.setServlets(holderList.toArray(holder));
 			}
 			server.setHandler(handler);
 		}

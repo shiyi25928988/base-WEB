@@ -1,4 +1,4 @@
-package base.config;
+package base.servlet;
 
 import java.util.Objects;
 
@@ -14,12 +14,18 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class GuiceServletConfig extends GuiceServletContextListener {
+public class GuiceServletCustomContextListener extends GuiceServletContextListener {
 
 	/**
 	 * Injector
 	 */
 	private static volatile Injector injector = null;
+	
+	public GuiceServletCustomContextListener() {
+		log.info("===============================");
+		log.info("GuiceServletConfig constructing");
+	}
+
 
 	/* (non-Javadoc)
 	 * @see com.google.inject.servlet.GuiceServletContextListener#getInjector()

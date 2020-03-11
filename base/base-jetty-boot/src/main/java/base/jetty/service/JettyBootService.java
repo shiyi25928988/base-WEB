@@ -1,5 +1,10 @@
 package base.jetty.service;
 
+import javax.servlet.Filter;
+import javax.servlet.Servlet;
+import javax.servlet.ServletContextListener;
+import javax.servlet.ServletRequestListener;
+
 import com.google.inject.ImplementedBy;
 
 /**
@@ -8,7 +13,7 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(value=JettyBootServiceImpl.class)
 public interface JettyBootService {
-	void setContext(String path);
-	void start(int port);
+	
+	void start();
 	void stop();
 }

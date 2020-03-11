@@ -25,8 +25,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Strings;
 import com.google.inject.Injector;
 
-import base.config.GuiceServletConfig;
 import base.rest.utils.RestHelper;
+import base.servlet.GuiceServletCustomContextListener;
 import base.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;
 import mq.base.utils.JsonUtils;
@@ -175,7 +175,7 @@ public class RestApiServiceImpl implements RestApiService {
 			if(Objects.nonNull(method)) {
 				Object obj = ReflectionUtils.newInstance(clazz);
 				Field[] fields = clazz.getDeclaredFields();
-				Injector injector = GuiceServletConfig.getInjectorInstance();
+				Injector injector = GuiceServletCustomContextListener.getInjectorInstance();
 				Stream.of(fields).forEach(field->{
 					if(field.isAnnotationPresent(com.google.inject.Inject.class) || field.isAnnotationPresent(javax.inject.Inject.class)) {
 						try {

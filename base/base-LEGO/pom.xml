@@ -11,7 +11,7 @@
 	</parent>
 
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>org.yshi</groupId>
 			<artifactId>base-DB</artifactId>
@@ -57,7 +57,6 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-
 
 		<!-- shiro -->
 		<dependency>

@@ -20,6 +20,10 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 	 * Injector
 	 */
 	private static volatile Injector injector = null;
+	
+	public GuiceServletConfig() {
+		log.info("GuiceServletConfig constructing");
+	}
 
 	/* (non-Javadoc)
 	 * @see com.google.inject.servlet.GuiceServletContextListener#getInjector()

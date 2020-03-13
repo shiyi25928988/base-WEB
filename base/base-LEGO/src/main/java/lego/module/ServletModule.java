@@ -1,4 +1,4 @@
-package base.module;
+package lego.module;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +12,8 @@ import com.google.inject.Provider;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
 
-import base.filter.SecureFilter;
-import base.servlet.DispatcherServlet;
-import base.wicket.WicketRootApplication;
+import lego.filter.SecureFilter;
+import lego.servlet.DispatcherServlet;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -32,15 +31,11 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 	@Override
 	protected void configureServlets() {
 
-//		install(new SecurityModule(this.getServletContext()));
+		install(new SecurityModule(this.getServletContext()));
 
-//		filter("/*").through(SecureFilter.class);
-//		bind(SecureFilter.class).in(Scopes.SINGLETON);
+		filter("/*").through(SecureFilter.class);
+		bind(SecureFilter.class).in(Scopes.SINGLETON);
 		
-		filter("/*").through(WicketFilter.class, createWicketFilterInitParams());
-		bind(WebApplication.class).to(WicketRootApplication.class);
-		bind(WicketFilter.class).to(CustomWicketFilter.class).in(Scopes.SINGLETON);
-
 		/** DISPATCH */
 		serve("/*").with(DispatcherServlet.class);
 		bind(DispatcherServlet.class).in(Scopes.SINGLETON);

@@ -1,4 +1,4 @@
-package base.secure;
+package security.manager;
 
 import java.util.Collection;
 import java.util.List;

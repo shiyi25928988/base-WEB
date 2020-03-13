@@ -1,4 +1,4 @@
-package base.utils;
+package base.common.encrypt;
 
 import java.nio.charset.Charset;
 import java.util.Objects;
@@ -9,13 +9,10 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * @author yshi
  *
  */
-@Slf4j
 public final class DesEncryptUtils {
 	
 	/** Secure key. */
@@ -143,7 +140,6 @@ public final class DesEncryptUtils {
 			cipher.init(Cipher.ENCRYPT_MODE, securekey, iv);
 			return cipher.doFinal(data);
 		} catch (Exception e) {
-			log.error(e.getMessage());
 		}
 		return null;
 	}

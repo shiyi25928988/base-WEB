@@ -28,9 +28,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
-import base.module.ModulesConfig;
-import base.servlet.DispatcherServlet;
-import base.servlet.GuiceServletCustomContextListener;
+import lego.module.ModulesConfig;
+import lego.servlet.DispatcherServlet;
+import lego.servlet.GuiceServletCustomContextListener;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -61,6 +61,7 @@ public class JettyModule extends AbstractModule {
 			Server server = new Server(8080);
 			server.setStopAtShutdown(true);
 			server.setHandler(context);
+			//context.getServletContext()
 			return server;
 		}
 	}

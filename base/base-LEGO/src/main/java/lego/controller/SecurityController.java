@@ -17,6 +17,7 @@ import db.base.entity.User;
 import db.base.service.UserService;
 import html.base.page.LoginHtml;
 import lego.annotation.RestAPI;
+import lego.rest.result.JSON;
 import lego.rest.utils.HtmlHelper;
 import lego.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;

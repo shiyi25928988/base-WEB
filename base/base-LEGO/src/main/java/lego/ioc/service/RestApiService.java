@@ -1,4 +1,4 @@
-package lego.ioc;
+package lego.ioc.service;
 
 /**
  * @author yshi

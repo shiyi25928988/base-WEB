@@ -14,6 +14,7 @@ import cache.base.service.CacheService;
 import db.base.entity.User;
 import db.base.service.UserService;
 import lego.annotation.RestAPI;
+import lego.rest.result.JSON;
 
 /**
  * @author yshi

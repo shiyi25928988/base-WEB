@@ -9,8 +9,8 @@ import com.google.inject.Provider;
 
 import lego.ioc.ClassHelper;
 import lego.ioc.PackageScanConfig;
-import lego.ioc.RestApiService;
-import lego.ioc.RestApiServiceImpl;
+import lego.ioc.service.RestApiService;
+import lego.ioc.service.RestApiServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 /**

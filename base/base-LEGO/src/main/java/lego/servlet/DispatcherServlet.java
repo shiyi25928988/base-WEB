@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.inject.Inject;
 
-import lego.ioc.RestApiService;
+import lego.ioc.service.RestApiService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

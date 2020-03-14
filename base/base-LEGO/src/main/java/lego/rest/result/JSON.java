@@ -1,4 +1,4 @@
-package lego.controller;
+package lego.rest.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

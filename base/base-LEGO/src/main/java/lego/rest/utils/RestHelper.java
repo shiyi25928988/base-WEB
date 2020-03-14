@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import lego.rest.result.JSON;
+import lego.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;
 import mq.base.utils.JsonUtils;
 
@@ -24,17 +26,26 @@ public final class RestHelper {
 	private RestHelper() {
 		throw new RuntimeException();
 	}
+	
+	public static void sendResponseData(final Object data) {
+		if(Objects.nonNull(data)) {
+			if(data instanceof lego.rest.result.JSON) {
+				sendResponseData((JSON<?>)data);
+			}
+		}
+	}
 
 	/**
 	 * @param data
 	 * @param resp
 	 */
-	public static void sendResponseData(final Object data, final HttpServletResponse resp) {
+	private static void sendResponseData(final JSON<?> data) {
 		if(Objects.isNull(data)) {
 			throw new NullPointerException();
 		}
+		var resp = ServletHelper.getResponse();
 		try {
-			String json = JsonUtils.toJson(data);
+			String json = JsonUtils.toJson(data.getObj());
 			resp.setContentType(MimeType.APPLICATION_JSON.getType());
 			resp.setCharacterEncoding("UTF-8");
 			PrintWriter writer = resp.getWriter();

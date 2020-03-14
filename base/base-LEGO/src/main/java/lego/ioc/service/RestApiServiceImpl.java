@@ -1,4 +1,4 @@
-package lego.ioc;
+package lego.ioc.service;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Strings;
 import com.google.inject.Injector;
 
+import lego.ioc.ReflectionUtils;
 import lego.rest.utils.RestHelper;
 import lego.servlet.GuiceServletCustomContextListener;
 import lego.servlet.ServletHelper;
@@ -193,8 +194,7 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 				});
-				RestHelper.sendResponseData(ReflectionUtils.invokeMethod(obj, method, args),
-						ServletHelper.getResponse());
+				RestHelper.sendResponseData(ReflectionUtils.invokeMethod(obj, method, args));
 			}
 		}
 	}

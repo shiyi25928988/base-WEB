@@ -41,9 +41,9 @@ public class SecurityModule extends ShiroWebModule {
 		 * add the URL template and authenticate type to the filterChain
 		 * 
 		 * */
-		addFilterChain("/login", ShiroWebModule.ANON);
-		addFilterChain("/logout", ShiroWebModule.AUTHC);
-		addFilterChain("/user", ShiroWebModule.AUTHC);
+		addFilterChain("/sec/login", ShiroWebModule.ANON);
+//		addFilterChain("/logout", ShiroWebModule.AUTHC);
+//		addFilterChain("/user", ShiroWebModule.AUTHC);
 	}
 
 	/**

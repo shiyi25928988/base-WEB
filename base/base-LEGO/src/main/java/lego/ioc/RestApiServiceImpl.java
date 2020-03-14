@@ -39,20 +39,21 @@ import mq.base.utils.JsonUtils;
 public class RestApiServiceImpl implements RestApiService {
 
 	private Set<Class<?>> classSet;
-	
+
 	private Map<String, Class<?>> classMap = new ConcurrentHashMap<>();
 
-	private Map<String, Method> methodMap_GET     = new ConcurrentHashMap<>();
-	private Map<String, Method> methodMap_PUT     = new ConcurrentHashMap<>();
-	private Map<String, Method> methodMap_POST    = new ConcurrentHashMap<>();
-	private Map<String, Method> methodMap_DELETE  = new ConcurrentHashMap<>();
+	private Map<String, Method> methodMap_GET = new ConcurrentHashMap<>();
+	private Map<String, Method> methodMap_PUT = new ConcurrentHashMap<>();
+	private Map<String, Method> methodMap_POST = new ConcurrentHashMap<>();
+	private Map<String, Method> methodMap_DELETE = new ConcurrentHashMap<>();
 	private Map<String, Method> methodMap_OPTIONS = new ConcurrentHashMap<>();
-	private Map<String, Method> methodMap_HEAD    = new ConcurrentHashMap<>();
-	
+	private Map<String, Method> methodMap_HEAD = new ConcurrentHashMap<>();
+
 	private Map<Method, List<String>> parameterMap = new ConcurrentHashMap<>();
-	
+
 	/**
 	 * Constructor
+	 * 
 	 * @param classSet
 	 */
 	public RestApiServiceImpl(final Set<Class<?>> classSet) {
@@ -60,13 +61,13 @@ public class RestApiServiceImpl implements RestApiService {
 		if (Objects.nonNull(this.classSet) && this.classSet.size() >= 1) {
 			classSet.stream().forEach(clazz -> {
 				Method[] methods = clazz.getDeclaredMethods();
-				
+
 				Stream.of(methods).forEach(m -> {
 
 					if (m.isAnnotationPresent(GET.class)) {
-						if(m.isAnnotationPresent(Path.class)) {
+						if (m.isAnnotationPresent(Path.class)) {
 							Path path = m.getAnnotation(Path.class);
-							if(!Strings.isNullOrEmpty(path.value())) {
+							if (!Strings.isNullOrEmpty(path.value())) {
 								methodMap_GET.put(path.value(), m);
 								classMap.put(path.value(), clazz);
 								addMethodParameter(m);
@@ -74,9 +75,9 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 					if (m.isAnnotationPresent(PUT.class)) {
-						if(m.isAnnotationPresent(Path.class)) {
+						if (m.isAnnotationPresent(Path.class)) {
 							Path path = m.getAnnotation(Path.class);
-							if(!Strings.isNullOrEmpty(path.value())) {
+							if (!Strings.isNullOrEmpty(path.value())) {
 								methodMap_PUT.put(path.value(), m);
 								classMap.put(path.value(), clazz);
 								addMethodParameter(m);
@@ -84,9 +85,9 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 					if (m.isAnnotationPresent(POST.class)) {
-						if(m.isAnnotationPresent(Path.class)) {
+						if (m.isAnnotationPresent(Path.class)) {
 							Path path = m.getAnnotation(Path.class);
-							if(!Strings.isNullOrEmpty(path.value())) {
+							if (!Strings.isNullOrEmpty(path.value())) {
 								methodMap_POST.put(path.value(), m);
 								classMap.put(path.value(), clazz);
 								addMethodParameter(m);
@@ -94,9 +95,9 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 					if (m.isAnnotationPresent(DELETE.class)) {
-						if(m.isAnnotationPresent(Path.class)) {
+						if (m.isAnnotationPresent(Path.class)) {
 							Path path = m.getAnnotation(Path.class);
-							if(!Strings.isNullOrEmpty(path.value())) {
+							if (!Strings.isNullOrEmpty(path.value())) {
 								methodMap_DELETE.put(path.value(), m);
 								classMap.put(path.value(), clazz);
 								addMethodParameter(m);
@@ -104,9 +105,9 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 					if (m.isAnnotationPresent(OPTIONS.class)) {
-						if(m.isAnnotationPresent(Path.class)) {
+						if (m.isAnnotationPresent(Path.class)) {
 							Path path = m.getAnnotation(Path.class);
-							if(!Strings.isNullOrEmpty(path.value())) {
+							if (!Strings.isNullOrEmpty(path.value())) {
 								methodMap_OPTIONS.put(path.value(), m);
 								classMap.put(path.value(), clazz);
 								addMethodParameter(m);
@@ -114,9 +115,9 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 					if (m.isAnnotationPresent(HEAD.class)) {
-						if(m.isAnnotationPresent(Path.class)) {
+						if (m.isAnnotationPresent(Path.class)) {
 							Path path = m.getAnnotation(Path.class);
-							if(!Strings.isNullOrEmpty(path.value())) {
+							if (!Strings.isNullOrEmpty(path.value())) {
 								methodMap_HEAD.put(path.value(), m);
 								classMap.put(path.value(), clazz);
 								addMethodParameter(m);
@@ -127,27 +128,28 @@ public class RestApiServiceImpl implements RestApiService {
 			});
 		}
 	}
-	
+
 	/**
 	 * @param method
 	 */
 	private void addMethodParameter(final Method method) {
-		if(method.getParameterCount() <= 0) return;
+		if (method.getParameterCount() <= 0)
+			return;
 		List<String> list = new LinkedList<>();
-		
-		Stream.of(method.getParameters()).forEach(p ->{
-			if(p.isAnnotationPresent(PathParam.class)) {
-				PathParam pathParam = (PathParam)p.getAnnotation(PathParam.class);
-				if(Strings.isNullOrEmpty(pathParam.value())){
-					//throw new InvalidPathParameterException();
-				}else {
+
+		Stream.of(method.getParameters()).forEach(p -> {
+			if (p.isAnnotationPresent(PathParam.class)) {
+				PathParam pathParam = (PathParam) p.getAnnotation(PathParam.class);
+				if (Strings.isNullOrEmpty(pathParam.value())) {
+					// throw new InvalidPathParameterException();
+				} else {
 					list.add(pathParam.value());
 				}
 			}
 		});
 		parameterMap.put(method, list);
 	}
-	
+
 	/**
 	 * @param methodMap
 	 * @throws Exception
@@ -158,26 +160,31 @@ public class RestApiServiceImpl implements RestApiService {
 		var method = methodMap.get(path);
 		var clazz = classMap.get(path);
 		List<String> parameters = parameterMap.get(method);
-		List<String> args = new ArrayList<>();
-		parameters.forEach(p->{
-			args.add(ServletHelper.getRequest().getParameter(p));
-		});
-		invoke(clazz, method, args.toArray());
+		if (Objects.nonNull(parameters) && !parameters.isEmpty()) {
+			List<String> args = new ArrayList<>();
+			parameters.forEach(p -> {
+				args.add(ServletHelper.getRequest().getParameter(p));
+			});
+			invoke(clazz, method, args.toArray());
+		} else {
+			invoke(clazz, method);
+		}
 	}
-	
+
 	/**
 	 * @param clazz
 	 * @param method
 	 * @throws Exception
 	 */
-	private void invoke(Class<?> clazz, Method method, Object[] args) throws Exception {
-		if(Objects.nonNull(clazz)) {
-			if(Objects.nonNull(method)) {
+	private void invoke(Class<?> clazz, Method method, Object...args) throws Exception {
+		if (Objects.nonNull(clazz)) {
+			if (Objects.nonNull(method)) {
 				Object obj = ReflectionUtils.newInstance(clazz);
 				Field[] fields = clazz.getDeclaredFields();
 				Injector injector = GuiceServletCustomContextListener.getInjectorInstance();
-				Stream.of(fields).forEach(field->{
-					if(field.isAnnotationPresent(com.google.inject.Inject.class) || field.isAnnotationPresent(javax.inject.Inject.class)) {
+				Stream.of(fields).forEach(field -> {
+					if (field.isAnnotationPresent(com.google.inject.Inject.class)
+							|| field.isAnnotationPresent(javax.inject.Inject.class)) {
 						try {
 							ReflectionUtils.setField(obj, field, injector.getInstance(field.getType()));
 						} catch (Exception e) {
@@ -186,12 +193,12 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 				});
-				RestHelper.sendResponseData(
-						ReflectionUtils.invokeMethod(obj, method, args), ServletHelper.getResponse());
+				RestHelper.sendResponseData(ReflectionUtils.invokeMethod(obj, method, args),
+						ServletHelper.getResponse());
 			}
 		}
 	}
-	
+
 	@Override
 	public void doGet() {
 		try {
@@ -245,7 +252,7 @@ public class RestApiServiceImpl implements RestApiService {
 			log.error(e.getMessage());
 		}
 	}
-	
+
 	@Override
 	public void doTrace() {
 		log.error("Not support TRACE http method!!");

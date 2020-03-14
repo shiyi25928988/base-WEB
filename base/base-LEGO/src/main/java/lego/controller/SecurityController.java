@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -12,6 +13,7 @@ import org.apache.shiro.subject.Subject;
 
 import com.google.inject.Inject;
 
+import db.base.entity.User;
 import db.base.service.UserService;
 import html.base.page.LoginHtml;
 import lego.annotation.RestAPI;
@@ -31,21 +33,21 @@ public class SecurityController {
 	UserService userService;
 	
 	@GET
-	@Path(value = "/login")
-	public void loginHtml() {
+	@Path(value = "/sec/login")
+	public String loginHtml() {
 		log.info("get login page..");
-		HtmlHelper.sendHtmlPage(new LoginHtml(ServletHelper.getRequest().getContextPath()).render());
+		return new LoginHtml(ServletHelper.getRequest().getContextPath()).render();
 	}
 	
 	@POST
-	@Path(value = "/login")
-	public void login_post_username_password() {
+	@Path(value = "/sec/login")
+	public JSON<String> login_post_username_password(@PathParam(value = "USER_NAME") String userName, @PathParam(value = "PASS_WORD") String passWord) {
 		log.info("post login request..");
-		HttpServletRequest req = ServletHelper.getRequest();
+		///HttpServletRequest req = ServletHelper.getRequest();
 		//HttpServletResponse resp = ServletHelper.getResponse();
 		
-		String userName = req.getParameter("USER_NAME");
-		String passWord = req.getParameter("PASS_WORD");
+//		String userName = req.getParameter("USER_NAME");
+//		String passWord = req.getParameter("PASS_WORD");
 		
 		Subject currentUser = SecurityUtils.getSubject();
 		/**  */
@@ -66,6 +68,8 @@ public class SecurityController {
 		    	log.error(e.getLocalizedMessage());
 		    }
 		}
+		
+		return new JSON<String>("success!!");
 	}
 	
 	@GET

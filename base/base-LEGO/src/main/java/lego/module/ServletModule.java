@@ -1,20 +1,18 @@
 package lego.module;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.util.Properties;
 
-import org.apache.wicket.protocol.http.IWebApplicationFactory;
-import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.protocol.http.WicketFilter;
+import org.apache.shiro.web.servlet.ShiroFilter;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Scopes;
-import com.google.inject.Singleton;
 
+import cache.base.module.CacheModule;
+import db.base.module.DataSourceModule;
 import lego.filter.SecureFilter;
 import lego.servlet.DispatcherServlet;
 import lombok.extern.slf4j.Slf4j;
+import mq.base.module.MessageQueueModule;
 
 /**
  * @author yshi
@@ -22,7 +20,27 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class ServletModule extends com.google.inject.servlet.ServletModule {
-
+	
+	private static Properties messageQueueProp = new Properties();
+	private static Properties jdbcProp = new Properties();
+	
+	/*
+	 * Load the property files here, which stored in the folder '/base-WEB/src/main/resources' 
+	 * */
+	static {
+		try {
+			messageQueueProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mq.properties"));
+			jdbcProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"));
+		} catch (IOException e) {
+			log.error(e.getMessage());
+			System.exit(1);
+		}
+	}
+	
+	private static DataSourceModule dataSourceModule = new DataSourceModule(jdbcProp);
+	private static MessageQueueModule messageQueueModule = new MessageQueueModule(messageQueueProp);
+	private static IocModule iocModule = new IocModule();
+	private static CacheModule cacheModule = new CacheModule();
 	/*
 	 * (non-Javadoc) 
 	 * 
@@ -30,73 +48,22 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 	 */
 	@Override
 	protected void configureServlets() {
-
+		
+		install(dataSourceModule);
+		install(messageQueueModule);
+		install(iocModule);
+		install(cacheModule);
+		
+		log.info(this.getServletContext().getClass().getCanonicalName());
+		
 		install(new SecurityModule(this.getServletContext()));
 
-		filter("/*").through(SecureFilter.class);
+		filter("/sec/*").through(SecureFilter.class);
 		bind(SecureFilter.class).in(Scopes.SINGLETON);
-		
+
 		/** DISPATCH */
 		serve("/*").with(DispatcherServlet.class);
 		bind(DispatcherServlet.class).in(Scopes.SINGLETON);
 	}
-
-	/**
-	 * WicketFilter....
-	 * @author yshi
-	 *
-	 */
-	@Singleton
-	private static class CustomWicketFilter extends WicketFilter {
-
-		@Inject
-		private Provider<WebApplication> webApplicationProvider;
-
-		/**
-		 *
-		 */
-		@Override
-		protected IWebApplicationFactory getApplicationFactory() {
-			return new IWebApplicationFactory() {
-				@Override
-				public WebApplication createApplication(WicketFilter filter) {
-					return webApplicationProvider.get();
-				}
-
-				@Override
-				public void destroy(WicketFilter filter) {
-					log.info("WicketFilter destroy...");
-					filter.destroy();
-				}
-			};
-		}
-	}
-
-	/**
-	 * Replaced the WEB.xml configuration
-	 * 
-	 * <web-app>
-	 * 		<display-name>Wicket Test</display-name>
-	 * 		<filter>
-	 * 			<filter-name>TestApplication</filter-name>
-	 * 			<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
-	 * 			<init-param>
-	 * 				<param-name>applicationClassName</param-name>
-	 * 				<param-value>org.wicketTutorial.WicketApplication</param-value>
-	 * 			</init-param>
-	 * 		</filter>
-	 * 		<filter-mapping>
-	 * 			<filter-name>TestApplication</filter-name>
-	 * 			<url-pattern>/*</url-pattern>
-	 * 		</filter-mapping>
-	 * </web-app>
-	 * 
-	 * @return Map
-	 */
-	private Map<String, String> createWicketFilterInitParams() {
-		Map<String, String> wicketFilterParams = new HashMap<String, String>();
-		wicketFilterParams.put(WicketFilter.FILTER_MAPPING_PARAM, "/*");
-		wicketFilterParams.put("applicationClassName", "base.wicket.WicketRootApplication");
-		return wicketFilterParams;
-	}
+	
 }

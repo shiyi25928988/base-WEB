@@ -6,7 +6,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 
-import lego.module.ModulesConfig;
+import lego.module.ServletModule;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,7 +33,7 @@ public class GuiceServletCustomContextListener extends GuiceServletContextListen
 	@Override
 	protected synchronized Injector getInjector() {
 		if (Objects.isNull(injector)) {
-			injector = Guice.createInjector(ModulesConfig.getAllModules());
+			injector = Guice.createInjector(new ServletModule());
 		}
 		return injector;
 	}

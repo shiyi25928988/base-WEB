@@ -20,9 +20,7 @@
 		<module>base-COMMON</module>
 		<module>base-NEUROPH</module>
 		<module>base-SELENIUM</module>
-		<module>base-jetty-boot</module>
 		<module>base-LEGO</module>
-		<module>base-security</module>
 	</modules>
 
 	<properties>

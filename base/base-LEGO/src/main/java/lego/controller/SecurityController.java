@@ -17,6 +17,7 @@ import db.base.entity.User;
 import db.base.service.UserService;
 import html.base.page.LoginHtml;
 import lego.annotation.RestAPI;
+import lego.rest.result.HTML;
 import lego.rest.result.JSON;
 import lego.rest.utils.HtmlHelper;
 import lego.servlet.ServletHelper;
@@ -35,9 +36,9 @@ public class SecurityController {
 	
 	@GET
 	@Path(value = "/sec/login")
-	public String loginHtml() {
+	public HTML loginHtml() {
 		log.info("get login page..");
-		return new LoginHtml(ServletHelper.getRequest().getContextPath()).render();
+		return new HTML(new LoginHtml(ServletHelper.getRequest().getContextPath()).render());
 	}
 	
 	@POST

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import base.common.json.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
-import mq.base.utils.JsonUtils;
 
 /**
  * @author yshi

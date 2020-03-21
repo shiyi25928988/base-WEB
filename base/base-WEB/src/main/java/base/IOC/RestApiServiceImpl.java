@@ -29,7 +29,6 @@ import base.config.GuiceServletConfig;
 import base.rest.utils.RestHelper;
 import base.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;
-import mq.base.utils.JsonUtils;
 
 /**
  * @author yshi

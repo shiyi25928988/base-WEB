@@ -1,11 +1,26 @@
 package lego.rest.result;
 
+import lego.rest.utils.MimeType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * @author shiyi
+ *
+ */
 @Data
 @AllArgsConstructor
-public class HTML {
+@NoArgsConstructor
+public class HTML implements ReturnType<String>{
 
 	private String html;
+	
+	private final MimeType mimeType = MimeType.TEXT_HTML;
+	private final String suffix = ".html";
+	
+	@Override
+	public String getData() {
+		return html;
+	}
 }

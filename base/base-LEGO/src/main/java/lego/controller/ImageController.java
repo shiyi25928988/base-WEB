@@ -7,8 +7,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import lego.annotation.RestAPI;
-import lego.rest.utils.HtmlHelper;
 import lego.rest.utils.MimeType;
+import lego.rest.utils.RestHelper;
 import lego.servlet.ServletHelper;
 
 /**
@@ -22,14 +22,14 @@ public class ImageController {
 	@Path(value = "/image/pussy.png")
 	public void getPussy() throws IOException {
 		String filePath = ServletHelper.getRealPath() + "WEB-INF" + File.separator +"image" + File.separator + "pussy.png";
-		HtmlHelper.sendImage(filePath, MimeType.IMAGE_PNG);
+		RestHelper.sendImage(filePath, MimeType.IMAGE_PNG);
 	}
 	
 	@GET
 	@Path(value = "/logo.png")
 	public void getLogo() throws IOException {
 		String filePath = ServletHelper.getRealPath() + "WEB-INF" + File.separator +"image" + File.separator + "logo.png";
-		HtmlHelper.sendImage(filePath, MimeType.IMAGE_PNG);
+		RestHelper.sendImage(filePath, MimeType.IMAGE_PNG);
 	}
 	
 

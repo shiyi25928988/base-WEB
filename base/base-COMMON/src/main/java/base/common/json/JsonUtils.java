@@ -31,6 +31,11 @@ public final class JsonUtils {
 	public static <T> String toJson(T t) throws JsonProcessingException {
 		return objectMapper.writeValueAsString(t);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T fromJson(byte[] content, Class<?> clazz) throws JsonParseException, JsonMappingException, IOException {
+		return (T) objectMapper.readValue(content, clazz);
+	}
 
 	public static String getSimpleClassName(String canonicalName) {
 		String[] names = canonicalName.split("\\.");

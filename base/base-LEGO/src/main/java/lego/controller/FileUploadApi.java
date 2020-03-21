@@ -2,11 +2,9 @@ package lego.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,7 +15,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import html.base.form.UploadForm;
 import lego.annotation.RestAPI;
-import lego.rest.utils.HtmlHelper;
+import lego.rest.result.HTML;
+import lego.rest.result.Result;
 import lego.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,30 +37,23 @@ public class FileUploadApi {
 
 	@GET
 	@Path(value = "/uploadform")
-	public void getUploadForm() {
-		HtmlHelper.sendHtmlPage(new UploadForm(ServletHelper.getRequest().getContextPath()).renderForm().render());
+	public HTML getUploadForm() {
+		return new HTML(new UploadForm(ServletHelper.getRequest().getContextPath()).renderForm().render());
 	}
 
 	@POST
 	@Path(value = "/upload")
-	public void uploadFile() throws IOException {
+	public Result uploadFile() throws IOException {
 
 		HttpServletRequest request = ServletHelper.getRequest();
-		HttpServletResponse response = ServletHelper.getResponse();
 
 		if (!ServletFileUpload.isMultipartContent(request)) {
-			PrintWriter writer = response.getWriter();
-			writer.println("Error: form must include \"enctype=multipart/form-data\"");
-			writer.flush();
-			return;
+			return Result.Builder.failed("Error: form must include \"enctype=multipart/form-data\"");
 		}
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
-		
 		factory.setSizeThreshold(MEMORY_THRESHOLD);
-		
 		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
-
 		ServletFileUpload upload = new ServletFileUpload(factory);
 
 		upload.setFileSizeMax(MAX_FILE_SIZE);
@@ -101,15 +93,7 @@ public class FileUploadApi {
 		} catch (Exception ex) {
 			request.setAttribute("message", "error: " + ex.getMessage());
 		}
-
-//        try {
-//			request.getServletContext().getRequestDispatcher("/message.jsp").forward(
-//			        request, response);
-//		} catch (ServletException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
+		return Result.Builder.success("Succeed Upload!");
 	}
 
 }

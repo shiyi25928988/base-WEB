@@ -25,14 +25,21 @@ public class UserServiceImpl implements UserService{
     
     @Transactional
     @Override
-    public Optional<User> getUser(String userId) {
-    	return this.userMapper.getUser(userId);
-    	
+    public User getUser(String userId) {
+    	return this.userMapper.getUser(userId).get();
     }
 
-    @Transactional
 	@Override
-	public List<User> getAllUser() {
-		return this.userMapper.getAllUser();
+	public int insert(User user) {
+		// TODO Auto-generated method stub
+		return this.userMapper.insert(user);
+		
 	}
+
+//    @Transactional
+//	@Override
+//	public List<User> getAllUser() {
+//		//return this.userMapper.getAllUser();
+//    	return this.userMapper.;
+//	}
 }

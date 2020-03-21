@@ -2,6 +2,7 @@ package lego.ioc.service;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,12 +26,15 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Strings;
 import com.google.inject.Injector;
 
+import lego.annotation.RequestBody;
+import lego.exception.EmptyPathParameterException;
+import lego.exception.ReduplicativeMathodPathException;
+import lego.exception.SingleRequestBodyRequiredException;
 import lego.ioc.ReflectionUtils;
 import lego.rest.utils.RestHelper;
 import lego.servlet.GuiceServletCustomContextListener;
 import lego.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;
-import mq.base.utils.JsonUtils;
 
 /**
  * @author yshi
@@ -51,6 +55,7 @@ public class RestApiServiceImpl implements RestApiService {
 	private Map<String, Method> methodMap_HEAD = new ConcurrentHashMap<>();
 
 	private Map<Method, List<String>> parameterMap = new ConcurrentHashMap<>();
+	private Map<Method, Class<?>> requestBodyMap = new ConcurrentHashMap<>();
 
 	/**
 	 * Constructor
@@ -64,65 +69,58 @@ public class RestApiServiceImpl implements RestApiService {
 				Method[] methods = clazz.getDeclaredMethods();
 
 				Stream.of(methods).forEach(m -> {
-
+					// NO ELSE to ensure that we can add multi-annotation on the same method
 					if (m.isAnnotationPresent(GET.class)) {
-						if (m.isAnnotationPresent(Path.class)) {
-							Path path = m.getAnnotation(Path.class);
-							if (!Strings.isNullOrEmpty(path.value())) {
-								methodMap_GET.put(path.value(), m);
-								classMap.put(path.value(), clazz);
-								addMethodParameter(m);
-							}
+						try {
+							setMethodAndClassMap(clazz, m, methodMap_GET);
+						} catch (ReduplicativeMathodPathException | EmptyPathParameterException
+								| SingleRequestBodyRequiredException e) {
+							log.error(e.getLocalizedMessage());
 						}
 					}
+
 					if (m.isAnnotationPresent(PUT.class)) {
-						if (m.isAnnotationPresent(Path.class)) {
-							Path path = m.getAnnotation(Path.class);
-							if (!Strings.isNullOrEmpty(path.value())) {
-								methodMap_PUT.put(path.value(), m);
-								classMap.put(path.value(), clazz);
-								addMethodParameter(m);
-							}
+						try {
+							setMethodAndClassMap(clazz, m, methodMap_PUT);
+						} catch (ReduplicativeMathodPathException | EmptyPathParameterException
+								| SingleRequestBodyRequiredException e) {
+							log.error(e.getLocalizedMessage());
 						}
 					}
+
 					if (m.isAnnotationPresent(POST.class)) {
-						if (m.isAnnotationPresent(Path.class)) {
-							Path path = m.getAnnotation(Path.class);
-							if (!Strings.isNullOrEmpty(path.value())) {
-								methodMap_POST.put(path.value(), m);
-								classMap.put(path.value(), clazz);
-								addMethodParameter(m);
-							}
+						try {
+							setMethodAndClassMap(clazz, m, methodMap_POST);
+						} catch (ReduplicativeMathodPathException | EmptyPathParameterException
+								| SingleRequestBodyRequiredException e) {
+							log.error(e.getLocalizedMessage());
 						}
 					}
+
 					if (m.isAnnotationPresent(DELETE.class)) {
-						if (m.isAnnotationPresent(Path.class)) {
-							Path path = m.getAnnotation(Path.class);
-							if (!Strings.isNullOrEmpty(path.value())) {
-								methodMap_DELETE.put(path.value(), m);
-								classMap.put(path.value(), clazz);
-								addMethodParameter(m);
-							}
+						try {
+							setMethodAndClassMap(clazz, m, methodMap_DELETE);
+						} catch (ReduplicativeMathodPathException | EmptyPathParameterException
+								| SingleRequestBodyRequiredException e) {
+							log.error(e.getLocalizedMessage());
 						}
 					}
+
 					if (m.isAnnotationPresent(OPTIONS.class)) {
-						if (m.isAnnotationPresent(Path.class)) {
-							Path path = m.getAnnotation(Path.class);
-							if (!Strings.isNullOrEmpty(path.value())) {
-								methodMap_OPTIONS.put(path.value(), m);
-								classMap.put(path.value(), clazz);
-								addMethodParameter(m);
-							}
+						try {
+							setMethodAndClassMap(clazz, m, methodMap_OPTIONS);
+						} catch (ReduplicativeMathodPathException | EmptyPathParameterException
+								| SingleRequestBodyRequiredException e) {
+							log.error(e.getLocalizedMessage());
 						}
 					}
+
 					if (m.isAnnotationPresent(HEAD.class)) {
-						if (m.isAnnotationPresent(Path.class)) {
-							Path path = m.getAnnotation(Path.class);
-							if (!Strings.isNullOrEmpty(path.value())) {
-								methodMap_HEAD.put(path.value(), m);
-								classMap.put(path.value(), clazz);
-								addMethodParameter(m);
-							}
+						try {
+							setMethodAndClassMap(clazz, m, methodMap_HEAD);
+						} catch (ReduplicativeMathodPathException | EmptyPathParameterException
+								| SingleRequestBodyRequiredException e) {
+							log.error(e.getLocalizedMessage());
 						}
 					}
 				});
@@ -131,23 +129,56 @@ public class RestApiServiceImpl implements RestApiService {
 	}
 
 	/**
+	 * @param clazz
 	 * @param method
+	 * @param methodMap
+	 * @throws ReduplicativeMathodPathException
+	 * @throws SingleRequestBodyRequiredException
+	 * @throws EmptyPathParameterException
 	 */
-	private void addMethodParameter(final Method method) {
+	private void setMethodAndClassMap(Class<?> clazz, Method method, Map<String, Method> methodMap)
+			throws ReduplicativeMathodPathException, EmptyPathParameterException, SingleRequestBodyRequiredException {
+		if (method.isAnnotationPresent(Path.class)) {
+			Path path = method.getAnnotation(Path.class);
+			if (!Strings.isNullOrEmpty(path.value())) {
+				if (Objects.nonNull(methodMap.get(path.value()))) {
+					throw new ReduplicativeMathodPathException("Request Path is already exist with : " + path.value());
+				}
+				methodMap.put(path.value(), method);
+				classMap.put(path.value(), clazz);
+				addMethodParameter(method);
+			}
+		}
+	}
+
+	/**
+	 * @param method
+	 * @throws EmptyPathParameterException
+	 * @throws SingleRequestBodyRequiredException
+	 */
+	private void addMethodParameter(final Method method)
+			throws EmptyPathParameterException, SingleRequestBodyRequiredException {
 		if (method.getParameterCount() <= 0)
 			return;
 		List<String> list = new LinkedList<>();
 
-		Stream.of(method.getParameters()).forEach(p -> {
+		for (Parameter p : method.getParameters()) {
 			if (p.isAnnotationPresent(PathParam.class)) {
 				PathParam pathParam = (PathParam) p.getAnnotation(PathParam.class);
 				if (Strings.isNullOrEmpty(pathParam.value())) {
-					// throw new InvalidPathParameterException();
+					throw new EmptyPathParameterException();
 				} else {
 					list.add(pathParam.value());
 				}
+			} else
+
+			if (p.isAnnotationPresent(RequestBody.class)) {
+				if (Objects.nonNull(requestBodyMap.get(method))) {
+					throw new SingleRequestBodyRequiredException(method.getName() + " required single parameter!!");
+				}
+				requestBodyMap.put(method, p.getType());
 			}
-		});
+		}
 		parameterMap.put(method, list);
 	}
 
@@ -156,20 +187,29 @@ public class RestApiServiceImpl implements RestApiService {
 	 * @throws Exception
 	 */
 	private void invoke(final Map<String, Method> methodMap) throws Exception {
+		List<String> args = new ArrayList<>();
 		var req = ServletHelper.getRequest();
 		var path = StringUtils.remove(req.getRequestURI(), req.getContextPath());
 		var method = methodMap.get(path);
 		var clazz = classMap.get(path);
 		List<String> parameters = parameterMap.get(method);
+
+		Class<?> requestBodyClass = requestBodyMap.get(method);
+
 		if (Objects.nonNull(parameters) && !parameters.isEmpty()) {
-			List<String> args = new ArrayList<>();
+
 			parameters.forEach(p -> {
 				args.add(ServletHelper.getRequest().getParameter(p));
 			});
 			invoke(clazz, method, args.toArray());
-		} else {
-			invoke(clazz, method);
+			return;
 		}
+		if (Objects.nonNull(requestBodyClass)) {
+			invoke(clazz, method, RestHelper.getRequestPostBody(requestBodyClass));
+			return;
+
+		}
+		invoke(clazz, method);
 	}
 
 	/**
@@ -177,7 +217,7 @@ public class RestApiServiceImpl implements RestApiService {
 	 * @param method
 	 * @throws Exception
 	 */
-	private void invoke(Class<?> clazz, Method method, Object...args) throws Exception {
+	private void invoke(Class<?> clazz, Method method, Object... args) throws Exception {
 		if (Objects.nonNull(clazz)) {
 			if (Objects.nonNull(method)) {
 				Object obj = ReflectionUtils.newInstance(clazz);

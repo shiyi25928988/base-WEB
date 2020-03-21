@@ -49,6 +49,11 @@
 			<artifactId>base-CACHE</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.yshi</groupId>
+			<artifactId>base-COMMON</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -88,7 +93,7 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+
 		<!-- CXF-restful -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>

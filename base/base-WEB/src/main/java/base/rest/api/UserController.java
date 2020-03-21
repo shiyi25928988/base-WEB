@@ -32,10 +32,8 @@ public class UserController {
 	@Path(value = "/user")
 	public JSON<User> getUserByID(@PathParam(value = "USER_ID") String userId) {
 		User user = new User();
-		Optional<User> opUser = userService.getUser(userId);
-		if (opUser.isPresent()) {
-			user = opUser.get();
-		}
+		User opUser = userService.getUser(userId);
+
 		return new JSON<User>(user);
 	}
 

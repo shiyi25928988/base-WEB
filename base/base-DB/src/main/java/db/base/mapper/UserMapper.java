@@ -3,6 +3,7 @@ package db.base.mapper;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -23,4 +24,7 @@ public interface UserMapper {
     
     @Select("SELECT * FROM user ")
     List<User> getAllUser();
+    
+    @Insert("INSERT INTO user (USER_ID,USER_NAME) VALUES (#{userId},#{userName})")
+    int insert(User user);
 }

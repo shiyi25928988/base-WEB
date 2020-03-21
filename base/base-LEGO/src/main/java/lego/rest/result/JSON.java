@@ -1,19 +1,24 @@
 package lego.rest.result;
 
+import lego.rest.utils.MimeType;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * @author shiyi
  *
  * @param <T>
  */
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JSON<T> {
+public class JSON<T> implements ReturnType<T>{
 	private T obj; 
+	private final MimeType mimeType = MimeType.APPLICATION_JSON;
+	private final String suffix = ".json";
+	@Override
+	public T getData() {
+		return obj;
+	}
 }

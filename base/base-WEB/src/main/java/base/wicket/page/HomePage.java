@@ -25,7 +25,7 @@ public class HomePage extends WebPage {
 
 		//add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
 		
-		cache.put("002", userService.getUser("002").get().getUserName());
+		cache.put("002", userService.getUser("002").getUserName());
 		
 		add(new Label("version", cache.get("002").get().toString()));
 

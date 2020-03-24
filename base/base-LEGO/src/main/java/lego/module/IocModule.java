@@ -63,4 +63,12 @@ public class IocModule extends AbstractModule {
 			return new RestApiServiceImpl(controllerClassSet);
 		}
 	}
+	
+	public static void registScanPackage(Class<?> clazz) throws ClassNotFoundException, IOException {
+		registScanPackage(clazz.getPackage());
+	}
+	
+	public static void registScanPackage(Package pack) throws ClassNotFoundException, IOException {
+		controllerClassSet.addAll(ClassHelper.getControllers(pack.getName()));
+	}
 }

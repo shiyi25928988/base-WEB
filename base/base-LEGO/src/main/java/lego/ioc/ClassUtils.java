@@ -85,10 +85,11 @@ public final class ClassUtils {
 	private static void addClass(final Set<Class<?>> classSet, 
 								@NonNull final String packagePath,
 								@NonNull final String packageName) {
-
+		
 		File[] files = new File(packagePath).listFiles(new FileFilter() {
 			@Override
 			public boolean accept(final File file) {
+
 				if (file.isFile()) {
 					if (file.getName().endsWith(".class")) {
 						return true;
@@ -155,6 +156,8 @@ public final class ClassUtils {
 	 * @return
 	 */
 	private static String escapeSpace(final String str) {
-		return str.replace("%20", " ");
+		String newStr = str.replace("%20", " ");
+		newStr = newStr.replace("%5c", File.separator);
+		return newStr;
 	}
 }

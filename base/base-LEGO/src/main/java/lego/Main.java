@@ -1,10 +1,6 @@
 package lego;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-import lego.jetty.service.JettyBootService;
-import lego.module.JettyModule;
+import java.io.IOException;
 
 /**
  * @author shiyi
@@ -12,9 +8,12 @@ import lego.module.JettyModule;
  */
 public class Main {
 
-	public static void main(String... strings) throws Exception {
-		Injector injector = Guice.createInjector(new JettyModule());
-		JettyBootService service = injector.getInstance(JettyBootService.class);
-		service.start();
+	public static void main(String... strings)  {
+		try {
+			ServiceBooter.startOn(null);
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

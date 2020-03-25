@@ -5,14 +5,14 @@ import java.io.IOException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-import lego.annotation.RestAPI;
+import lego.annotation.Controller;
 import lego.rest.utils.RestHelper;
 
 /**
  * @author yshi
  *
  */
-@RestAPI
+@Controller
 public class CssController {
 	
 	@GET

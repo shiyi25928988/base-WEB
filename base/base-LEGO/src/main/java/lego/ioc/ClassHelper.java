@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import lego.annotation.RestAPI;
+import lego.annotation.Controller;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -47,7 +47,7 @@ public final class ClassHelper {
 	 * @throws IOException
 	 */
 	public static Set<Class<?>> getControllers(String scanPackageName) throws ClassNotFoundException, IOException {
-		Set<Class<?>> classSet = getAnnotationClass(ClassHelper.getClassSet(scanPackageName), RestAPI.class);
+		Set<Class<?>> classSet = getAnnotationClass(ClassHelper.getClassSet(scanPackageName), Controller.class);
 		classSet.forEach(clazz -> log.info(clazz.getCanonicalName()));
 		return classSet;
 	}

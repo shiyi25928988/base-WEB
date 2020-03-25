@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-import lego.annotation.RestAPI;
+import lego.annotation.Controller;
 import lego.rest.utils.MimeType;
 import lego.rest.utils.RestHelper;
 import lego.servlet.ServletHelper;
@@ -15,7 +15,7 @@ import lego.servlet.ServletHelper;
  * @author yshi
  *
  */
-@RestAPI
+@Controller
 public class ImageController {
 
 	@GET

@@ -16,7 +16,7 @@ import cache.base.service.CacheService;
 import db.base.entity.User;
 import db.base.service.UserService;
 import lego.annotation.RequestBody;
-import lego.annotation.RestAPI;
+import lego.annotation.Controller;
 import lego.rest.result.JSON;
 import lego.rest.result.Result;
 
@@ -24,7 +24,7 @@ import lego.rest.result.Result;
  * @author yshi
  *
  */
-@RestAPI
+@Controller
 public class UserController {
 
 	@Inject

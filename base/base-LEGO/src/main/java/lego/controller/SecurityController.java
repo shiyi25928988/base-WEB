@@ -15,7 +15,7 @@ import com.google.inject.Inject;
 
 import db.base.service.UserService;
 import html.base.page.LoginHtml;
-import lego.annotation.RestAPI;
+import lego.annotation.Controller;
 import lego.rest.result.HTML;
 import lego.rest.result.JSON;
 import lego.servlet.ServletHelper;
@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-@RestAPI
+@Controller
 public class SecurityController {
 	
 	@Inject

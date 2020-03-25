@@ -14,7 +14,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import html.base.form.UploadForm;
-import lego.annotation.RestAPI;
+import lego.annotation.Controller;
 import lego.rest.result.HTML;
 import lego.rest.result.Result;
 import lego.servlet.ServletHelper;
@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-@RestAPI
+@Controller
 public class FileUploadApi {
 
 	private static final String UPLOAD_DIRECTORY = "upload";

@@ -21,14 +21,11 @@ public class Main {
 
 业务示例
 ```java
-@RestAPI
+@Controller
 public class UserController {
 
 	@Inject
 	UserService userService;
-	
-	@Inject
-	CacheService<String, User> cacheService;
 
 	@GET
 	@Path(value = "/test/user")

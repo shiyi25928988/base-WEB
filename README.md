@@ -17,3 +17,33 @@ public class Main {
 	}
 }
 ```
+
+
+业务示例
+```java
+@RestAPI
+public class UserController {
+
+	@Inject
+	UserService userService;
+	
+	@Inject
+	CacheService<String, User> cacheService;
+
+	@GET
+	@Path(value = "/test/user")
+	public JSON<User> getUserByID(@PathParam(value = "USER_ID") String userId) {
+		User user = userService.getUser(userId);
+		return new JSON<User>(user);
+	}
+	
+	@POST
+	@Path(value = "/test/user/create")
+	public Result create(@RequestBody User user) {
+		// TODO
+		userService.insert(user);
+		return Result.Builder.success("create success!!");
+	}
+
+}
+```

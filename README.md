@@ -1,5 +1,5 @@
-# 写给自己用的微服务应用框架
-## 基于Guice
+# 一个微服务应用框架
+## 基于Guice，完全脱离Spring
 ### 暂时没有文档
 #### 启动非常快
 
@@ -19,7 +19,7 @@ public class Main {
 ```
 
 
-业务示例
+HTTP接口代码示例
 ```java
 @Controller
 public class UserController {

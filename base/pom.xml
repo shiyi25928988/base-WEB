@@ -21,6 +21,7 @@
 		<module>base-NEUROPH</module>
 		<module>base-SELENIUM</module>
 		<module>base-LEGO</module>
+		<module>base-business-custom-001</module>
 	</modules>
 
 	<properties>

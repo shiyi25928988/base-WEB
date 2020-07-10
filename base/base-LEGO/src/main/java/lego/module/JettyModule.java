@@ -23,6 +23,7 @@ import lego.servlet.GuiceServletCustomContextListener;
  */
 public class JettyModule extends AbstractModule {
 
+	@Override
 	protected void configure() {
 		bind(ServletContextHandler.class).toProvider(ServletContextHandlerProvider.class).in(Singleton.class);
 		bind(Server.class).toProvider(ServerProvider.class).in(Singleton.class);

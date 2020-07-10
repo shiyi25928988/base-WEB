@@ -24,7 +24,7 @@ public class ServiceBooter {
 		moduleList.add(new JettyModule());
 	}
 
-	public static void startOn(Class<?> clazz, Module... modules) throws ClassNotFoundException, IOException {
+	public static void startOnJetty(Class<?> clazz, Module... modules) throws ClassNotFoundException, IOException {
 		Injector injector;
 		if (Objects.nonNull(clazz))
 			IocModule.registScanPackage(clazz);

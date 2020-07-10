@@ -25,7 +25,7 @@ public class WebDriverFactory {
 		
 		switch (type) {
 		case Chrome:
-			System.setProperty(WebDriverPath.chromeDriverPropertyKey, WebDriverPath.chromeDriverPath_v79);
+			System.setProperty(WebDriverPath.chromeDriverPropertyKey, WebDriverPath.chromeDriverPath_v83);
 			webDriver = new ChromeDriver();
 			break;
 		case Edge:

@@ -12,7 +12,7 @@ public class WebDriverFactoryTest {
 	
 	@Test
 	public void test() {
-		System.setProperty(WebDriverPath.chromeDriverPropertyKey, WebDriverPath.chromeDriverPath_v79);
+		System.setProperty(WebDriverPath.chromeDriverPropertyKey, WebDriverPath.chromeDriverPath_v83);
 		WebDriver driver = WebDriverFactory.buildWebDriver(BrowserType.Chrome);
 		Assert.assertNotNull(driver);
 	}

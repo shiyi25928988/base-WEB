@@ -12,7 +12,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.yshi</groupId>
-			<artifactId>base-LEGO</artifactId>
+			<artifactId>base-CORE</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

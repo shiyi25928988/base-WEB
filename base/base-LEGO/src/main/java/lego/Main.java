@@ -2,10 +2,17 @@ package lego;
 
 import java.io.IOException;
 
+import lego.annotation.PropertiesFile;
+
 /**
  * @author shiyi
  *
  */
+@PropertiesFile(
+		files = { 
+					"application.properties" 
+				}
+	)
 public class Main {
 
 	public static void main(String... strings)  {

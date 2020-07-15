@@ -7,23 +7,30 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.base.Strings;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author shiyi
  *
  */
+@Slf4j
 public class CoreProperties {
 	
-	private static Properties properties = new Properties();
 	private static Map<String, String> propertiesFileRegister = new ConcurrentHashMap<>();
 
 	public static void setProperties(String propertiesFileName) {
 		propertiesFileRegister.put(propertiesFileName, propertiesFileName);
 		try {
-			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(propertiesFileName));
+			System.getProperties().load(Thread.currentThread().getContextClassLoader().getResourceAsStream(propertiesFileName));
 		} catch (IOException e) {
 			e.printStackTrace();
 			propertiesFileRegister.remove(propertiesFileName);
 		}
+		
+		System.getProperties().forEach((k,v) ->{
+			log.info("properties key : " +  k);
+			log.info("properties value : " +  v);
+		});
 	}
 	
 	/**
@@ -41,8 +48,8 @@ public class CoreProperties {
 	 */
 	public static String getProperties(String key, String defaultValue) {
 		
-		if(CoreProperties.properties.containsKey(key)) {
-			String value = CoreProperties.properties.getProperty(key);
+		if(System.getProperties().containsKey(key)) {
+			String value = System.getProperties().getProperty(key);
 			if(Strings.isNullOrEmpty(value)) {
 				return defaultValue;
 			}else {

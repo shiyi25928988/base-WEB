@@ -4,10 +4,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+import core.annotation.Controller;
+import core.http.result.JSON;
 import db.base.entity.User;
-import lego.annotation.Controller;
-import lego.rest.result.HTML;
-import lego.rest.result.JSON;
 
 @Controller
 public class ApiTest {

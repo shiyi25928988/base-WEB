@@ -13,12 +13,10 @@ import javax.ws.rs.Produces;
 import com.google.inject.Inject;
 
 import cache.base.service.CacheService;
+import core.annotation.Controller;
+import core.http.result.JSON;
 import db.base.entity.User;
 import db.base.service.UserService;
-import lego.annotation.RequestBody;
-import lego.annotation.Controller;
-import lego.rest.result.JSON;
-import lego.rest.result.Result;
 
 /**
  * @author yshi

@@ -19,10 +19,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class DataSourceModule extends MyBatisModule {
-	private  Properties myBatisProperties;
 	
-	public DataSourceModule(Properties properties) {
-		this.myBatisProperties = properties;
+	public DataSourceModule() {
 	}
 
 	/* (non-Javadoc)
@@ -34,7 +32,7 @@ public class DataSourceModule extends MyBatisModule {
 		/*
 		 * myBatisProperties is a property include JDBC 
 		 * */
-		Names.bindProperties(binder(), this.myBatisProperties);
+		Names.bindProperties(binder(), System.getProperties());
 		bindDataSourceProviderType(PooledDataSourceProvider.class);
 		bindTransactionFactoryType(JdbcTransactionFactory.class);
 		

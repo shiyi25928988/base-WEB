@@ -20,9 +20,9 @@
 		<module>base-COMMON</module>
 		<module>base-NEUROPH</module>
 		<module>base-SELENIUM</module>
-		<module>base-LEGO</module>
 		<module>base-business-custom-001</module>
 		<module>base-CORE</module>
+		<module>base-FORM</module>
 	</modules>
 
 	<properties>

@@ -21,24 +21,13 @@ import mq.base.module.MessageQueueModule;
 @Slf4j
 public class ServletModule extends com.google.inject.servlet.ServletModule {
 	
-	private static Properties messageQueueProp = new Properties();
-	private static Properties jdbcProp = new Properties();
 	
 	/*
 	 * Load the property files here, which stored in the folder '/base-WEB/src/main/resources' 
 	 * */
-	static {
-		try {
-			messageQueueProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mq.properties"));
-			jdbcProp.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"));
-		} catch (IOException e) {
-			log.error(e.getMessage());
-			System.exit(1);
-		}
-	}
 	
-	private static DataSourceModule dataSourceModule = new DataSourceModule(jdbcProp);
-	private static MessageQueueModule messageQueueModule = new MessageQueueModule(messageQueueProp);
+	private static DataSourceModule dataSourceModule = new DataSourceModule();
+	private static MessageQueueModule messageQueueModule = new MessageQueueModule(System.getProperties());
 	private static IocModule iocModule = new IocModule();
 	private static CacheModule cacheModule = new CacheModule();
 	/*

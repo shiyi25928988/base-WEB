@@ -1,6 +1,7 @@
 package core.booter;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ import core.module.IocModule;
 import core.module.JettyModule;
 import core.properties.CoreProperties;
 import core.service.jetty.JettyBootService;
+import lombok.extern.slf4j.Slf4j;
 
 
 
@@ -22,6 +24,7 @@ import core.service.jetty.JettyBootService;
  * @author
  *
  */
+@Slf4j
 public class ServiceBooter {
 
 	private static List<Module> moduleList = new ArrayList<>();
@@ -51,7 +54,10 @@ public class ServiceBooter {
 	 * @param mainClass
 	 */
 	private static void loadPropertiesFile(Class<?> mainClass) {
+		
+		
 		PropertiesFile propertiesFile = mainClass.getAnnotation(PropertiesFile.class);
+		
 		
 		if(Objects.isNull(propertiesFile)) {
 			return;
@@ -65,7 +71,6 @@ public class ServiceBooter {
 		Arrays.asList(fileName).forEach(pf -> {
 			CoreProperties.setProperties(pf);
 		});
-		
 	}
 
 }

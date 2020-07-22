@@ -1,4 +1,4 @@
-package base.crawler.crawler;
+package base.crawler.crawlerType;
 
 import java.util.regex.Pattern;
 

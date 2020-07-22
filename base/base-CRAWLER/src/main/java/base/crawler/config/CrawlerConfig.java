@@ -29,11 +29,11 @@ public class CrawlerConfig extends CrawlConfig{
 	
 	public static Integer maxPagesToFetch = -1;
 	
-	public static String userAgentString = HttpHeader.VALUE_USER_AGENT;
+	public static String userAgentString = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36";
 	
 	public static Collection<? extends Header> defaultHeaders = HttpHeader.getHeaders();
 	
-	public static Integer politenessDelay = 1000; // milliseconds delay between request 
+	public static Integer politenessDelay = 100; // milliseconds delay between request 
 	
 	public static Boolean includeHttpsPages = true;
 	
@@ -45,9 +45,9 @@ public class CrawlerConfig extends CrawlConfig{
 	
 	public static Integer maxTotalConnections = 1024;
 	
-	public static Integer socketTimeout = 10 * 1000; //10 seconds
+	public static Integer socketTimeout = 100 * 1000; //10 seconds
 	
-	public static Integer connectionTimeout = 60 * 1000; //60 second
+	public static Integer connectionTimeout = 600 * 1000; //60 second
 	
 	public static Integer maxOutgoingLinksToFollow = Integer.MAX_VALUE;//-1;
 	

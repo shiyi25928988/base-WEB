@@ -1,4 +1,4 @@
-package base.crawler;
+package base.crawler.utils;
 
 import java.io.IOException;
 import java.net.InetAddress;

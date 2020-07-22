@@ -198,6 +198,7 @@ public abstract class ContentType {
 				}
 			}
 		}
+		log.info("CharSet : " + cs);
 		return cs;
 	}
 	

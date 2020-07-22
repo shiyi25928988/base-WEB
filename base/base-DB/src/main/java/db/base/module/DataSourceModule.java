@@ -8,7 +8,10 @@ import org.mybatis.guice.datasource.builtin.PooledDataSourceProvider;
 
 import com.google.inject.name.Names;
 
+import db.base.mapper.NewsMapper;
 import db.base.mapper.UserMapper;
+import db.base.service.NewsService;
+import db.base.service.NewsServiceImpl;
 import db.base.service.UserService;
 import db.base.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +48,7 @@ public class DataSourceModule extends MyBatisModule {
 	 */
 	private void bindService() {
 		bind(UserService.class).to(UserServiceImpl.class);
+		bind(NewsService.class).to(NewsServiceImpl.class);
 	}
 	
 	/**
@@ -52,6 +56,7 @@ public class DataSourceModule extends MyBatisModule {
 	 */
 	private void addMapper() {
 		addMapperClass(UserMapper.class);
+		addMapperClass(NewsMapper.class);
 	}
 	
 }

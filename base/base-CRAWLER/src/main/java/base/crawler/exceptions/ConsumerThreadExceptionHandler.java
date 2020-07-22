@@ -3,7 +3,7 @@ package base.crawler.exceptions;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.concurrent.ExecutorService;
 
-import base.crawler.MessageConsumer;
+import base.crawler.guice.service.MessageConsumer;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -21,10 +21,10 @@ public class ConsumerThreadExceptionHandler implements UncaughtExceptionHandler{
 
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
-		
+		log.error(t.getName());
 		log.error(e.getMessage());
 		
-		executorService.submit(new MessageConsumer());
+		executorService.submit(new MessageConsumer(MessageConsumer.getNewsService()));
 		
 	}
 

@@ -13,6 +13,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.yshi</groupId>
+			<artifactId>base-DB</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.yshi</groupId>
 			<artifactId>base-COMMON</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -52,6 +57,12 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.htmlparser</groupId>
+			<artifactId>htmlparser</artifactId>
+			<version>2.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

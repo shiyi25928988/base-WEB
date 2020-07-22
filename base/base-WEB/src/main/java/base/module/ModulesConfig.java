@@ -27,7 +27,7 @@ public abstract class ModulesConfig {
 		}
 	}
 	
-	private static DataSourceModule dataSourceModule = new DataSourceModule(jdbcProp);
+	private static DataSourceModule dataSourceModule = new DataSourceModule();
 	private static MessageQueueModule messageQueueModule = new MessageQueueModule(messageQueueProp);
 	private static IocModule iocModule = new IocModule();
 	private static ServletModule servletModule = new ServletModule();

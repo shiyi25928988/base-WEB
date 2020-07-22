@@ -1,5 +1,7 @@
 package base.crawler;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CrawlResults {
 	public String url;
+	public String title;
+	public String imageUrl;
 	public String fileName;
 	public byte[] content;
 	public String extension;
@@ -22,6 +26,8 @@ public class CrawlResults {
 	public String rootFolder;
 	public String protocol;
 	public String charSet;
+	public String source;
+	public Date releaseDate;
 	
 	public enum ResultType{
 		Html,

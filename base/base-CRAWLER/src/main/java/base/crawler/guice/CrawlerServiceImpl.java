@@ -9,13 +9,19 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
 
-import base.crawler.CrawlerLauncher;
-import base.crawler.CrawlerUtils;
+import com.google.inject.Inject;
+
 import base.crawler.cli.CommandLineOptions;
 import base.crawler.cli.GlobalVars;
 import base.crawler.config.CrawlerConfig;
-import base.crawler.crawler.EveryThingCrawler;
+import base.crawler.crawlerType.AbstractCrawler;
+import base.crawler.crawlerType.EveryThingCrawler;
 import base.crawler.exceptions.AuthInfoInvalidException;
+import base.crawler.guice.service.CrawlerLauncher;
+import base.crawler.guice.service.CrawlerLauncherService;
+import base.crawler.utils.CrawlerUtils;
+import db.base.entity.NewsEntity;
+import db.base.service.NewsService;
 import edu.uci.ics.crawler4j.crawler.authentication.AuthInfo;
 import edu.uci.ics.crawler4j.crawler.authentication.FormAuthInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -32,9 +38,21 @@ public class CrawlerServiceImpl implements CrawlerService {
 	private static HelpFormatter formatter = new HelpFormatter();
 	
 	private static String fileType = "";
+	
+	private CrawlerLauncherService crawlerLauncher;
+	
+	private Class<? extends AbstractCrawler> crawlerClass;
+	
+	
+	
+	public CrawlerServiceImpl(CrawlerLauncherService crawlerLauncher, Class<? extends AbstractCrawler> crawlerClass) {
+		this.crawlerLauncher = crawlerLauncher;
+		this.crawlerClass = crawlerClass;
+	}
 
 	@Override
 	public void start(String... args) throws Exception {
+		
 		try {
 			CommandLine cmd = parser.parse(CommandLineOptions.getOptions(), args);
 
@@ -112,7 +130,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 					Arrays.stream(addresses).forEach(addr -> {
 						try {
 							if (CrawlerUtils.isAddressReacheable(addr)) {
-								CrawlerLauncher.start(EveryThingCrawler.class, addr);
+								crawlerLauncher.start(crawlerClass, addr);
 							} else {
 								log.error(addr + "is unReacheable.");
 							}

@@ -8,7 +8,7 @@ public abstract class GlobalVars {
 
 	public static boolean isRobotTxtEnabled = false;
 	
-	public static String robotUserAgent = "Baiduspider";
+	public static String robotUserAgent = "ToutiaoSpider";
 	
 	public static int crawlerNumber = Runtime.getRuntime().availableProcessors();
 	

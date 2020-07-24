@@ -1,7 +1,7 @@
 package base.crawler.config;
 
 import base.crawler.crawlerType.AbstractCrawler;
-import base.crawler.crawlerType.EveryThingCrawler;
+import base.crawler.crawlerType.DefaultCrawler;
 import base.crawler.crawlerType.SohuCrawler;
 import base.crawler.crawlerType.SootooCrawler;
 
@@ -10,7 +10,9 @@ import base.crawler.crawlerType.SootooCrawler;
  *
  */
 public enum WebSiteType {
-	SOHU("sohu"), SOOTOO("sootoo"), DEFAULT("");
+	SOHU("sohu"), 
+	SOOTOO("sootoo"), 
+	DEFAULT("");
 
 	private String domain;
 
@@ -49,7 +51,7 @@ public enum WebSiteType {
 		case SOOTOO:
 			return new SootooCrawler();
 		default:
-			return new EveryThingCrawler();
+			return new DefaultCrawler();
 		}
 	}
 

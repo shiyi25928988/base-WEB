@@ -9,19 +9,13 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
 
-import com.google.inject.Inject;
-
 import base.crawler.cli.CommandLineOptions;
 import base.crawler.cli.GlobalVars;
 import base.crawler.config.CrawlerConfig;
 import base.crawler.crawlerType.AbstractCrawler;
-import base.crawler.crawlerType.EveryThingCrawler;
 import base.crawler.exceptions.AuthInfoInvalidException;
-import base.crawler.guice.service.CrawlerLauncher;
 import base.crawler.guice.service.CrawlerLauncherService;
 import base.crawler.utils.CrawlerUtils;
-import db.base.entity.NewsEntity;
-import db.base.service.NewsService;
 import edu.uci.ics.crawler4j.crawler.authentication.AuthInfo;
 import edu.uci.ics.crawler4j.crawler.authentication.FormAuthInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -37,19 +31,22 @@ public class CrawlerServiceImpl implements CrawlerService {
 
 	private static HelpFormatter formatter = new HelpFormatter();
 	
-	private static String fileType = "";
-	
 	private CrawlerLauncherService crawlerLauncher;
 	
 	private Class<? extends AbstractCrawler> crawlerClass;
 	
-	
-	
+	/**
+	 * @param crawlerLauncher
+	 * @param crawlerClass
+	 */
 	public CrawlerServiceImpl(CrawlerLauncherService crawlerLauncher, Class<? extends AbstractCrawler> crawlerClass) {
 		this.crawlerLauncher = crawlerLauncher;
 		this.crawlerClass = crawlerClass;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void start(String... args) throws Exception {
 		
@@ -143,7 +140,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 			}
 
 		} catch (ParseException e1) {
-			e1.printStackTrace();
+			log.info(e1.getLocalizedMessage());
 		}
 	}
 }

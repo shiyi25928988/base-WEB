@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 import base.crawler.crawlerType.CrawlerDispathcer;
-import base.crawler.crawlerType.EveryThingCrawler;
 import base.crawler.crawlerType.SohuCrawler;
 import base.crawler.guice.service.CrawlerLauncher;
 import base.crawler.guice.service.CrawlerLauncherService;

@@ -40,6 +40,10 @@ public class SohuCrawler extends AbstractCrawler{
 		if (page.getParseData() instanceof edu.uci.ics.crawler4j.parser.HtmlParseData) {
 			var htmlParseData = (HtmlParseData) page.getParseData();
 			
+			if(!page.getWebURL().getURL().trim().startsWith("https://www.sohu.com/a")) {
+				return;
+			}
+			
 			try {
 				if("GB2312".contentEquals(htmlParseData.getContentCharset())) {
 					return;

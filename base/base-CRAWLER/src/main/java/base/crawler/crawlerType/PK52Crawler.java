@@ -18,12 +18,14 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class DefaultCrawler extends AbstractCrawler{
+public class PK52Crawler extends AbstractCrawler{
 
 	@Override
 	protected Pattern getPattern() {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public boolean shouldVisit(Page referringPage, WebURL url) {
 		return true;
@@ -44,11 +46,15 @@ public class DefaultCrawler extends AbstractCrawler{
 					return;
 				}
 				String description = htmlParseData.getMetaTagValue("description");
-				String contentType = "news";
+				String contentType = "game";
 				String imageUrl = getImageUrl(htmlParseData.getHtml(), htmlParseData.getContentCharset(),1);
 				
 				Date releaseDate = new Date();
-				
+				try {
+					releaseDate = HtmlParser.parseDate(htmlParseData.getMetaTagValue("og:release_date"));
+				} catch (ParseException e1) {
+					releaseDate = new Date();
+				}
 				CrawlResults result = new CrawlResults();
 				result.setTitle(htmlParseData.getTitle());
 				result.setUrl(page.getWebURL().getURL());

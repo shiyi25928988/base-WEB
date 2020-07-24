@@ -74,7 +74,7 @@ public class HtmlParser {
 	
 	public static void main(String... strings) {
 		try {
-			String url = "http://www.sootoo.com/content/737579.shtml";
+			String url = "http://news.52pk.com/shtml/20200724/7426508.shtml";
 			List<String> list = getTagContent(url, "img");
 
 			list.forEach(s -> {

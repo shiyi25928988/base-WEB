@@ -12,7 +12,6 @@ public class NewsServiceImpl implements NewsService{
 
 	@Override
 	public int insertNews(NewsEntity newsEntity) {
-		// TODO Auto-generated method stub
 		return newsMapper.insertNews(newsEntity);
 	}
 

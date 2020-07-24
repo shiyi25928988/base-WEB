@@ -15,14 +15,16 @@ public interface NewsMapper {
     @Select("SELECT * FROM news ")
     List<User> getAllNews();
     
-    @Insert("INSERT INTO news (title,url,image,create_date,news_date,content,source) VALUES ("
+    @Insert("INSERT INTO news (title,url,image,create_date,news_date,content,source,key_word,type) VALUES ("
     		+ "#{title},"
     		+ "#{url},"
     		+ "#{image},"
     		+ "#{create_date},"
     		+ "#{news_date},"
     		+ "#{content},"
-    		+ "#{source}"
+    		+ "#{source},"
+    		+ "#{key_word},"
+    		+ "#{type}"
     		+ ")")
     int insertNews(NewsEntity news);
 }

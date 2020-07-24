@@ -16,4 +16,6 @@ public class NewsEntity {
 	Date news_date;
 	String content;
 	String source;
+	String key_word;
+	String type;
 }

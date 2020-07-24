@@ -7,7 +7,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+import base.crawler.crawlerType.CrawlerDispathcer;
 import base.crawler.crawlerType.EveryThingCrawler;
+import base.crawler.crawlerType.SohuCrawler;
 import base.crawler.guice.service.CrawlerLauncher;
 import base.crawler.guice.service.CrawlerLauncherService;
 import base.crawler.guice.service.MessageConsumerGroup;
@@ -68,7 +70,7 @@ public class CrawlerModule extends AbstractModule {
 		@Override
 		public CrawlerService get() {
 			Objects.requireNonNull(crawlerLauncher);
-			return new CrawlerServiceImpl(crawlerLauncher, EveryThingCrawler.class);
+			return new CrawlerServiceImpl(crawlerLauncher, CrawlerDispathcer.class);
 		}
 		
 	}

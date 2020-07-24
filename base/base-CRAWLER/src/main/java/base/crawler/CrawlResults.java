@@ -28,6 +28,8 @@ public class CrawlResults {
 	public String charSet;
 	public String source;
 	public Date releaseDate;
+	public String keyWord;
+	public String contentType;
 	
 	public enum ResultType{
 		Html,

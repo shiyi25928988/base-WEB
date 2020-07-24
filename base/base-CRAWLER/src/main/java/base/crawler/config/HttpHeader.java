@@ -16,37 +16,36 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class HttpHeader {
-	
+
 	private static Properties headerProperties = new Properties();
 	private static HashSet<BasicHeader> headers = new HashSet<BasicHeader>();
 	static {
-		
 		try {
-			headerProperties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("http-header.properties"));
-			headerProperties.forEach((k,v)->{
+			headerProperties
+					.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("http-header.properties"));
+			headerProperties.forEach((k, v) -> {
 				log.info("http header " + k + ":" + v);
-				headers.add(new BasicHeader(k.toString(),v.toString()));
+				headers.add(new BasicHeader(k.toString(), v.toString()));
 			});
 		} catch (IOException e) {
 			log.error(e.toString());
 			System.exit(1);
 		}
 	}
-	
 
 	@SuppressWarnings("unused")
 	private static HttpHeader instance = new HttpHeader();
 
 	private HttpHeader() {
-		
-		headers.add(new BasicHeader(":authority", "www.toutiao.com"));
-		headers.add(new BasicHeader(":method", "GET"));
-		headers.add(new BasicHeader(":path", "/"));
-		headers.add(new BasicHeader(":scheme", "https"));
-		
+
+//		headers.add(new BasicHeader(":authority", "www.toutiao.com"));
+//		headers.add(new BasicHeader(":method", "GET"));
+//		headers.add(new BasicHeader(":path", "/"));
+//		headers.add(new BasicHeader(":scheme", "https"));
+
 	}
-	
-	public static HashSet<BasicHeader> getHeaders(){
+
+	public static HashSet<BasicHeader> getHeaders() {
 		return headers;
 	}
 

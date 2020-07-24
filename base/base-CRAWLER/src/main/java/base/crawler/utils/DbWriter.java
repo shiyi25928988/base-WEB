@@ -7,7 +7,13 @@ import java.util.Objects;
 import base.crawler.CrawlResults;
 import db.base.entity.NewsEntity;
 import db.base.service.NewsService;
+import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author shiyi
+ *
+ */
+@Slf4j
 public class DbWriter {
 
 	private NewsService newService;
@@ -28,6 +34,13 @@ public class DbWriter {
 		newsEntity.setCreate_date(new Date());
 		newsEntity.setSource(result.getSource());
 		newsEntity.setNews_date(result.getReleaseDate());
-		return newService.insertNews(newsEntity);
+		newsEntity.setKey_word(result.getKeyWord());
+		newsEntity.setType(result.getContentType());
+		try {
+			newService.insertNews(newsEntity);
+		}catch(Exception e) {
+			log.info(e.getLocalizedMessage());
+		}
+		return 0;
 	}
 }

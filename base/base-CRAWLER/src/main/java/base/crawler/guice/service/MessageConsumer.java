@@ -1,17 +1,12 @@
 package base.crawler.guice.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.google.inject.Inject;
-
 import base.crawler.CrawlResults;
 import base.crawler.config.QueueHolder;
 import base.crawler.utils.DbWriter;
-import base.crawler.utils.FileWriter;
-import db.base.entity.NewsEntity;
 import db.base.service.NewsService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,15 +21,12 @@ public class MessageConsumer implements Runnable {
 
 	private AtomicBoolean stop = new AtomicBoolean(false);
 	
-	private NewsService newService;
-	
 	private static NewsService staticNewsService;
 	
 	private DbWriter dbWriter;
 	
 	public MessageConsumer(NewsService newService) {
 		Objects.requireNonNull(newService, "NewsService is null");
-		this.newService = newService;
 		staticNewsService = newService;
 		this.dbWriter = new DbWriter(newService);
 	}
@@ -49,10 +41,6 @@ public class MessageConsumer implements Runnable {
 	@Override
 	public void run() {
 		
-//		NewsEntity newsEntity = new NewsEntity();
-//		newsEntity.setContent("test");
-//		newService.insertNews(newsEntity);
-		
 		CrawlResults results;
 		
 		for(;;){
@@ -65,11 +53,9 @@ public class MessageConsumer implements Runnable {
 			}
 			try {
 				dbWriter.write(results);
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (Exception e) {
+				log.info(e.getLocalizedMessage());
 			}
-			//FileWriter.writeResult(results);
 		}
 	}
 

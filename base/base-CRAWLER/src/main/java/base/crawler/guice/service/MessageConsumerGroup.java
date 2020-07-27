@@ -106,8 +106,6 @@ public class MessageConsumerGroup implements MessageConsumerGroupService {
 
 		new Thread(runnable).start();
 		
-		
-
 	}
 
 	class WriteDBTask implements Callable<Integer> {

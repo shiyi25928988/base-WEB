@@ -74,7 +74,7 @@ public class HtmlParser {
 	
 	public static void main(String... strings) {
 		try {
-			String url = "http://news.52pk.com/shtml/20200724/7426508.shtml";
+			String url = "https://sports.sina.com.cn/g/pl/2020-07-27/doc-iivhvpwx7637555.shtml";
 			List<String> list = getTagContent(url, "img");
 
 			list.forEach(s -> {
@@ -86,6 +86,8 @@ public class HtmlParser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		
 //		String ss = "<img class=\"aligncenter j-lazy\" alt=\"江疏影变身酷我畅听声音陪伴官 深挖新时代女性热议话题\" src=\"http://www.jjg630.com/uploads/temfile/5f1a86023bab6.jpeg\" data-original=\"http://www.jjg630.com/uploads/tem_file/5f1a86023bab6.jpeg\" style=\"display: block;\">";
 //		ss = "<img class=\"aligncenter\" src=\"http://www.jjg630.com/uploads/tem_file/5f1a86023bab6.jpeg\">";

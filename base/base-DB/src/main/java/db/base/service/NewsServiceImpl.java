@@ -1,5 +1,7 @@
 package db.base.service;
 
+import java.util.List;
+
 import com.google.inject.Inject;
 
 import db.base.entity.NewsEntity;
@@ -13,6 +15,16 @@ public class NewsServiceImpl implements NewsService{
 	@Override
 	public int insertNews(NewsEntity newsEntity) {
 		return newsMapper.insertNews(newsEntity);
+	}
+
+	@Override
+	public boolean isNewsExist(NewsEntity newsEntity) {
+		List<NewsEntity> list = newsMapper.getNewsByUrl(newsEntity);
+		if(list.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }

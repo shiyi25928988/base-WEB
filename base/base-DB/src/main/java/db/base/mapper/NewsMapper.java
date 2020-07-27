@@ -27,4 +27,7 @@ public interface NewsMapper {
     		+ "#{type}"
     		+ ")")
     int insertNews(NewsEntity news);
+    
+    @Select("SELECT * FROM news WHERE news.url = #{url}")
+    List<NewsEntity> getNewsByUrl(NewsEntity news);
 }

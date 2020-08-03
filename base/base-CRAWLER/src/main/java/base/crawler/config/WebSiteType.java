@@ -2,6 +2,8 @@ package base.crawler.config;
 
 import base.crawler.crawlerType.AbstractCrawler;
 import base.crawler.crawlerType.DefaultCrawler;
+import base.crawler.crawlerType.JianshuCrawler;
+import base.crawler.crawlerType.Netease163Crawler;
 import base.crawler.crawlerType.PK52Crawler;
 import base.crawler.crawlerType.SinaCrawler;
 import base.crawler.crawlerType.SohuCrawler;
@@ -16,6 +18,8 @@ public enum WebSiteType {
 	SOOTOO("sootoo"), 
 	PK52("52pk"),
 	SINA("sina"),
+	NE163("163"),
+	JIANSHU("jianshu"),
 	DEFAULT("");
 
 	private String domain;
@@ -58,6 +62,10 @@ public enum WebSiteType {
 			return new PK52Crawler();
 		case SINA:
 			return new SinaCrawler();
+		case NE163:
+			return new Netease163Crawler();
+		case JIANSHU:
+			return new JianshuCrawler();
 		default:
 			return new DefaultCrawler();
 		}

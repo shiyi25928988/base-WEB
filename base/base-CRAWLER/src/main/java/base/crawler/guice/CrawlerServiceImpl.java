@@ -129,7 +129,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 							if (CrawlerUtils.isAddressReacheable(addr)) {
 								crawlerLauncher.start(crawlerClass, addr);
 							} else {
-								log.error(addr + "is unReacheable.");
+								log.error(addr + " is unReacheable.");
 							}
 						} catch (Exception e) {
 							log.error(e.getMessage());

@@ -16,6 +16,13 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket</artifactId>
+			<version>9.0.0</version>
+			<type>pom</type>
+		</dependency>
+
 		<!-- shiro -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>

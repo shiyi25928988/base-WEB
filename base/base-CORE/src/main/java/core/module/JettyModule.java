@@ -1,13 +1,17 @@
 package core.module;
 
+import java.io.IOException;
 import java.util.EnumSet;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ListenerHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.util.resource.Resource;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -29,44 +33,73 @@ public class JettyModule extends AbstractModule {
 		bind(Server.class).toProvider(ServerProvider.class).in(Singleton.class);
 		bind(ServletContext.class).toProvider(ServletContextProvider.class);
 	}
-	
 
 	private static class ServletContextHandlerProvider implements Provider<ServletContextHandler> {
 		@Override
 		public ServletContextHandler get() {
 			// TODO Auto-generated method stub
-			return new ServletContextHandler(ServletContextHandler.SESSIONS);
+			return new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
 		}
 	}
-	
-	private static class ServletContextProvider implements Provider<ServletContext>{
+
+	private static class ServletContextProvider implements Provider<ServletContext> {
 		@Inject
 		ServletContextHandler servletContextHandler;
-		
+
 		@Override
 		public ServletContext get() {
 			return servletContextHandler.getServletContext();
 		}
 	}
-	
+
 	private static class ServerProvider implements Provider<Server> {
-		
+
 		@Inject
 		ServletContextHandler servletContextHandler;
-		
+
 		@Override
 		public Server get() {
-			servletContextHandler.setContextPath("/");
-			servletContextHandler.addServlet(DispatcherServlet.class, "/*");
-			servletContextHandler.addFilter(com.google.inject.servlet.GuiceFilter.class, "/*", EnumSet.of(DispatcherType.REQUEST));
-			servletContextHandler.getServletHandler().addListener(new ListenerHolder(GuiceServletCustomContextListener.class));
+
+			HandlerList handlerList = new HandlerList();
+			{
+				servletContextHandler.setContextPath("/");
+				servletContextHandler.addServlet(DispatcherServlet.class, "/*");
+				servletContextHandler.addFilter(com.google.inject.servlet.GuiceFilter.class, "/*",
+						EnumSet.of(DispatcherType.REQUEST));
+				servletContextHandler.getServletHandler()
+						.addListener(new ListenerHolder(GuiceServletCustomContextListener.class));
+				handlerList.addHandler(servletContextHandler);
+			}
+			{
+				ServletContextHandler resourceHandler = new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
+				resourceHandler.setContextPath("/static/");
+				resourceHandler.insertHandler(getResourceHandler());
+				handlerList.prependHandler(resourceHandler);
+			}
+
 			Server server = new Server(8080);
 			server.setStopAtShutdown(true);
-			server.setHandler(servletContextHandler);
-			//servletContextHandler.getServletContext();
+			server.setHandler(handlerList);
 			return server;
 		}
+
+		private ResourceHandler getResourceHandler() {
+
+			String dir = System.getProperty("user.dir");
+			try {
+				Resource res = Resource.newResource(dir + "\\META-INF\\resources", false);
+				ResourceHandler resourceHandler = new ResourceHandler();
+				resourceHandler.setDirectoriesListed(true);
+				resourceHandler.setBaseResource(res);
+				// resourceHandler.setDirAllowed(true);
+				return resourceHandler;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+
+		}
 	}
-	
 
 }

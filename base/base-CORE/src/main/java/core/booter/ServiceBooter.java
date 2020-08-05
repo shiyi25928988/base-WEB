@@ -1,7 +1,6 @@
 package core.booter;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,26 +9,26 @@ import java.util.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.Stage;
 
+import core.Main;
 import core.annotation.PropertiesFile;
 import core.module.IocModule;
 import core.module.JettyModule;
+import core.module.ModuleRegister;
 import core.properties.CoreProperties;
 import core.service.jetty.JettyBootService;
 import lombok.extern.slf4j.Slf4j;
 
 
-
 /**
- * @author
+ * @author shiyi
  *
  */
-@Slf4j
 public class ServiceBooter {
-
-	private static List<Module> moduleList = new ArrayList<>();
+	
 	static {
-		moduleList.add(new JettyModule());
+		ModuleRegister.register(new JettyModule());
 	}
 
 	public static void startOnJetty(Class<?> mainClass, Module... modules) throws ClassNotFoundException, IOException {
@@ -41,23 +40,27 @@ public class ServiceBooter {
 		
 		if (Objects.nonNull(modules) && modules.length > 0) {
 			for(Module module : modules) {
-				moduleList.add(module);
+				ModuleRegister.register(module);
 			}
 		} 
 		
-		injector = Guice.createInjector(moduleList);
+		injector = Guice.createInjector(Stage.DEVELOPMENT, ModuleRegister.getModulesAsList());
 		JettyBootService service = injector.getInstance(JettyBootService.class);
 		service.start();
 	}
 	
 	/**
+	 * @PropertiesFile(files = { "application.properties" })
+     * @Slf4j
+     * public class Main {
+     *     public static void main(String... strings) {
+	 * 
+	 * 
 	 * @param mainClass
 	 */
 	private static void loadPropertiesFile(Class<?> mainClass) {
 		
-		
 		PropertiesFile propertiesFile = mainClass.getAnnotation(PropertiesFile.class);
-		
 		
 		if(Objects.isNull(propertiesFile)) {
 			return;

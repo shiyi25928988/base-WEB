@@ -1,9 +1,7 @@
 package core.module;
 
-import java.io.IOException;
-import java.util.Properties;
-
-import org.apache.shiro.web.servlet.ShiroFilter;
+import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.http.WicketFilter;
 
 import com.google.inject.Scopes;
 
@@ -49,6 +47,13 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 
 		filter("/sec/*").through(SecureFilter.class);
 		bind(SecureFilter.class).in(Scopes.SINGLETON);
+		
+		/**
+		 * wicket
+		 * */
+		filter("/*").through(WicketFilter.class, core.filter.WebApplicationFilter.createWicketFilterInitParams());
+		bind(org.apache.wicket.protocol.http.WebApplication.class).to(core.wicket.WicketWebApplication.class);
+		bind(org.apache.wicket.protocol.http.WicketFilter.class).to(core.filter.WebApplicationFilter.class).in(Scopes.SINGLETON);
 
 		/** DISPATCH */
 		serve("/*").with(DispatcherServlet.class);

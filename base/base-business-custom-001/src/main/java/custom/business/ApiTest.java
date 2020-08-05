@@ -12,7 +12,7 @@ import db.base.entity.User;
 public class ApiTest {
 
 	@GET
-	@Path(value = "/test")
+	@Path(value = "/api/test")
 	public JSON<String> getUserByID() {
 		return new JSON<String>("test");
 	}

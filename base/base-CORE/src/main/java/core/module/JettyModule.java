@@ -38,7 +38,7 @@ public class JettyModule extends AbstractModule {
 		@Override
 		public ServletContextHandler get() {
 			// TODO Auto-generated method stub
-			return new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
+			return new ServletContextHandler(ServletContextHandler.SESSIONS);
 		}
 	}
 

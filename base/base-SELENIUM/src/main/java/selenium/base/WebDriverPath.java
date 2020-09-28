@@ -18,6 +18,7 @@ public final class WebDriverPath {
 	public static final String chromeDriverPath_v80 = driverPath + "chrome" + File.separator + "80" + File.separator + "chromedriver.exe";
 	public static final String chromeDriverPath_v83 = driverPath + "chrome" + File.separator + "83" + File.separator + "chromedriver.exe";
 	public static final String chromeDriverPath_v84 = driverPath + "chrome" + File.separator + "84" + File.separator + "chromedriver.exe";
+	public static final String chromeDriverPath_v85 = driverPath + "chrome" + File.separator + "85" + File.separator + "chromedriver.exe";
 	
 	
 	//FireFox

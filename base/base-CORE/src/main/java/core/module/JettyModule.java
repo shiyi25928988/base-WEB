@@ -53,6 +53,8 @@ public class JettyModule extends AbstractModule {
 	}
 
 	private static class ServerProvider implements Provider<Server> {
+		
+		private int port;
 
 		@Inject
 		ServletContextHandler servletContextHandler;
@@ -77,7 +79,9 @@ public class JettyModule extends AbstractModule {
 				handlerList.prependHandler(resourceHandler);
 			}
 
-			Server server = new Server(8080);
+			port = Integer.parseInt(System.getProperty("application.port", "8080"));
+			
+			Server server = new Server(port);
 			server.setStopAtShutdown(true);
 			server.setHandler(handlerList);
 			return server;

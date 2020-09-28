@@ -48,13 +48,6 @@ public class ServletModule extends com.google.inject.servlet.ServletModule {
 		filter("/sec/*").through(SecureFilter.class);
 		bind(SecureFilter.class).in(Scopes.SINGLETON);
 		
-		/**
-		 * wicket
-		 * */
-		filter("/*").through(WicketFilter.class, core.filter.WebApplicationFilter.createWicketFilterInitParams());
-		bind(org.apache.wicket.protocol.http.WebApplication.class).to(core.wicket.WicketWebApplication.class);
-		bind(org.apache.wicket.protocol.http.WicketFilter.class).to(core.filter.WebApplicationFilter.class).in(Scopes.SINGLETON);
-
 		/** DISPATCH */
 		serve("/*").with(DispatcherServlet.class);
 		bind(DispatcherServlet.class).in(Scopes.SINGLETON);

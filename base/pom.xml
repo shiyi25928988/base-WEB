@@ -23,7 +23,6 @@
 		<module>base-business-custom-001</module>
 		<module>base-CORE</module>
 		<module>base-FORM</module>
-		<module>base-DB-plus</module>
 	</modules>
 
 	<properties>

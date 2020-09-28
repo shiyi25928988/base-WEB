@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Main {
 	public static void main(String... strings) {
 		try {
-			ServiceBooter.startOnJetty(Main.class, new CustomModule());
+			ServiceBooter.startFrom(Main.class, new CustomModule());
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -31,7 +31,7 @@ public class ServiceBooter {
 		ModuleRegister.register(new JettyModule());
 	}
 
-	public static void startOnJetty(Class<?> mainClass, Module... modules) throws ClassNotFoundException, IOException {
+	public static void startFrom(Class<?> mainClass, Module... modules) throws ClassNotFoundException, IOException {
 		Injector injector;
 		if (Objects.nonNull(mainClass)) {
 			loadPropertiesFile(mainClass);

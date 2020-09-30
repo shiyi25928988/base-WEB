@@ -9,14 +9,12 @@
 	<name>Base Parent</name>
 
 	<modules>
-		<module>base-WEB</module>
 		<module>base-MQ</module>
 		<module>base-DB</module>
 		<module>base-CACHE</module>
 		<module>base-HTML</module>
 		<module>base-CRAWLER</module>
 		<module>base-CLI</module>
-		<module>base-WICKET</module>
 		<module>base-COMMON</module>
 		<module>base-NEUROPH</module>
 		<module>base-SELENIUM</module>

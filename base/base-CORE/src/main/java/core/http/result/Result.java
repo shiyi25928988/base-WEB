@@ -18,11 +18,6 @@ public abstract class Result<T> implements ReturnType<T> {
 		return MimeType.APPLICATION_JSON;
 	}
 
-	@Override
-	public String getSuffix() {
-		return "";
-	}
-
 	/**
 	 * @author shiyi
 	 *
@@ -42,19 +37,6 @@ public abstract class Result<T> implements ReturnType<T> {
 			};
 		}
 		
-		public static Result<ResultStatus> success(int httpStatus, String message) {
-			return new Result<ResultStatus>() {
-
-				@Override
-				public ResultStatus getData() {
-					ResultStatus rs = new ResultStatus();
-					rs.setHttpStatus(httpStatus);
-					rs.setSuccess(true);
-					rs.setMessage(message);
-					return rs;
-				}
-			};
-		}
 
 		public static Result<ResultStatus> failed(String message) {
 			return new Result<ResultStatus>() {
@@ -70,19 +52,6 @@ public abstract class Result<T> implements ReturnType<T> {
 			};
 		}
 		
-		public static Result<ResultStatus> failed(int httpStatus, String message) {
-			return new Result<ResultStatus>() {
-
-				@Override
-				public ResultStatus getData() {
-					ResultStatus rs = new ResultStatus();
-					rs.setHttpStatus(httpStatus);
-					rs.setSuccess(false);
-					rs.setMessage(message);
-					return rs;
-				}
-			};
-		}
 	}
 
 	/**

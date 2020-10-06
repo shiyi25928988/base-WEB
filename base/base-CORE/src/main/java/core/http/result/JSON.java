@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 public class JSON<T> implements ReturnType<T>{
 	private T obj; 
 	private final MimeType mimeType = MimeType.APPLICATION_JSON;
-	private final String suffix = ".json";
 	@Override
 	public T getData() {
 		return obj;

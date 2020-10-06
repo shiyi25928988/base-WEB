@@ -30,7 +30,7 @@ import core.annotation.RequestBody;
 import core.exception.EmptyPathParameterException;
 import core.exception.ReduplicativeMathodPathException;
 import core.exception.SingleRequestBodyRequiredException;
-import core.http.RestHelper;
+import core.http.HttpRespHelper;
 import core.ioc.ReflectionUtils;
 import core.servlet.GuiceServletCustomContextListener;
 import core.servlet.ServletHelper;
@@ -162,9 +162,9 @@ public class RestApiServiceImpl implements RestApiService {
 			return;
 		List<String> list = new LinkedList<>();
 
-		for (Parameter p : method.getParameters()) {
-			if (p.isAnnotationPresent(PathParam.class)) {
-				PathParam pathParam = (PathParam) p.getAnnotation(PathParam.class);
+		for (Parameter param : method.getParameters()) {
+			if (param.isAnnotationPresent(PathParam.class)) {
+				PathParam pathParam = (PathParam) param.getAnnotation(PathParam.class);
 				if (Strings.isNullOrEmpty(pathParam.value())) {
 					throw new EmptyPathParameterException();
 				} else {
@@ -172,11 +172,11 @@ public class RestApiServiceImpl implements RestApiService {
 				}
 			} else
 
-			if (p.isAnnotationPresent(RequestBody.class)) {
+			if (param.isAnnotationPresent(RequestBody.class)) {
 				if (Objects.nonNull(requestBodyMap.get(method))) {
 					throw new SingleRequestBodyRequiredException(method.getName() + " required single parameter!!");
 				}
-				requestBodyMap.put(method, p.getType());
+				requestBodyMap.put(method, param.getType());
 			}
 		}
 		parameterMap.put(method, list);
@@ -191,25 +191,30 @@ public class RestApiServiceImpl implements RestApiService {
 		var req = ServletHelper.getRequest();
 		var path = StringUtils.remove(req.getRequestURI(), req.getContextPath());
 		var method = methodMap.get(path);
-		var clazz = classMap.get(path);
-		List<String> parameters = parameterMap.get(method);
 
-		Class<?> requestBodyClass = requestBodyMap.get(method);
+		if (Objects.nonNull(method)) {
+			var clazz = classMap.get(path);
+			List<String> parameters = parameterMap.get(method);
 
-		if (Objects.nonNull(parameters) && !parameters.isEmpty()) {
+			Class<?> requestBodyClass = requestBodyMap.get(method);
 
-			parameters.forEach(p -> {
-				args.add(ServletHelper.getRequest().getParameter(p));
-			});
-			invoke(clazz, method, args.toArray());
-			return;
+			if (Objects.nonNull(parameters) && !parameters.isEmpty()) {
+
+				parameters.forEach(p -> {
+					args.add(ServletHelper.getRequest().getParameter(p));
+				});
+				invoke(clazz, method, args.toArray());
+				return;
+			}
+			if (Objects.nonNull(requestBodyClass)) {
+				invoke(clazz, method, HttpRespHelper.getRequestPostBody(requestBodyClass));
+				return;
+
+			}
+			invoke(clazz, method);
+		} else {
+			HttpRespHelper.send404Status();
 		}
-		if (Objects.nonNull(requestBodyClass)) {
-			invoke(clazz, method, RestHelper.getRequestPostBody(requestBodyClass));
-			return;
-
-		}
-		invoke(clazz, method);
 	}
 
 	/**
@@ -234,7 +239,7 @@ public class RestApiServiceImpl implements RestApiService {
 						}
 					}
 				});
-				RestHelper.sendResponseData(ReflectionUtils.invokeMethod(obj, method, args));
+				HttpRespHelper.sendResponseData(ReflectionUtils.invokeMethod(obj, method, args));
 			}
 		}
 	}

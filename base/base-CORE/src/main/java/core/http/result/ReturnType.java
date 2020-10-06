@@ -9,6 +9,5 @@ import core.http.MimeType;
 public interface ReturnType<T> {
 
 	MimeType getMimeType();
-	String getSuffix();
 	T getData();
 }

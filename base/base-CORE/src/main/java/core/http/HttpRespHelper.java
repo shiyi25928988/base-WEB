@@ -24,12 +24,12 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public final class RestHelper {
+public final class HttpRespHelper {
 
 	/**
 	 * To prevent instantiated.
 	 */
-	private RestHelper() {
+	private HttpRespHelper() {
 		throw new RuntimeException();
 	}
 
@@ -46,7 +46,25 @@ public final class RestHelper {
 				throw new UnsupportMIMETypeException();
 			}
 		} else {
+			log.error("RestHelper#sendResponseData send a null object, cause of a void return type method");
 			throw new NullPointerException();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public static void send404Status() {
+		var resp = ServletHelper.getResponse();
+		resp.setStatus(HttpStatusCode.SC_NOT_FOUND);
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter writer;
+		try {
+			writer = resp.getWriter();
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			log.error(e.getLocalizedMessage());
 		}
 	}
 
@@ -63,7 +81,7 @@ public final class RestHelper {
 			try {
 				data = JsonUtils.toJson(responseData.getData());
 			} catch (JsonProcessingException e) {
-				e.printStackTrace();
+				log.error(e.getLocalizedMessage());
 				resp.setStatus(HttpStatusCode.SC_INTERNAL_SERVER_ERROR);
 				resp.setCharacterEncoding("UTF-8");
 				PrintWriter writer = resp.getWriter();
@@ -87,6 +105,7 @@ public final class RestHelper {
 			HttpServletResponse resp = ServletHelper.getResponse();
 			resp.setContentType(MimeType.TEXT_HTML.getType());
 			resp.setCharacterEncoding("UTF-8");
+			resp.setStatus(HttpStatusCode.SC_OK);
 			PrintWriter writer;
 			writer = resp.getWriter();
 			writer.write(html);
@@ -150,6 +169,24 @@ public final class RestHelper {
 			out.close();
 		} else {
 			throw new IOException(filePath + " doesn't exist!!");
+		}
+	}
+
+	public static void sendBase64Icon(String icon) {
+		try {
+			HttpServletResponse resp = ServletHelper.getResponse();
+			resp.setContentType(MimeType.IMAGE_PNG.getType());
+			resp.setCharacterEncoding("UTF-8");
+			PrintWriter writer;
+
+			writer = resp.getWriter();
+
+			writer.write(icon);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

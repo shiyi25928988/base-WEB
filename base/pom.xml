@@ -23,6 +23,7 @@
 		<module>base-business-custom-001</module>
 		<module>base-CORE</module>
 		<module>base-FORM</module>
+		<module>base-HTTP-PROXY</module>
 	</modules>
 
 	<properties>
@@ -45,12 +46,10 @@
 		<slf4j.version>1.8.0-beta4</slf4j.version>
 		<logback.version>1.2.3</logback.version>
 
-
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-
 			<dependency>
 				<groupId>jakarta.servlet</groupId>
 				<artifactId>jakarta.servlet-api</artifactId>

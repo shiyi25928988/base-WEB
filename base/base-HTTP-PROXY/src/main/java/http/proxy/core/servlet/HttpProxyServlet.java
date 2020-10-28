@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import http.proxy.core.config.PathMapRegister;
 import http.proxy.core.http.utils.MimeType;
 import http.proxy.core.http.utils.OkHttpClientPool;
 import lombok.extern.slf4j.Slf4j;
@@ -62,19 +63,13 @@ public class HttpProxyServlet extends HttpServlet {
 		
 		log.info(req.getRequestURI());
 		
+		String url = PathMapRegister.getMapedRemoteURL(req.getRequestURI());
+		
 		OkHttpClient okHttpClient = OkHttpClientPool.borrowOkHttpClient();
-		Request request = new Request.Builder().url("https://www.baidu.com").build();
+		Request request = new Request.Builder().url(url).build();
 		Response response = okHttpClient.newCall(request).execute();
 		
 		log.info("receive resp in : " + response.receivedResponseAtMillis() + "ms");
-		
-		
-		response.headers().forEach(header -> {
-			log.info("header : " + header.getFirst());
-			log.info("header : " + header.getSecond());
-			resp.addHeader(header.getFirst(), header.getSecond());
-		});
-		
 		log.info("protocol : " + response.protocol().name());
 		log.info("contentType : " + response.body().contentType().toString());
 		

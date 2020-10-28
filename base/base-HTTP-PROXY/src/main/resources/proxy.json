@@ -1,0 +1,12 @@
+{
+    "CONFIG_LIST":[
+        {
+            "location":"/",
+            "proxy_pass":"https://www.sohu.com/"
+        },
+        {
+            "location":"3",
+            "proxy_pass":"4"
+        }
+    ]
+}

@@ -95,11 +95,11 @@ public class JettyModule extends AbstractModule {
 			try {
 				//Resource res = Resource.newResource("C:\\Users\\86135\\Videos", false);
 				String fileStoragePath = System.getProperty("application.fileStoragePath", "/home/files");
-				Resource res = Resource.newResource("/home/files", false);
+				Resource res = Resource.newResource(fileStoragePath, false);
 				ResourceHandler resourceHandler = new ResourceHandler();
 				resourceHandler.setDirectoriesListed(true);
 				resourceHandler.setBaseResource(res);
-				resourceHandler.setDirAllowed(true);
+				//resourceHandler.setDirAllowed(true);
 				return resourceHandler;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

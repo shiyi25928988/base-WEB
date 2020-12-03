@@ -6,9 +6,9 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>base-business-custom-001</artifactId>
+  <artifactId>base-CORE</artifactId>
   <build>
-    <finalName>file-browser</finalName>
+    <finalName>core</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -24,7 +24,7 @@
         <configuration>
           <transformers>
             <transformer>
-              <mainClass>custom.business.Main</mainClass>
+              <mainClass>core.Main</mainClass>
             </transformer>
           </transformers>
         </configuration>
@@ -33,16 +33,25 @@
   </build>
   <dependencies>
     <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.3</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.12</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
+  <properties>
+    <jetty.version>10.0.0.beta0</jetty.version>
+  </properties>
 </project>

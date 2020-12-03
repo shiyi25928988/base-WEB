@@ -145,8 +145,12 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-core</artifactId>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<finalName>http-proxy</finalName>
 		<plugins>
@@ -174,5 +178,5 @@
 
 		</plugins>
 	</build>
-	
+
 </project>

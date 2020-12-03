@@ -18,12 +18,6 @@
 			<version>1.4.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-guice -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-guice</artifactId>
-			<version>9.0.0-M2</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

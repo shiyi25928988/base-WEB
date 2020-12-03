@@ -17,6 +17,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.inject.name.Names;
 
 import core.servlet.DispatcherServlet;
 import core.servlet.GuiceServletCustomContextListener;
@@ -29,6 +30,7 @@ public class JettyModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		Names.bindProperties(binder(), System.getProperties());
 		bind(ServletContextHandler.class).toProvider(ServletContextHandlerProvider.class).in(Singleton.class);
 		bind(Server.class).toProvider(ServerProvider.class).in(Singleton.class);
 		bind(ServletContext.class).toProvider(ServletContextProvider.class);
@@ -74,7 +76,7 @@ public class JettyModule extends AbstractModule {
 			}
 			{
 				ServletContextHandler resourceHandler = new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
-				resourceHandler.setContextPath("/static/");
+				resourceHandler.setContextPath(System.getProperty("application.staticResourcePath", ("/resources/*")));
 				resourceHandler.insertHandler(getResourceHandler());
 				handlerList.prependHandler(resourceHandler);
 			}
@@ -91,11 +93,13 @@ public class JettyModule extends AbstractModule {
 
 			String dir = System.getProperty("user.dir");
 			try {
-				Resource res = Resource.newResource(dir + "\\META-INF\\resources", false);
+				//Resource res = Resource.newResource("C:\\Users\\86135\\Videos", false);
+				String fileStoragePath = System.getProperty("application.fileStoragePath", "/home/files");
+				Resource res = Resource.newResource("/home/files", false);
 				ResourceHandler resourceHandler = new ResourceHandler();
 				resourceHandler.setDirectoriesListed(true);
 				resourceHandler.setBaseResource(res);
-				// resourceHandler.setDirAllowed(true);
+				resourceHandler.setDirAllowed(true);
 				return resourceHandler;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

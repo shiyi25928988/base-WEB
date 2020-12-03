@@ -7,7 +7,7 @@
 		<artifactId>base.parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>base-business-custom-001</artifactId>
+	<artifactId>base-BT</artifactId>
 
 	<properties>
 		<maven.compiler.source>14</maven.compiler.source>
@@ -18,15 +18,67 @@
 		</project.reporting.outputEncoding>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<bt-version>1.9</bt-version>
+		<!-- <jetty.version>9.4.26.v20200117</jetty.version> -->
+		<jetty.version>10.0.0.beta0</jetty.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>	
+
+
+		<dependency>
+			<groupId>com.github.atomashpolskiy</groupId>
+			<artifactId>bt-core</artifactId>
+			<version>${bt-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.atomashpolskiy</groupId>
+			<artifactId>bt-http-tracker-client</artifactId>
+			<version>${bt-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.atomashpolskiy</groupId>
+			<artifactId>bt-dht</artifactId>
+			<version>${bt-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.atomashpolskiy</groupId>
+			<artifactId>bt-upnp</artifactId>
+			<version>${bt-version}</version>
+		</dependency>
+
 		
 
 		<dependency>
 			<groupId>org.yshi</groupId>
 			<artifactId>base-CORE</artifactId>
 			<version>${project.version}</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -49,20 +101,11 @@
 			<version>2.0</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
-		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.5.5</version>
-			<scope>compile</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-	</dependencies>
 
+	</dependencies>
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -82,9 +125,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -94,19 +134,11 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>custom.business.Main</mainClass>
+							<mainClass>base.dl.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
-
 			</plugin>
 		</plugins>
 	</build>
-	<!-- <build> <finalName>file-browser</finalName> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
-		<artifactId>maven-shade-plugin</artifactId> <version>3.2.0</version> <configuration> 
-		<transformers> <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> 
-		<mainClass>custom.business.Main</mainClass> </transformer> </transformers> 
-		</configuration> <executions> <execution> <phase>package</phase> <goals> 
-		<goal>shade</goal> </goals> </execution> </executions> </plugin> </plugins> 
-		</build> -->
 </project>

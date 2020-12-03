@@ -56,6 +56,13 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.as/jboss-as-server -->
+		<dependency>
+			<groupId>org.jboss.as</groupId>
+			<artifactId>jboss-as-server</artifactId>
+			<version>7.2.0.Final</version>
+		</dependency>
+
 	</dependencies>
 
 	<!-- <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 

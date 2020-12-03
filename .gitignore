@@ -2,3 +2,6 @@
 *.project
 base/base-FORM/.classpath
 base/base-CRAWLER/frontier/
+*.iml
+*.log
+base/.idea/

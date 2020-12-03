@@ -1,4 +1,4 @@
-package base.magnet;
+package base.dl.magnet;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

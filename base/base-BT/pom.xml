@@ -51,7 +51,6 @@
 			<version>${jetty.version}</version>
 		</dependency>	
 
-
 		<dependency>
 			<groupId>com.github.atomashpolskiy</groupId>
 			<artifactId>bt-core</artifactId>
@@ -72,8 +71,6 @@
 			<artifactId>bt-upnp</artifactId>
 			<version>${bt-version}</version>
 		</dependency>
-
-		
 
 		<dependency>
 			<groupId>org.yshi</groupId>

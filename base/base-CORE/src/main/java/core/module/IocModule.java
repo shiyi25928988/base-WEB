@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
+import com.google.inject.name.Names;
 
 import core.ioc.ClassHelper;
 import core.service.http.RestApiService;
@@ -35,6 +36,7 @@ public class IocModule extends AbstractModule {
 	 */
 	@Override
 	protected void configure() {
+		Names.bindProperties(binder(), System.getProperties());
 		bind(RestApiService.class).toProvider(RestServiceProvider.class);
 	}
 

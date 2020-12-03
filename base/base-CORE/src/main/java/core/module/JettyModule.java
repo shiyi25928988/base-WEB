@@ -2,6 +2,7 @@ package core.module;
 
 import java.io.IOException;
 import java.util.EnumSet;
+import java.util.Properties;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;
@@ -30,7 +31,7 @@ public class JettyModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		Names.bindProperties(binder(), System.getProperties());
+		
 		bind(ServletContextHandler.class).toProvider(ServletContextHandlerProvider.class).in(Singleton.class);
 		bind(Server.class).toProvider(ServerProvider.class).in(Singleton.class);
 		bind(ServletContext.class).toProvider(ServletContextProvider.class);

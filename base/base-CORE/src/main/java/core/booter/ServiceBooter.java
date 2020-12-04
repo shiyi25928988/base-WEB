@@ -44,7 +44,7 @@ public class ServiceBooter {
 			}
 		} 
 		
-		injector = Guice.createInjector(Stage.DEVELOPMENT, ModuleRegister.getModulesAsList());
+		injector = ModuleRegister.getInjector();// Guice.createInjector(Stage.DEVELOPMENT, ModuleRegister.getModulesAsList());
 		JettyBootService service = injector.getInstance(JettyBootService.class);
 		service.start();
 	}

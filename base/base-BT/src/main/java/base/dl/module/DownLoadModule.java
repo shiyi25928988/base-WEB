@@ -3,6 +3,7 @@ package base.dl.module;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 
 import bt.dht.DHTConfig;
@@ -11,11 +12,16 @@ import bt.runtime.Config;
 
 public class DownLoadModule extends AbstractModule{
 
+	
+	
 	@Override
 	protected void configure() {
-		bind(Config.class).toProvider(ConfigProvider.class).asEagerSingleton();
-		bind(DHTConfig.class).toProvider(DHTConfigProvider.class);
-		bind(DHTModule.class).toProvider(DHTModuleProvider.class);
+		DHTModule DHTModule = new DHTModule();
+		//install(DHTModule);
+		Names.bindProperties(binder(), System.getProperties());
+		bind(Config.class).toProvider(ConfigProvider.class).in(Singleton.class);
+		bind(DHTConfig.class).toProvider(DHTConfigProvider.class).in(Singleton.class);
+		bind(DHTModule.class).toInstance(DHTModule);
 	}
 	
 	public static class ConfigProvider implements Provider<Config>{

@@ -32,6 +32,7 @@ import core.exception.ReduplicativeMathodPathException;
 import core.exception.SingleRequestBodyRequiredException;
 import core.http.HttpRespHelper;
 import core.ioc.ReflectionUtils;
+import core.module.ModuleRegister;
 import core.servlet.GuiceServletCustomContextListener;
 import core.servlet.ServletHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -227,7 +228,7 @@ public class RestApiServiceImpl implements RestApiService {
 			if (Objects.nonNull(method)) {
 				Object obj = ReflectionUtils.newInstance(clazz);
 				Field[] fields = clazz.getDeclaredFields();
-				Injector injector = GuiceServletCustomContextListener.getInjectorInstance();
+				Injector injector = ModuleRegister.getInjector();
 				Stream.of(fields).forEach(field -> {
 					if (field.isAnnotationPresent(com.google.inject.Inject.class)
 							|| field.isAnnotationPresent(javax.inject.Inject.class)) {

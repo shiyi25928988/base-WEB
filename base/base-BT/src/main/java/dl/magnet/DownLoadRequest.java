@@ -1,4 +1,4 @@
-package base.dl.magnet;
+package dl.magnet;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -131,7 +131,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>base.dl.Main</mainClass>
+							<mainClass>dl.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

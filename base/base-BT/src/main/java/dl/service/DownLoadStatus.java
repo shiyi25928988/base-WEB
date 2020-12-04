@@ -1,4 +1,4 @@
-package base.dl.service;
+package dl.service;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

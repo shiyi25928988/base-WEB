@@ -1,4 +1,4 @@
-package base.dl.magnet;
+package dl.magnet;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -7,10 +7,10 @@ import javax.ws.rs.PathParam;
 
 import com.google.inject.Inject;
 
-import base.dl.service.DownLoadServiceImpl;
 import core.annotation.Controller;
 import core.annotation.RequestBody;
 import core.http.result.JSON;
+import dl.service.DownLoadServiceImpl;
 
 @Controller
 public class RestServiceApi {

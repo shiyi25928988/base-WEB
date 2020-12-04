@@ -1,4 +1,4 @@
-package base.dl.service;
+package dl.service;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +17,8 @@ import bt.dht.DHTModule;
 import bt.runtime.BtClient;
 import bt.runtime.Config;
 import bt.torrent.TorrentSessionState;
+import dl.magnet.async.DownLoadExcutors;
+import dl.magnet.async.DownLoadTask;
 
 public class DownLoadServiceImpl implements DownLoadService{
 	
@@ -39,25 +41,9 @@ public class DownLoadServiceImpl implements DownLoadService{
 	public void download(String magnetUrl) {
 		
 		updateStatus(magnetUrl, null);
-		Path targetDirectory = Paths.get(storagePath);
-		Storage storage = new FileSystemStorage(targetDirectory);
+		DownLoadExcutors.submit(new DownLoadTask(magnetUrl, storagePath, config, dhtModule));
+		return;
 		
-		BtClient client = Bt.client()
-		        .config(config)
-		        .storage(storage)
-		        .magnet("magnetUrl")
-		        .autoLoadModules()
-		        .module(dhtModule)
-		        .stopWhenDownloaded()
-		        .build();
-		client.startAsync(torrentSessionState ->{
-			updateStatus(magnetUrl, torrentSessionState);
-			
-		}, 1000L).whenCompleteAsync((a,b) ->{
-			
-			
-			
-		});
 	}
 	
 	@Override
@@ -66,7 +52,7 @@ public class DownLoadServiceImpl implements DownLoadService{
 		return statusMap.get(magnetUrl);
 	}
 	
-	private void updateStatus(String magnetUrl, TorrentSessionState torrentSessionState) {
+	public static void updateStatus(String magnetUrl, TorrentSessionState torrentSessionState) {
 		
 		if(Objects.isNull(torrentSessionState)) {
 			if(statusMap.containsKey(magnetUrl)) {

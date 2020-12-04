@@ -1,4 +1,4 @@
-package base.dl.module;
+package dl.module;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;

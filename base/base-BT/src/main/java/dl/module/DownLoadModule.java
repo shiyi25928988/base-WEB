@@ -17,7 +17,6 @@ public class DownLoadModule extends AbstractModule{
 	@Override
 	protected void configure() {
 		DHTModule DHTModule = new DHTModule();
-		//install(DHTModule);
 		Names.bindProperties(binder(), System.getProperties());
 		bind(Config.class).toProvider(ConfigProvider.class).in(Singleton.class);
 		bind(DHTConfig.class).toProvider(DHTConfigProvider.class).in(Singleton.class);

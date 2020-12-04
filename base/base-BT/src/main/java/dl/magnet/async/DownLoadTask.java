@@ -10,7 +10,9 @@ import bt.dht.DHTModule;
 import bt.runtime.BtClient;
 import bt.runtime.Config;
 import dl.service.DownLoadServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DownLoadTask implements Runnable{
 
 	private String magnetUrl;
@@ -27,26 +29,28 @@ public class DownLoadTask implements Runnable{
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		Path targetDirectory = Paths.get(storagePath);
-		Storage storage = new FileSystemStorage(targetDirectory);
 		
-		BtClient client = Bt.client()
-		        .config(config)
-		        .storage(storage)
-		        .magnet(magnetUrl)
-		        .autoLoadModules()
-		        .module(dhtModule)
-		        .stopWhenDownloaded()
-		        .build();
-		client.startAsync(torrentSessionState ->{
-			DownLoadServiceImpl.updateStatus(magnetUrl, torrentSessionState);
-			
-		}, 1000L).whenCompleteAsync((a,b) ->{
-			
-			
-			
-		});
+		log.info("DownLoadTask submit");
+		// TODO Auto-generated method stub
+//		Path targetDirectory = Paths.get(storagePath);
+//		Storage storage = new FileSystemStorage(targetDirectory);
+//		
+//		BtClient client = Bt.client()
+//		        .config(config)
+//		        .storage(storage)
+//		        .magnet(magnetUrl)
+//		        .autoLoadModules()
+//		        .module(dhtModule)
+//		        .stopWhenDownloaded()
+//		        .build();
+//		client.startAsync(torrentSessionState ->{
+//			DownLoadServiceImpl.updateStatus(magnetUrl, torrentSessionState);
+//			
+//		}, 1000L).whenCompleteAsync((a,b) ->{
+//			
+//			
+//			
+//		});
 	}
 
 }
